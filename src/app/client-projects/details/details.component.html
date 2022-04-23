@@ -1,0 +1,14 @@
+
+<div class="card">
+    <div class="card-body">
+      <h5 class="card-title">{{data.designation}}</h5>
+      <p class="card-text" >{{data.description}}</p>
+      <div style="display: block;"> <b> Domain:</b> {{data.specialite}}</div>
+      <div style="display: block;"> <b> date:</b> {{data.dateCreation }}</div>
+      <div style="display: block;"> <b> Society:</b> {{data.societe}}</div>
+      <div style="margin-top: 10px;" *ngIf="this.isClient">
+         <button mat-raised-button color="primary" (click)="add(data.id)"> <mat-icon class="mat-18">create</mat-icon> Add complaint</button>
+      </div>
+
+    </div>
+  </div>

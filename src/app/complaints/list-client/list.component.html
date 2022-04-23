@@ -1,0 +1,76 @@
+
+
+<div fxLayout fxLayoutAlign="center space-between">
+    <mat-form-field fxFlex="40%">
+      <input matInput type="text" (keyup)="doFilter($event.target.value)" placeholder="Filter">
+    </mat-form-field>
+</div>    
+
+<div fxLayout fxLayoutAlign="center space-between" style="margin-bottom: 15px;">
+    &nbsp;&nbsp;<button mat-raised-button color="primary" (click)="exporter.exportTable('xlsx',{filename:'Complaints'})">Excel</button>
+    &nbsp;&nbsp;<button mat-raised-button color="primary" (click)="exporter.exportTable('csv',{filename:'Complaints'})">CSV</button>
+    &nbsp;&nbsp;<button mat-raised-button color="primary" (click)="exporter.exportTable('json',{filename:'Complaints'})">Json</button>
+    &nbsp;&nbsp;<button mat-raised-button color="primary" (click)="exporter.exportTable('txt',{filename:'Complaints'})">Txt</button>
+</div>
+<table mat-table matTableExporter [dataSource]="dataSource"  #exporter="matTableExporter" class="mat-elevation-z8">
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+  
+    <!-- Position Column -->
+    <ng-container matColumnDef="ID">
+      <th mat-header-cell *matHeaderCellDef> No. </th>
+      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+    </ng-container>
+  
+    <!-- Name Column -->
+    <ng-container matColumnDef="Name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.sujet}} </td>
+    </ng-container>
+
+    <!-- Society Column -->
+    <ng-container matColumnDef="Type">
+        <th mat-header-cell *matHeaderCellDef> Type </th>
+        <td mat-cell *matCellDef="let element"> {{element.type}} </td>
+    </ng-container>
+
+    <!-- Society Column -->
+    <ng-container matColumnDef="Project">
+        <th mat-header-cell *matHeaderCellDef> Project </th>
+        <td mat-cell *matCellDef="let element"> {{element.projet}} </td>
+    </ng-container>
+
+    <!-- Society Column -->
+    <ng-container matColumnDef="Date">
+        <th mat-header-cell *matHeaderCellDef> Date </th>
+        <td mat-cell *matCellDef="let element"> {{element.dateCreation}} </td>
+    </ng-container>
+
+    <!-- Society Column -->
+    <ng-container matColumnDef="Status">
+        <th mat-header-cell *matHeaderCellDef> Status </th>
+        <td mat-cell *matCellDef="let element">
+            <span  class="badge bg-warning" *ngIf="element.status === 'EN_COURS' " > En cours </span>
+            <span  class="badge bg-danger" *ngIf="element.status === 'EN_ATTENTE' " > En attente</span>
+            <span  class="badge bg-success" *ngIf="element.status === 'ClOTURE' " > Cloturé </span>
+        </td>
+    </ng-container>
+
+    <!-- Détails Column -->
+    <ng-container matColumnDef="Details">
+        <th mat-header-cell *matHeaderCellDef> Details </th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-icon-button color="primary" (click)="details(element.id)">
+              <mat-icon class="mat-18">reorder</mat-icon>
+          </button>
+        </td>
+      </ng-container>  
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <mat-paginator [pageSize]="6" [pageSizeOptions]="[2, 4, 6, 10, 20]">
+</mat-paginator>
+  
+  

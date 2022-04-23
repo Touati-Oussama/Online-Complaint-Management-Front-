@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Document</title>
+</head>
+<body>
+    
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title mb-0">Add a customer</h5>
+        </div>
+
+        <div class="card-body">
+            <div class="m-sm-4">
+                <form [formGroup]="data" (ngSubmit)="add()">
+                    <div class="mb-3">
+                        <label class="form-label">First Name</label>
+                        <input class="form-control form-control-lg" 
+                        [class.is-invalid] = "data.get('nom').invalid && data.get('nom').touched"
+                        type="text"  formControlName="nom" name="name" placeholder="Enter the First Name" />
+                        <div *ngIf="(f.nom.invalid && f.nom.touched) ||f. nom.dirty">
+                            <small *ngIf="f.nom.errors?.required" class="text-danger">First Name is required</small>
+                        </div>
+                       
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Last Name</label>
+                        <input class="form-control form-control-lg" 
+                        [class.is-invalid] = "data.get('prenom').invalid && data.get('prenom').touched"
+                        type="text"  formControlName="prenom" name="name" placeholder="Enter the Last Name" />
+                        <div *ngIf="(f.prenom.invalid && f.prenom.touched) ||f.prenom.dirty">
+                            <small *ngIf="f.prenom.errors?.required" class="text-danger">Last Name is required</small>
+                        </div>
+                        
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Username</label>
+                        <input class="form-control form-control-lg" 
+                        [class.is-invalid] = "data.get('username').invalid && data.get('username').touched"
+                        type="text"  formControlName="username" name="name" placeholder="Enter the username" />
+                        <div *ngIf="(f.username.invalid && f.username.touched) || f.username.dirty">
+                            <small *ngIf="f.username.errors?.required" class="text-danger">Username is required</small>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Phone Number</label>
+                        <input class="form-control form-control-lg" 
+                        [class.is-invalid] = "data.get('telephone').invalid && data.get('telephone').touched"
+                        type="tel"  formControlName="telephone" name="name" placeholder="Enter the phone number" />
+                        <div *ngIf="(f.telephone.invalid && f.telephone.touched) || f.telephone.dirty">
+                            <small *ngIf="f.telephone.errors?.required" class="text-danger">Phone is required</small>
+                            <small *ngIf="f.telephone.errors?.minlength" class="text-danger">Phone must be grater than 8 digit</small>
+                        </div>
+                    
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Society</label>
+                        <select class="form-select mb-3" formControlName="societe">
+                            <option value="">Select One</option>
+                            <option [value]="s.id" *ngFor="let s of societies">{{s.name}}</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Email</label>
+                        <input class="form-control form-control-lg"
+                        [class.is-invalid] = "data.get('email').invalid && data.get('email').touched"
+                         type="email"  formControlName="email" name="name" placeholder="Enter the email" />
+                         <div *ngIf="(f.email.invalid && f.email.touched) || f.email.dirty">
+                            <small *ngIf="f.email.errors?.required" class="text-danger">Email is required</small>
+                            <small *ngIf="f.email.errors?.pattern" class="text-danger">Please provide a valid email address</small>
+                          </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Password</label>
+                        <input class="form-control form-control-lg" 
+                        [class.is-invalid] = "data.get('password').invalid && data.get('password').touched"
+                        type="password"  formControlName="password" name="name" placeholder="Enter the password" />
+                        <div *ngIf="(f.password.invalid && f.password.touched) || f.password.dirty">
+                            <small *ngIf="f.password.errors?.required" class="text-danger">Password is required</small>
+                            <small *ngIf="f.password.errors?.minlength" class="text-danger">Password must be grater than 8 digit</small>
+                        </div>
+                       
+                    </div>
+                    <div>
+                          <label class="btn btn-default">
+                            <input type="file" (change)="selectFile($event)" />
+                          </label>
+                          <div class="alert alert-light" role="alert">{{ message }}</div>
+                    </div>
+
+                    <div *ngIf="currentFile" class="progress">
+                        <div
+                          class="progress-bar progress-bar-animated bg-danger progress-bar-striped" 
+                          role="progressbar"
+                          attr.aria-valuenow="{{ progress }}"
+                          aria-valuemin="0"
+                          aria-valuemax="100"
+                          [ngStyle]="{ width: progress + '%' }"
+                        >
+                          {{ progress }}%
+                        </div>
+                      </div>
+                    <div>
+                        <button   [disabled]="!data.valid" style="margin-right:5px;" mat-raised-button color="primary">Add</button>
+                        <button type="reset" mat-raised-button color="warn" (click)="OnClose()">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

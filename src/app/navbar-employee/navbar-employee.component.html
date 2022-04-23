@@ -1,0 +1,69 @@
+<nav id="sidebar" class="sidebar js-sidebar">
+    <div class="sidebar-content js-simplebar">
+        <a class="sidebar-brand" href="index.html">
+            <span class="align-middle">GPRO<span style="color: rgb(255, 0, 119);"> CRM</span></span>
+        </a>
+
+        <ul class="sidebar-nav">
+            <li class="sidebar-header">
+                Espace Employee
+            </li>
+
+            <li class="sidebar-item">
+                <a class="sidebar-link" routerLink="dashboard-customer">
+                    <i class="align-middle" ><mat-icon class="mat-18">dashboard icon</mat-icon></i> <span
+                        class="align-middle">Dashboard</span>
+                </a>
+            </li>
+
+            <li class="sidebar-item">
+                <a class="sidebar-link" routerLink="complaints/pending/1">
+                    <i class="align-middle"><mat-icon>notifications</mat-icon></i> <span class="align-middle">New Complaint</span>
+                </a>
+            </li>
+
+            <li class="sidebar-item">
+                <a class="sidebar-link" routerLink="complaints/closed/1">
+                    <i class="align-middle"><mat-icon>event_available</mat-icon></i> <span class="align-middle">Closed Complaint</span>
+                </a>
+            </li>
+
+            <li class="sidebar-item">
+                <a class="sidebar-link" routerLink="complaints/employeeList">
+                    <i class="align-middle"><mat-icon>event_note</mat-icon></i> <span class="align-middle">Complaint Hisotry</span>
+                </a>
+            </li>
+
+            <li class="sidebar-item">
+                <a class="sidebar-link" routerLink="projects">
+                    <i class="align-middle"><mat-icon>apps</mat-icon></i> <span class="align-middle">Management Projects</span>
+                </a>
+            </li>
+            
+            <li class="sidebar-item">
+                <a class="sidebar-link" [routerLink]="'teams/edit/'+id">
+                    <i class="align-middle"><mat-icon>person_outline</mat-icon></i> <span class="align-middle"> Edit Profile</span>
+                </a>
+            </li>
+
+            <li class="sidebar-item">
+                <a class="sidebar-link" href="pages-blank.html">
+                    <i class="align-middle"><mat-icon> email</mat-icon></i> <span class="align-middle">Inbox</span>
+                </a>
+            </li>
+
+            <li class="sidebar-item">
+                <a class="sidebar-link" href="pages-sign-up.html">
+                    <i class="align-middle"><mat-icon> chat</mat-icon></i> <span class="align-middle">Chat Room</span>
+                </a>
+            </li>
+
+
+            <li class="sidebar-item">
+                <a class="sidebar-link" (click)="onLogout()">
+                    <i class="align-middle"><mat-icon>power_settings_new</mat-icon></i> <span class="align-middle">Log out</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>

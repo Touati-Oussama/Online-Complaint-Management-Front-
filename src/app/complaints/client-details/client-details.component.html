@@ -1,0 +1,16 @@
+<div class="main-div">
+    <mat-card class="card">
+        <mat-card-header>
+            <div mat-card-avatar>
+                <img [src]="retrievedImage" class="header-image">
+            </div>
+            <mat-card-title>{{data.nom}} {{data.prenom}}</mat-card-title>
+            <mat-card-subtitle> <mat-icon class="mat-18"style="size: 10px;"> email</mat-icon> {{data.email}}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+            <p><b>Username:</b>  {{data.username}}</p>
+            <p><b>Phone Number:</b>  {{data.telephone}}</p>
+            <p><b>Company Name:</b>  {{companyName}}</p>           
+        </mat-card-content>
+    </mat-card>
+</div>
