@@ -6,6 +6,7 @@ import Swal from 'sweetalert2';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { ImageService } from 'src/app/services/image.service';
+import { HttpResponse, HttpEventType } from '@angular/common/http';
 
 @Component({
   selector: 'app-add',
@@ -57,37 +58,52 @@ export class AddComponent implements OnInit {
     }  
   }
   add(){
-    console.log(this.data.value);
     this.currentFile = this.selectedFiles.item(0);
-    this.userService.addStaff(this.data.value).toPromise().then((res:any)=>{
-      if (res.user_id) {
-        this.imageService.upload(res.user_id,this.currentFile).subscribe(res =>{
-          console.log(res);
-        });
-        Swal.fire({
-          icon: 'success',
-          title: 'Success...',
-          text: 'Your registration is successful!',
-        })
-        this.data.reset();
-        this.OnClose();
-      }else{
-        Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: 'Something went wrong!',
-        })
+    this.imageService.uploadd(this.currentFile).subscribe(res =>{
+      if (res){
+        console.log(res.body.id);
+        this.data.addControl('image', new FormControl(res.body.id,[]));
+        console.log(this.data.value);
+        this.userService.addStaff(this.data.value).subscribe((res:any)=>{
+          if (res.type === HttpEventType.UploadProgress) {
+            this.progress = Math.round(100 * res.loaded / res.total);
+          }
+          else if (res instanceof HttpResponse){
+            if (res.body.user_id) {
+              this.progress = 0;
+              Swal.fire({
+                icon: 'success',
+                title: 'Success...',
+                text: 'Your registration is successful!',
+              })
+              this.data.reset();
+              this.currentFile = undefined;
+              try {
+                if(this.dialogRef.getState())
+                this.OnClose();
+              } catch (error) {} 
+            }else{
+              Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Something went wrong!',
+              })
+            }
+          }
+        },
+        err => {
+          Swal.fire({
+            icon: 'warning',
+            title: 'Signup failed!...',
+            text: err.error.message,
+          })
+          this.currentFile = undefined;
+          }
+    
+        )
       }
-    },
-    err => {
-      Swal.fire({
-        icon: 'warning',
-        title: 'Signup failed!...',
-        text: err.error.message,
-      })
-      }
+    })
 
-    )
     
   }
 

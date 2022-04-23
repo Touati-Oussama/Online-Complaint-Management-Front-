@@ -1,39 +1,4 @@
-<!--<div class="row">
-    <div class="col-12 col-lg-8 col-xxl-10 d-flex">
-        <div class="card flex-fill">
-            <div class="card-header">
-                <h5 class="card-title mb-0">Liste of Customers avaible</h5>
-            </div>
-            <table class="table table-hover my-0">
-                <thead>
-                    <tr>
-                        <th class="d-none d-xl-table-cell">First Name</th>
-                        <th class="d-none d-xl-table-cell">Last Name</th>
-                        <th class="d-none d-xl-table-cell">Username</th>
-                        <th class="d-none d-xl-table-cell">Email</th>
-                        <th class="d-none d-xl-table-cell">Phone Number</th>
-                        <th class="d-none d-xl-table-cell">Company Name</th>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let d of data">
-                        <td class="d-none d-xl-table-cell">{{d.nom}}</td>  
-                        <td class="d-none d-xl-table-cell">{{d.prenom}}</td> 
-                        <td class="d-none d-xl-table-cell">{{d.username}}</td>  
-                        <td class="d-none d-xl-table-cell">{{d.email}}</td> 
-                        <td class="d-none d-xl-table-cell">{{d.telephone}}</td>  
-                        <td class="d-none d-xl-table-cell">{{d.societe}}</td>  
-                        <td> <button class="btn btn-danger btn-sm" (click)= "delete(d.user_id)">Delete</button></td>
-                            <td> <button class="btn btn-info btn-sm" [routerLink]="'edit/'+d.id">Modifier</button></td>      
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>-->
- 
+
 <button mat-raised-button color="primary" (click)="add()">
   <mat-icon class="mat-18">add</mat-icon><span>Add New Customer</span></button>
   <div style="background-color: white;margin-top: 20px;" class="mat-elevation-z8">

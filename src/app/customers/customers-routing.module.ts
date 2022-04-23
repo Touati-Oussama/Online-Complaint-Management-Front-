@@ -7,8 +7,8 @@ import { EditComponent } from './edit/edit.component';
 import { ListComponent } from './list/list.component';
 
 const routes: Routes = [
-  { path: '', component: ListComponent,canActivate:[AdminGuard] },
-  { path: 'add', component: AddComponent,canActivate:[AdminGuard] },
+  { path: '', component: ListComponent },
+  { path: 'add', component: AddComponent},
   { path: 'edit/:id', component: EditComponent}
 ];
 

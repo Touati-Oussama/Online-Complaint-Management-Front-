@@ -73,72 +73,91 @@ export class EditComponent implements OnInit {
   }
   
   update(){
+    if(!this.id)
+    this.id = this.route.snapshot.params.id;
     this.progress = 0;
     if (this.selectedFiles){
       this.currentFile = this.selectedFiles.item(0);
-      this.imageService.update(this.id,this.currentFile).subscribe(
-        event => {
-          if (event.type === HttpEventType.UploadProgress) {
-            this.progress = Math.round(100 * event.loaded / event.total);
-          } 
-          else if (event instanceof HttpResponse) {
-            this.message = event.body.message;
-            this.userService.updateTeams(this.data.value,this.id).toPromise().then((res:any)=>{
-              console.log(res);
-              if(res.user_id){
-                this.messageService.send('isAuthenticated');
-                Swal.fire({
-                icon: 'success',
-                title: 'Success...',
-                text: 'Updated Successfully !',
-                })
-                this.OnClose();
-              }else{
-                Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'Something went wrong!',
-                })
+      this.imageService.update(this.id,this.currentFile).subscribe(res => {
+          this.data.addControl('image', new FormControl(res.body.id,[]));
+          console.log(this.data.value);
+          this.userService.updateTeams(this.data.value,this.id).subscribe((res:any)=>{
+            if (res.type === HttpEventType.UploadProgress) {
+              this.progress = Math.round(100 * res.loaded / res.total);
+            }
+            else if (res instanceof HttpResponse) {
+                if(res.body.user_id){
+                  this.messageService.send('isAuthenticated');
+                  Swal.fire({
+                    icon: 'success',
+                    title: 'Success...',
+                    text: 'Updated Successfully !',
+                  })
+                  this.OnClose();
+                  this.progress = 0;
+                }else{
+                  Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Something went wrong!',
+                  })
+                }
               }
-            },
-            err => {
-              Swal.fire({
-                icon: 'warning',
-                title: 'Updated  failed!...',
-                text: err.error.message,
-              })
+            },err => {
+                Swal.fire({
+                  icon: 'warning',
+                  title: 'Updated failed!...',
+                  text: err.error.message,
+                })
+                }
+              )
+            
+          },
+          err => {
+          this.progress = 0;
+          this.message = err.error.message;
+          ;
+          this.currentFile = undefined;
+        });
+    
+    this.selectedFiles = undefined;
+  }
+  else {
+    this.data.addControl('image', new FormControl(null,[]));
+    console.log(this.data.value);
+    this.userService.updateTeams(this.data.value,this.id).subscribe((res:any)=>{
+      if (res.type === HttpEventType.UploadProgress) {
+        this.progress = Math.round(100 * res.loaded / res.total);
+      }
+      else if (res instanceof HttpResponse) {
+          console.log(res.body);
+          if(res.body.user_id){
+            this.messageService.send('isAuthenticated');
+            Swal.fire({
+              icon: 'success',
+              title: 'Success...',
+              text: 'Updated Successfully !',
+            })
+            this.OnClose();
+            this.progress = 0;
+          }else{
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Something went wrong!',
             })
           }
-        })
-    }
-    else{
-      this.userService.updateTeams(this.data.value,this.id).toPromise().then((res:any)=>{
-        console.log(res);
-        if(res.user_id){
-          this.messageService.send('isAuthenticated');
-          Swal.fire({
-          icon: 'success',
-          title: 'Success...',
-          text: 'Updated Successfully !',
-          })
-          this.OnClose();
-        }else{
-          Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: 'Something went wrong!',
-          })
         }
-      },
-      err => {
-        Swal.fire({
-          icon: 'warning',
-          title: 'Updated  failed!...',
-          text: err.error.message,
-        })
-      })
-    }
-
+      },err => {
+          Swal.fire({
+            icon: 'warning',
+            title: 'Updated failed!...',
+            text: err.error.message,
+          })
+          }
+        )
+  }
+ 
   }
 
   OnClose(){

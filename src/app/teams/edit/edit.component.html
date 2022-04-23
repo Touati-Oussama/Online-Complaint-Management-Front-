@@ -41,24 +41,23 @@
                     </div>
 
                     <div>
-                        <div *ngIf="currentFile" class="progress">
-                            <div
-                              class="progress-bar progress-bar-info progress-bar-striped"
-                              role="progressbar"
-                              attr.aria-valuenow="{{ progress }}"
-                              aria-valuemin="0"
-                              aria-valuemax="100"
-                              [ngStyle]="{ width: progress + '%' }"
-                            >
-                              {{ progress }}%
-                            </div>
-                          </div>
                           <label class="btn btn-default">
                             <input type="file" (change)="selectFile($event)" />
                           </label>
                           <div class="alert alert-light" role="alert">{{ message }}</div>
                     </div>
-                    
+                    <div *ngIf="progress > 0" class="progress" style="margin-bottom: 10px;">
+                        <div
+                          class="progress-bar progress-bar-danger progress-bar-striped"
+                          role="progressbar"
+                          attr.aria-valuenow="{{ progress }}"
+                          aria-valuemin="0"
+                          aria-valuemax="100"
+                          [ngStyle]="{ width: progress + '%' }"
+                        >
+                          {{ progress }}%
+                        </div>
+                    </div>
                     <div>
                         <button   [disabled]="!data.valid" style="margin-right:5px;" mat-raised-button color="primary">Update</button>
                         <button type="reset" mat-raised-button color="warn" (click)="OnClose()">Cancel</button>

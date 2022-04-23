@@ -49,83 +49,60 @@ export class AddComponent implements OnInit {
         Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
         password: new FormControl('',[Validators.required,Validators.minLength(8)]),
         societe: new FormControl('',Validators.required),
-        //role: new FormControl('CLIENT',[Validators.required]),
       }
     )
   }
 
 
     add(){
-    console.log(this.data.value);
+      
+  
     this.currentFile = this.selectedFiles.item(0);
-    /*this.userService.add(this.data.value).toPromise().then((res:any)=>{
-      if (res.user_id) {
-        this.imageService.upload(res.user_id,this.currentFile).subscribe(res =>{
-        });
-        Swal.fire({
-          icon: 'success',
-          title: 'Success...',
-          text: 'Your registration is successful!',
-        })
-        this.data.reset();
-        this.OnClose();
-      }else{
-        Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: 'Something went wrong!',
-        })
-      }
-    },
-    err => {
-      Swal.fire({
-        icon: 'warning',
-        title: 'Signup failed!...',
-        text: err.error.message,
-      })
-      }
-
-    )*/
-    
-    this.userService.add(this.data.value).subscribe((res:any)=>{
-      if (res.type === HttpEventType.UploadProgress) {
-        this.progress = Math.round(100 * res.loaded / res.total);
-      }
-      else if (res instanceof HttpResponse){
-        if (res.body.user_id) {
-          this.imageService.upload(res.body.user_id,this.currentFile).subscribe(res =>{
-            this.progress = 0;
-          });
+    this.imageService.uploadd(this.currentFile).subscribe(res =>{
+      if (res){
+        console.log(res.body.id);
+        this.data.addControl('image', new FormControl(res.body.id,[]));
+        console.log(this.data.value);
+        this.userService.add(this.data.value).subscribe((res:any)=>{
+          if (res.type === HttpEventType.UploadProgress) {
+            this.progress = Math.round(100 * res.loaded / res.total);
+          }
+          else if (res instanceof HttpResponse){
+            if (res.body.user_id) {
+              this.progress = 0;
+              Swal.fire({
+                icon: 'success',
+                title: 'Success...',
+                text: 'Your registration is successful!',
+              })
+              this.data.reset();
+              this.currentFile = undefined;
+              try {
+                if(this.dialogRef.getState())
+                this.OnClose();
+              } catch (error) {} 
+            }else{
+              Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Something went wrong!',
+              })
+            }
+          }
+        },
+        err => {
           Swal.fire({
-            icon: 'success',
-            title: 'Success...',
-            text: 'Your registration is successful!',
+            icon: 'warning',
+            title: 'Signup failed!...',
+            text: err.error.message,
           })
-          this.data.reset();
           this.currentFile = undefined;
-          try {
-            if(this.dialogRef.getState())
-            this.OnClose();
-          } catch (error) {} 
-        }else{
-          Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'Something went wrong!',
-          })
-        }
+          }
+    
+        )
       }
-    },
-    err => {
-      Swal.fire({
-        icon: 'warning',
-        title: 'Signup failed!...',
-        text: err.error.message,
-      })
-      this.currentFile = undefined;
-      }
+    })
 
-    )
   }
 
   get f() { return this.data.controls; }

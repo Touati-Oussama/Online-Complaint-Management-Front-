@@ -34,19 +34,22 @@ export class ImageService {
   }
 
 
-  update(id:number,file: File): Observable<HttpEvent<any>> {
+  update(id:number,file: File): any {
     let jwt = this.authService.getToken();
     jwt = "Bearer " + jwt;
     let httpHeaders = new HttpHeaders({"Authorization": jwt})
     const formData: FormData = new FormData();
     formData.append('file', file);
     
-    const req = new HttpRequest('POST', `${this.apiURL}/update/${id}`, formData, {
+    /*const req = new HttpRequest('POST', `${this.apiURL}/update/${id}`, formData, {
       headers:httpHeaders,
       reportProgress: true,
       responseType: 'json'
     });
-    return this.http.request(req);
+    return this.http.request(req);*/
+
+    return this.http.post(this.apiURL +'/update/'+id, formData, {headers: httpHeaders ,observe: 'response' })
+
   }
 
 
@@ -54,8 +57,8 @@ export class ImageService {
     let jwt = this.authService.getToken();
     jwt = "Bearer " + jwt;
     let httpHeaders = new HttpHeaders({"Authorization": jwt})
-    const uploadImageData = new FormData();
-    uploadImageData.append('imageFile', file, file.name);
+    const formData: FormData = new FormData();
+    formData.append('file', file);
 
     /*const req = new HttpRequest('POST', `${this.apiURL}/upload`, file, {
       headers:httpHeaders,
@@ -63,7 +66,7 @@ export class ImageService {
       responseType: 'json'
     });
     return this.http.request(req);*/
-    return this.http.post('http://localhost:8080/image/upload', uploadImageData, {headers: httpHeaders ,observe: 'response' })
+    return this.http.post(this.apiURL +'/upload', formData, {headers: httpHeaders ,observe: 'response' })
   }
 
   getFile(id: number): Observable<any> {
