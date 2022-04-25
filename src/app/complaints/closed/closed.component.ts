@@ -18,7 +18,7 @@ export class ClosedComponent implements OnInit {
   public displayedColumns = ['ID', 'Subject','Type','Project', 'Company Name', 'Date', 'Status', 'details', 'delete'];
   public dataSource = new MatTableDataSource();
   constructor(private complaintService:CompalintService,private dialog:MatDialog,
-              private route:ActivatedRoute, private router:Router,public authService:AuthService) { }
+               private router:Router,public authService:AuthService) { }
   status = 'ClOTURE';
   @ViewChild(MatPaginator) paginator: MatPaginator;
   
@@ -26,14 +26,13 @@ export class ClosedComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
   }
   ngOnInit(): void {
-    const id = this.route.snapshot.params.id;
-    if (id == 0)
+    if (this.authService.isAdmin())
     {
       this.complaintService.getByStatusName(this.status).subscribe((res:any)=>{
         this.dataSource.data = res;
       })
     }
-    else if (id == 1)
+    else if (this.authService.isEmployee())
     {
       this.complaintService.getByEmployeAndStaus(this.authService.loggedUser,this.status).subscribe((res:any)=>{
         this.dataSource.data = res;
@@ -70,7 +69,7 @@ export class ClosedComponent implements OnInit {
     this.router.navigate(['complaints/closed']);
   }
   pending(){
-    this.router.navigate(['complaints/pending/'+0]);
+    this.router.navigate(['complaints/pending/']);
   }
 
 }

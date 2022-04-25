@@ -66,45 +66,7 @@ export class ForwardComponent implements OnInit {
     var splitted = activity.split(" ", activity.length); 
     //splitted.forEach(s =>{console.log(s)});
 
-
-
-    /*this.userService.getStaff(id).subscribe(res =>{
-      //console.log(res.username);
-      this.trelloService.getTrelloUserId(res.username).subscribe((member:any) =>{
-        //console.log(member.id);
-        this.trelloService.addCard(complaintName,description,dueDate).subscribe( (card:any)=>{
-          //console.log(card.id);
-          this.trelloService.addEmployeToCard(card.id,member.id).subscribe((res:any)=>{
-            //console.log(res);
-              this.complaintService.forwardToEmployee(complaintId,id).subscribe( res =>{
-                this.complaintService.updateStatus(complaintId,Etat.EN_COURS).subscribe((res) =>{
-                  console.log(res);
-                  if (res){
-                    Swal.fire({
-                      icon: 'success',
-                      title: 'Success...',
-                      text: 'Added Successfully !',
-                    })
-                    this.messageService.send('isAddedComplaint');
-                    this.data.reset();
-                    this.router.navigate(['complaints/adminList'])
-                  }
-                  else{
-                    Swal.fire({
-                      icon: 'error',
-                      title: 'Oops...',
-                      text: 'Something went wrong!',
-                    })
-                  }
-                })
-              })
-  
-          })
-        })
-      })
-    })*/
-
-
+    
     //create a card in trello
     this.trelloService.addCard(this.complain.complaint.sujet,description,dueDate).subscribe( (card:any)=>{
       console.log(card.id);
@@ -134,7 +96,10 @@ export class ForwardComponent implements OnInit {
                           })
                           this.messageService.send('isAddedComplaint');
                           this.data.reset();
-                          this.dialogRef.close();
+                          try {
+                            this.dialogRef.close();
+                          } catch (error) {}
+                          
                         }
                         else{
                           Swal.fire({
@@ -147,14 +112,42 @@ export class ForwardComponent implements OnInit {
                     })
 
                   })
+              },err=>{
+                console.log('Trello username developper not found');
+                //assign the developper to complaint
+                this.complaintService.forwardToEmployee(complaintId,id).subscribe( res =>{
+                //update status of complaint
+                this.complaintService.updateStatus(complaintId,Etat.EN_COURS).subscribe((res) =>{
+                if (res){
+                  Swal.fire({
+                    icon: 'success',
+                    title: 'Success...',
+                    text: 'Forward Successfully !',
+                    })
+                    this.messageService.send('isAddedComplaint');
+                    this.data.reset();
+                    try {
+                      this.dialogRef.close();
+                    } catch (error) {}
+                                          
+                }
+                else{
+                  Swal.fire({
+                  icon: 'error',
+                  title: 'Oops...',
+                  text: 'Something went wrong!',
+                  })
+                }
               })
+             })
             })
+          })
         })
       })
     })
+  })
+  
   }
-
-    )}
 
 
 

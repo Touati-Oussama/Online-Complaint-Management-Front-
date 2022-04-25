@@ -10,16 +10,12 @@
 	<meta name="keywords"
 		content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
 </head>
-<div class="main" *ngIf="!this.authService.isAdmin() && !this.authService.isClient()&& !this.authService.isEmployee()">
-	<router-outlet></router-outlet>
-  </div>
 <body>
 	<div class="wrapper">
 		<app-navbar-admin *ngIf="this.authService.isAdmin()"></app-navbar-admin>
 		<app-navbar-client *ngIf="this.authService.isClient()"></app-navbar-client>
 		<app-navbar-employee *ngIf="this.authService.isEmployee()"></app-navbar-employee>
 		<div class="main">
-
 			<app-header></app-header>
 			<main class="content">
 				<div class="container-fluid p-0">

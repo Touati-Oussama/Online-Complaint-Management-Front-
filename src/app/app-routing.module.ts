@@ -21,7 +21,7 @@ const routes: Routes = [
   {path:  'app-forbidden', component: ForbiddenComponent},
   {path: 'dashboard-admin',component:DashboardAdminComponent,canActivate:[AdminGuard]},
   {path: 'dashboard-customer',component:DashboardCustomerComponent},
-  {path: 'dashboard-employee', component:DashboardEmployeeComponent}
+  {path: 'dashboard-employee', component:DashboardEmployeeComponent},
 ];
 
 @NgModule({

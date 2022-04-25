@@ -22,8 +22,8 @@ const routes: Routes = [
   { path: 'test/:statusname', component:ListAdminComponent},
   { path: 'adminList', component:ListAdminComponent},
   { path: 'employeeList', component:ListEmployeeComponent},
-  { path: 'pending/:id',component:PendingComponent},
-  { path: 'closed/:id', component:ClosedComponent},
+  { path: 'pending',component:PendingComponent},
+  { path: 'closed', component:ClosedComponent},
   { path: 'zeroAction', component:ZeroActionComponent},
   { path: 'client-details', component: ClientDetailsComponent},
   { path: 'forward/:id/:complaintName', component: ForwardComponent}

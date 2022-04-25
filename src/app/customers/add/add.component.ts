@@ -54,9 +54,7 @@ export class AddComponent implements OnInit {
   }
 
 
-    add(){
-      
-  
+    add(){ 
     this.currentFile = this.selectedFiles.item(0);
     this.imageService.uploadd(this.currentFile).subscribe(res =>{
       if (res){

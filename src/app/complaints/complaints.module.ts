@@ -1,7 +1,7 @@
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ComplaintsRoutingModule } from './complaints-routing.module';
 import { ComplaintsComponent } from './complaints.component';
 import { AddComponent } from './add/add.component';
@@ -42,7 +42,8 @@ import { ListEmployeeComponent } from './list-employee/list-employee.component';
     FlexLayoutModule,
     MatPaginatorModule,
     MatCardModule,
-    MatTableExporterModule 
+    MatTableExporterModule,
+    FontAwesomeModule 
   ]
 })
 export class ComplaintsModule { }

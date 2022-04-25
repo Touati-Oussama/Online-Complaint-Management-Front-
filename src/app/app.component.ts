@@ -7,6 +7,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { ImageService } from './services/image.service';
 import { SharedService } from './services/shared.service';
 import { Subscription } from 'rxjs';
+import { MessageService } from './services/message.service';
 
 @Component({
   selector: 'app-root',
@@ -20,7 +21,10 @@ export class AppComponent implements OnInit{
   base64Data: any;
   retrieveResonse: any;
   verifToken : boolean = true;
+  private subscription:Subscription;
+
   constructor (public authService: AuthService,
+    private messageService:MessageService,
     private router: Router) {
 
     }
@@ -28,6 +32,12 @@ export class AppComponent implements OnInit{
 
   ngOnInit(): void {
     this.authService.loadToken();
+    this.subscription = this.messageService.getMessage().subscribe(res=>{
+      if (res.message === 'isAuthenticated'){
+        console.log(this.authService.getToken());
+      }
+    });  
+
     if (this.authService.getToken()==null || this.authService.isTokenExpired())
       this.router.navigate(['/login']);
   }

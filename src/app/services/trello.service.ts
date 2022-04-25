@@ -59,6 +59,13 @@ export class TrelloService {
     }})
   }
 
+  getAllcardInListDoing(){
+    return this.http.get('https://api.trello.com/1/lists/'+ environment.idListDoing+'/cards',{params:{
+      key: environment.KEY,
+      token: environment.TOKEN,
+
+    }})
+  }
   deleteCardInTrello(idCard){
     return this.http.delete('https://api.trello.com/1/cards/'+idCard,{params:{
       key: environment.KEY,

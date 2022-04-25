@@ -84,7 +84,7 @@ export class AuthService {
   isEmployee():Boolean{
     if (!this.roles) //this.roles== undefiened
         return false;
-    return (this.roles.indexOf('STAFF') >=0);
+    return (this.roles.indexOf('EMPLOYEE') >=0);
   }
 
   setLoggedUserFromLocalStorage(login : string) {

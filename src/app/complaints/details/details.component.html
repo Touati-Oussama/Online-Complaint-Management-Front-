@@ -21,6 +21,6 @@
         <button mat-raised-button color="primary">Reply To Complaint</button>
         <button mat-raised-button color="primary" (click)="takeAction()">Take Action</button>
         <button mat-raised-button color="primary" (click)="viewClient()">View client</button>
-        <button *ngIf="authService.isAdmin()" mat-raised-button color="warn">Delete Complaint</button>
+        <button  mat-raised-button color="warn" (click)="delete(data.id)">Delete Complaint</button>
     </div>
 </div>

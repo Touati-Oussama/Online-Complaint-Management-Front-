@@ -1,3 +1,4 @@
+import { Etat } from './../model/Etat';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -36,6 +37,7 @@ export class HeaderComponent implements OnInit {
     this.subscription = this.messageService.getMessage().subscribe(res=>{
       if (res.message === 'isAuthenticated'){
         this.loadImage();
+        this.loadComplaints();
       }
       else if  (res.message === 'isAddedComplaint'){
         this.loadComplaints();
@@ -62,7 +64,7 @@ export class HeaderComponent implements OnInit {
     })
   }
   loadComplaints(){
-    this.complaintService.getByStatusName(this.status).subscribe((res:any)=>{
+    this.complaintService.getByStatusName(Etat.EN_ATTENTE).subscribe((res:any)=>{
       this.data = res;
       if(this.data)
         this.nb = this.data.length;

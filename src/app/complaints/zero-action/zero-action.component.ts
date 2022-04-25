@@ -55,9 +55,9 @@ export class ZeroActionComponent implements OnInit {
     this.router.navigate(['complaints/zeroAction']);
   }
   closed(){
-    this.router.navigate(['complaints/closed/'+0]);
+    this.router.navigate(['complaints/closed/']);
   }
   pending(){
-    this.router.navigate(['complaints/pending/'+0]);
+    this.router.navigate(['complaints/pending/']);
   }
 }

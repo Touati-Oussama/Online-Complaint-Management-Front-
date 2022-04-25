@@ -1,5 +1,5 @@
 import { Observable, Subject, tap } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AuthService } from './auth.service';
 
@@ -21,15 +21,25 @@ export class CompalintService {
   }
   constructor(private http: HttpClient,private authService:AuthService) { }
 
-  add(data):any{
+  add(data):Observable<HttpEvent<any>>{
     let jwt = this.authService.getToken();
     jwt = "Bearer " + jwt;
     let httpHeaders = new HttpHeaders({"Authorization": jwt})
-    return this.http.post(`${this.apiURL}/add`,data,{headers:httpHeaders}).pipe(
+    /*return this.http.post(`${this.apiURL}/add`,data,{headers:httpHeaders}).pipe(
       tap(()=>{
         this.Refreshrequired.next();
       })
-    );
+    );*/
+      const req = new HttpRequest('POST', `${this.apiURL}/add`, data, {
+        headers:httpHeaders,
+        reportProgress: true,
+        responseType: 'json'
+      });
+      return this.http.request(req).pipe(
+        tap(()=>{
+          this.Refreshrequired.next();
+        })
+      );
     } 
 
    getByClientUsername(username):any{
@@ -99,4 +109,11 @@ export class CompalintService {
     let httpHeaders = new HttpHeaders({"Authorization": jwt})
     return this.http.post(`${this.apiURL}/update/employee/${id}/${idEmployee}`,{headers:httpHeaders});
    }
+
+   delete(id):any{
+    let jwt = this.authService.getToken();
+    jwt = "Bearer " + jwt;
+    let httpHeaders = new HttpHeaders({"Authorization": jwt})
+    return this.http.delete(`${this.apiURL}/delete/${id}`,{headers:httpHeaders});
+  }
 }

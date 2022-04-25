@@ -13,22 +13,23 @@ export class FileService {
   
   constructor(private http: HttpClient,private authService:AuthService)  { }
 
-  upload(id:number,file: File): Observable<HttpEvent<any>> {
+  upload(file: File): any {
     let jwt = this.authService.getToken();
     jwt = "Bearer " + jwt;
     let httpHeaders = new HttpHeaders({"Authorization": jwt})
     const formData: FormData = new FormData();
     formData.append('file', file);
     
-    const req = new HttpRequest('POST', `${this.apiURL}/upload/${id}`, formData, {
+    /*const req = new HttpRequest('POST', `${this.apiURL}/upload/`, formData, {
       headers:httpHeaders,
       reportProgress: true,
       responseType: 'json'
     });
-    return this.http.request(req);
+    return this.http.request(req);*/
+    return this.http.post(this.apiURL+'/upload',formData,{headers:httpHeaders, observe:'response'})
   }
 
-  getBySfe(id:number):Observable<any>{
+  getByComplaint(id:number):Observable<any>{
     let jwt = this.authService.getToken();
     jwt = "Bearer " + jwt;
     let httpHeaders = new HttpHeaders({"Authorization": jwt})

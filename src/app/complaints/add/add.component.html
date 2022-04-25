@@ -36,9 +36,16 @@
                     rows="3"></textarea>
                 </div>
                 <div>
-                    <div *ngIf="currentFile" class="progress">
+ 
+                      <label class="btn btn-default">
+                        <input type="file" (change)="selectFile($event)"  accept=".pdf"/>
+                      </label>
+                      <div class="alert alert-light" role="alert">{{ message }}</div>
+                </div>
+                <div class="mb-3">
+                    <div *ngIf="progress >= 0" class="progress">
                         <div
-                          class="progress-bar progress-bar-info progress-bar-striped"
+                          class="progress-bar progress-bar-danger progress-bar-striped"
                           role="progressbar"
                           attr.aria-valuenow="{{ progress }}"
                           aria-valuemin="0"
@@ -48,10 +55,6 @@
                           {{ progress }}%
                         </div>
                       </div>
-                      <label class="btn btn-default">
-                        <input type="file" (change)="selectFile($event)"  accept=".pdf"/>
-                      </label>
-                      <div class="alert alert-light" role="alert">{{ message }}</div>
                 </div>
                 <div class="text-center m-3">
                     <button mat-raised-button color="primary" style="margin-right: 10px;" [disabled]="! data.valid">Submit</button> 

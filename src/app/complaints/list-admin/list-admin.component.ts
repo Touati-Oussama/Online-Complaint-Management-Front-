@@ -1,7 +1,6 @@
 import { Etat } from './../../model/Etat';
 import { TrelloService } from './../../services/trello.service';
 import { MessageService } from './../../services/message.service';
-import { Status } from './../../model/Status';
 import { CompalintService } from './../../services/compalint.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
@@ -64,10 +63,10 @@ export class ListAdminComponent implements OnInit {
     this.router.navigate(['complaints/zeroAction']);
   }
   closed(){
-    this.router.navigate(['complaints/closed/'+0]);
+    this.router.navigate(['complaints/closed/']);
   }
   pending(){
-    this.router.navigate(['complaints/pending/'+0]);
+    this.router.navigate(['complaints/pending/']);
   }
 
   verif(){
@@ -98,6 +97,7 @@ export class ListAdminComponent implements OnInit {
         title: 'Success...',
         text: 'Verified Successfully !',
       })
+      this.ngOnInit();
     }
     else{
       Swal.fire({
@@ -106,5 +106,46 @@ export class ListAdminComponent implements OnInit {
         text: 'Invalid Date!',
       })
     }
+  }
+
+  delete(id:number){
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "Do you really want to delete this project ?",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.complaintService.delete(id).toPromise().then((res:any) =>{
+          if (res){
+            Swal.fire({
+              icon: 'success',
+              title: 'Success...',
+              text: 'Deleted Successfully !',
+            })
+            this.ngOnInit();
+          }
+          else{
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Something went wrong!',
+            })
+          }
+        },
+        err =>{
+          Swal.fire({
+            icon: 'warning',
+            title: 'Deleted failed!...',
+            text: err.error.message,
+          })
+        }
+        )
+      }
+    }
+    )
   }
 }

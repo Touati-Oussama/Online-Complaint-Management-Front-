@@ -23,7 +23,7 @@ export class AddComponent implements OnInit {
 
   selectedFiles: FileList;
   currentFile: File;
-  progress = 0;
+  progress = -1;
   message = '';
   fileInfos: Observable<any>;
   selectFile(event): void {
@@ -81,7 +81,90 @@ export class AddComponent implements OnInit {
 
 
   submit(){
+
     
+    //const idProject = this.route.snapshot.params.id;
+    if(!this.data.value['projet'])
+    this.data.patchValue({projet: this.idProject});
+    this.data.patchValue({ client: this.authService.loggedUser })
+    //console.log(this.data.value);
+    this.progress = 0;
+    if(this.selectedFiles){
+      this.currentFile = this.selectedFiles.item(0);
+      this.fileService.upload(this.currentFile).subscribe((res:any ) =>{
+      if (res){
+        console.log(res);
+        console.log(res.body.id);
+        this.data.addControl('file',new FormControl(res.body.id,[]));
+        console.log(this.data.value);
+        this.complaintService.add(this.data.value).subscribe((res:any)=>{
+          if (res.type == HttpEventType.UploadProgress){
+            this.progress = Math.round(100 * res.loaded / res.total);
+          }
+          else if (res instanceof HttpResponse){
+            if (res.body.id) {
+              
+              Swal.fire({
+                icon: 'success',
+                title: 'Success...',
+                text: 'Added Successfully !',
+              })  
+              this.selectedFiles = undefined;
+              this.data.reset();
+              this.progress = -1;
+              try {
+                this.onClose();
+              } catch (error) {}
+
+            }else{
+              Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Something went wrong!',
+              })
+            }
+          }
+        })
+      }
+      },
+        err => {
+          this.progress = -1;
+          this.message = 'Could not upload the file!';
+          this.currentFile = undefined;
+        });
+    }
+    else
+    {
+      this.data.addControl('image', new FormControl(null,[]));
+      console.log(this.data.value);
+      this.complaintService.add(this.data.value).subscribe((res:any)=>{
+        if (res.type === HttpEventType.UploadProgress) {
+          this.progress = Math.round(100 * res.loaded / res.total);
+        }
+        else if (res instanceof HttpResponse) {
+          if (res.body.id) {
+            this.selectedFiles = undefined;
+            Swal.fire({
+              icon: 'success',
+              title: 'Success...',
+              text: 'Added Successfully !',
+            })  
+            this.data.reset();
+            this.onClose();
+            this.progress = -1;
+          }else{
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Something went wrong!',
+            })
+          }
+        }
+
+      })
+    }
+
+    /*
     //const idProject = this.route.snapshot.params.id;
     if(!this.data.value['projet'])
       //this.data.setValue({projet: idProject})
@@ -162,7 +245,7 @@ export class AddComponent implements OnInit {
         text: 'Something went wrong!, Please try again !',
       })
     })
-    }
+    }*/
     
 
     }

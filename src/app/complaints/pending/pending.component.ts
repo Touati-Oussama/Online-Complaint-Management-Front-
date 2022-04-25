@@ -1,3 +1,4 @@
+import { TrelloService } from './../../services/trello.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -13,31 +14,40 @@ import { DetailsComponent } from '../details/details.component';
   styleUrls: ['./pending.component.css']
 })
 export class PendingComponent implements OnInit {
-
-  public displayedColumns = ['ID', 'Subject','Type','Project', 'Company Name', 'Date', 'Status', 'details', 'delete'];
+  test:any;
+  public displayedColumns = ['ID', 'Subject','Type','Project', 'Company Name', 'Date', 'Status','Trello', 'details', 'delete'];
   public dataSource = new MatTableDataSource();
   constructor(private complaintService:CompalintService,private dialog:MatDialog,private route: ActivatedRoute,
-              public authService:AuthService,private router:Router) { }
+              private trelloService:TrelloService,
+              public authService:AuthService,private router:Router) {
+               }
   status = 'EN_COURS';
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  
   
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
   }
   ngOnInit(): void {
     const id = this.route.snapshot.params.id;
-    if (id == 0)
+    if (this.authService.isAdmin())
     {
       this.complaintService.getByStatusName(this.status).subscribe((res:any)=>{
         this.dataSource.data = res;
       })
     }
-    else if (id == 1)
+    else if (this.authService.isEmployee())
     {
       this.complaintService.getByEmployeAndStaus(this.authService.loggedUser,this.status).subscribe((res:any)=>{
         this.dataSource.data = res;
       })
     }
+
+    this.trelloService.getAllcardInListDoing().subscribe(res =>{
+      this.test = res;
+      console.log(this.test);
+    })
+ 
   }
 
   details(id){
@@ -65,9 +75,21 @@ export class PendingComponent implements OnInit {
     this.router.navigate(['complaints/zeroAction']);
   }
   closed(){
-    this.router.navigate(['complaints/closed/'+0]);
+    this.router.navigate(['complaints/closed/']);
   }
   pending(){
     this.router.navigate(['complaints/pending']);
+  }
+
+  goToTrello(complaintName){
+    this.trelloService.getAllcardInListDoing().subscribe((res:any[]) =>{
+      this.test = res;
+      res.forEach(card => {
+        if(card.name == complaintName){
+          //this.router.navigateByUrl(card.url);
+          window.location.href= card.url;
+        }
+      });
+    })
   }
 }
