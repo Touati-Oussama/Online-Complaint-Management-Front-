@@ -1,3 +1,9 @@
+import { StompService } from './../../services/stomp-service.service';
+import { SocieteService } from 'src/app/services/societe.service';
+import { Status } from 'src/app/model/Status';
+
+import { ProjetService } from './../../services/projet.service';
+import { TypeService } from './../../services/types.service';
 import { Etat } from './../../model/Etat';
 import { TrelloService } from './../../services/trello.service';
 import { MessageService } from './../../services/message.service';
@@ -8,8 +14,12 @@ import { DetailsComponent } from '../details/details.component';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Subscription, filter } from 'rxjs';
 import Swal from 'sweetalert2';
+import * as _ from 'lodash';
+import { Filter } from 'src/app/model/filter';
+import { Complaint } from 'src/app/model/Complaint';
+import { MatSelectChange } from '@angular/material/select';
 
 @Component({
   selector: 'app-list-admin',
@@ -20,28 +30,91 @@ export class ListAdminComponent implements OnInit {
 
 
 
+  types = [];
+  projects = [];
+  societes = [];
+  defaultValue = "All";
+  filterDictionary= new Map<string,string>();
   ok = true;
-  public displayedColumns = ['ID', 'Subject','Type','Project', 'Company Name', 'Date', 'Status', 'details', 'delete'];
+  filters: Filter[]=[];
+  public displayedColumns = ['id', 'sujet','type','project', 'societe', 'date', 'status', 'details', 'delete'];
   public dataSource = new MatTableDataSource();
   constructor(private complaintService:CompalintService,private dialog:MatDialog,
     private messageService:MessageService,
+    private typeService:TypeService,
+    private projetService:ProjetService,
+    private societeService:SocieteService,
+    private stompService:StompService,
     private trelloService:TrelloService,
-    private router:Router) { }
+    private router:Router) {}
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
   }
+
+  status: string[]=[Etat.EN_ATTENTE,Etat.EN_COURS,Etat.ClOTURE];
   ngOnInit(): void {
     this.getAll();
+    this.stompService.subscribe('/topic/New Complaint',() : void =>{
+      this.getAll();
+    })
+    this.loadProjects();
+    this.loadTypes();
+    this.loadSociete();
+    this.filters.push({name:'projet',options:this.projects,defaultValue:this.defaultValue});
+    this.filters.push({name:'type',options:this.types,defaultValue:this.defaultValue});
+    this.filters.push({name:'societe',options:this.societes,defaultValue:this.defaultValue});
+    this.filters.push({name:'status',options:this.status,defaultValue:this.defaultValue});
   }
 
-  getAll(){
-    this.complaintService.getAll().subscribe((res:any)=>{
-      this.dataSource.data = res;
+  loadProjects(){
+    this.projetService.getAll().subscribe((res:any[]) =>{
+      res.forEach(p =>{
+        this.projects.push(p.designation);
+      })
     })
   }
+  loadTypes(){
+    this.typeService.listeType().subscribe((res:any[]) =>{
+      res.forEach(t =>{
+        this.types.push(t.type);
+      })
+    })
+    }
+  loadSociete(){
+    this.societeService.listeSocieties().subscribe((res:any[]) =>{
+      res.forEach(s =>{
+        this.societes.push(s.name);
+      })
+    })
+  }
+  getAll(){
+
+      this.complaintService.getAll().subscribe((res:any[])=>{
+        this.dataSource.data = res;
+      })
+      this.dataSource.filterPredicate = function (record,filter) {
+        debugger;
+        var map = new Map(JSON.parse(filter));
+        let isMatch = false;
+        for(let [key,value] of map){
+          isMatch = (value=="All") || (record[key as keyof Complaint] == value); 
+          if(!isMatch) return false;
+        }
+        return isMatch;
+      }
+    }
+  applyEmpFilter(ob:MatSelectChange,filter:Filter) {
+
+    this.filterDictionary.set(filter.name,ob.value);
+    var jsonString = JSON.stringify(Array.from(this.filterDictionary.entries()));
+    this.dataSource.filter = jsonString;
+      //console.log(this.filterValues);
+    }
+
+
 
   details(id){
     const dialogRef = this.dialog.open(DetailsComponent,{
@@ -55,8 +128,34 @@ export class ListAdminComponent implements OnInit {
     })  
   }
 
-  public doFilter = (value: string) => {
-    this.dataSource.filter = value.trim().toLocaleLowerCase();
+  public doFilter = (keyword: string) => {
+    //this.dataSource.filter = value.trim().toLocaleLowerCase();
+    this.complaintService.findByFilter(keyword.trim().toLowerCase()).subscribe((res:any[])=>{
+      if (res){
+        this.dataSource.data = res;
+      }
+    })
+  }
+
+  onChangeStatus($event:any){
+   
+   this.complaintService.getByStatusName($event.value).subscribe((res:any[])=>{
+      this.dataSource.data = res;
+   })
+
+  }
+
+  
+  onChangeType($event:any){
+    this.complaintService.findByType($event.value).subscribe((res:any)=>{
+      this.dataSource.data = res;
+    })
+  }
+
+  onChangeProject($event:any){
+    this.complaintService.findByProjet($event.value).subscribe((res:any)=>{
+      this.dataSource.data = res;
+    })
   }
 
   zeroAction(){
@@ -148,4 +247,5 @@ export class ListAdminComponent implements OnInit {
     }
     )
   }
+
 }

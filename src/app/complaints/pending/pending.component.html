@@ -1,4 +1,4 @@
-<div *ngIf="authService.isAdmin()">
+<div *ngIf="authService.isAdmin() || authService.isClientAdmin()">
   <button mat-button color="primary" (click)="all()"> 
     <mat-icon class="mat-18">border_color</mat-icon> <span>All Complaints</span>
   </button>
@@ -52,10 +52,16 @@
     </ng-container>    
   
     <!-- Name Column -->
-    <ng-container matColumnDef="Company Name">
-        <th mat-header-cell *matHeaderCellDef> Company Name </th>
-        <td mat-cell *matCellDef="let element"> {{element.societe}} </td>
+    <ng-container matColumnDef="Company Name" *ngIf="!authService.isClientAdmin()">
+      <th mat-header-cell *matHeaderCellDef > Company Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.societe}} </td>
     </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="Company Name" *ngIf="authService.isClientAdmin()">
+        <th mat-header-cell *matHeaderCellDef > Sent By </th>
+        <td mat-cell *matCellDef="let element"> {{element.client}} </td>
+      </ng-container> 
   
     <!-- Name Column -->
     <ng-container matColumnDef="Date">
@@ -97,7 +103,7 @@
     <ng-container matColumnDef="delete">
       <th mat-header-cell *matHeaderCellDef> Delete </th>
       <td mat-cell *matCellDef="let element"> 
-        <button mat-icon-button color="warn" (click)="delete(element.type_id)">
+        <button mat-icon-button color="warn" [disabled]="!authService.isAdmin()" (click)="delete(element.type_id)">
             <mat-icon class="mat-18">delete</mat-icon>
         </button>
       </td>

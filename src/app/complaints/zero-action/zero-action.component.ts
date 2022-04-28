@@ -1,3 +1,5 @@
+import { AuthService } from './../../services/auth.service';
+import { Etat } from './../../model/Etat';
 import { ImageService } from './../../services/image.service';
 import { Router } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
@@ -8,6 +10,7 @@ import { Observable } from 'rxjs';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
+import { UserService } from 'src/app/services/users.service';
 
 @Component({
   selector: 'app-zero-action',
@@ -18,18 +21,30 @@ export class ZeroActionComponent implements OnInit {
 
   public displayedColumns = ['ID', 'Subject','Type','Project', 'Company Name', 'Date', 'Status', 'details', 'delete'];
   public dataSource = new MatTableDataSource();
-  constructor(private complaintService:CompalintService,private dialog:MatDialog,private router:Router) { }
-  status = 'EN_ATTENTE ';
+  constructor(private complaintService:CompalintService,private dialog:MatDialog,
+    private userService:UserService, 
+    private router:Router,public authService:AuthService) { }
+  status = Etat.EN_ATTENTE;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
   }
   ngOnInit(): void {
-    this.complaintService.getByStatusName(this.status).subscribe((res:any)=>{
-      console.log(res);
-      this.dataSource.data = res;
-    })
+    if(this.authService.isAdmin())
+      this.complaintService.getByStatusName(Etat.EN_ATTENTE).subscribe((res:any)=>{
+        console.log(res);
+        this.dataSource.data = res;
+      })
+    else if (this.authService.isClientAdmin()){
+      this.userService.getCustomerByUsername(this.authService.loggedUser).subscribe(res =>{
+        console.log(res);
+        this.complaintService.getBySocieteAndStatus(res.societe,this.status).subscribe((res:any)=>{
+          this.dataSource.data = res;
+          console.log(res);
+        })
+      })
+    }
   }
 
   details(id){
@@ -43,12 +58,20 @@ export class ZeroActionComponent implements OnInit {
       this.ngOnInit();
     })  
   }
-
-  public doFilter = (value: string) => {
-    this.dataSource.filter = value.trim().toLocaleLowerCase();
+  public doFilter = (keyword: string) => {
+    //this.dataSource.filter = value.trim().toLocaleLowerCase();
+    this.complaintService.findByFilterAndStatus(keyword.trim().toLowerCase(),this.status).subscribe((res:any[])=>{
+      if (res){
+        this.dataSource.data = res;
+      }
+    })
   }
+  
   all(){
-    this.router.navigate(['complaints/adminList']);
+    if(this.authService.isAdmin())
+      this.router.navigate(['complaints/adminList']);
+    else if (this.authService.isClientAdmin())
+      this.router.navigate(['complaints/clientAdminList']);
   }
 
   zeroAction(){

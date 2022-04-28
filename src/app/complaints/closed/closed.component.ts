@@ -1,3 +1,5 @@
+import { UserService } from './../../services/users.service';
+import { Etat } from './../../model/Etat';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
@@ -18,8 +20,9 @@ export class ClosedComponent implements OnInit {
   public displayedColumns = ['ID', 'Subject','Type','Project', 'Company Name', 'Date', 'Status', 'details', 'delete'];
   public dataSource = new MatTableDataSource();
   constructor(private complaintService:CompalintService,private dialog:MatDialog,
+              private userService:UserService, 
                private router:Router,public authService:AuthService) { }
-  status = 'ClOTURE';
+  status = Etat.ClOTURE;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   
   ngAfterViewInit(): void {
@@ -38,6 +41,13 @@ export class ClosedComponent implements OnInit {
         this.dataSource.data = res;
       })
     }
+    else if (this.authService.isClientAdmin()){
+      this.userService.getCustomerByUsername(this.authService.loggedUser).subscribe(res =>{
+        this.complaintService.getBySocieteAndStatus(res.societe,this.status).subscribe((res:any)=>{
+          this.dataSource.data = res;
+        })
+      })
+    }
 
   }
 
@@ -53,13 +63,21 @@ export class ClosedComponent implements OnInit {
     })  
   }
 
-  public doFilter = (value: string) => {
-    this.dataSource.filter = value.trim().toLocaleLowerCase();
+  public doFilter = (keyword: string) => {
+    //this.dataSource.filter = value.trim().toLocaleLowerCase();
+    this.complaintService.findByFilterAndStatus(keyword.trim().toLowerCase(),this.status).subscribe((res:any[])=>{
+      if (res){
+        this.dataSource.data = res;
+      }
+    })
   }
 
 
   all(){
-    this.router.navigate(['complaints/adminList']);
+    if(this.authService.isAdmin())
+      this.router.navigate(['complaints/adminList']);
+    else if (this.authService.isClientAdmin())
+      this.router.navigate(['complaints/clientAdminList']);
   }
 
   zeroAction(){

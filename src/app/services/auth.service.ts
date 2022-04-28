@@ -87,6 +87,12 @@ export class AuthService {
     return (this.roles.indexOf('EMPLOYEE') >=0);
   }
 
+  isClientAdmin():Boolean{
+    if (!this.roles) //this.roles== undefiened
+      return false;
+    return (this.roles.indexOf('ADMIN_CLIENT') >=0);
+  }
+
   setLoggedUserFromLocalStorage(login : string) {
     this.loggedUser = login;
     this.isloggedIn = true;

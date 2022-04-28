@@ -8,3 +8,17 @@ th.mat-header-cell {
     text-align: left;
     max-width: 300px;
 }
+
+.container{
+    display: flex;
+    flex-direction: row;
+    
+}
+
+.search-container{
+
+    display: flex;
+    justify-content: space-between;
+    
+}
+

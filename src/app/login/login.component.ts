@@ -41,7 +41,10 @@ export class LoginComponent implements OnInit{
       else if(this.authService.isClient()){
         this.router.navigate(['/dashboard-customer']);
       }
-   
+      
+      else if(this.authService.isClientAdmin()){
+        this.router.navigate(['/dashboard-customer-admin']);
+      }
     },(err) =>{
     this.err = 1;
     });

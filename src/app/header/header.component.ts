@@ -1,3 +1,4 @@
+import { StompService } from './../services/stomp-service.service';
 import { Etat } from './../model/Etat';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -6,6 +7,7 @@ import { AuthService } from '../services/auth.service';
 import { CompalintService } from '../services/compalint.service';
 import { ImageService } from '../services/image.service';
 import { MessageService } from '../services/message.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-header',
@@ -27,6 +29,7 @@ export class HeaderComponent implements OnInit {
     private imageService:ImageService,
     private messageService:MessageService,
     private complaintService:CompalintService,
+    private stompService:StompService,
     private router: Router) {
 
     }
@@ -34,6 +37,15 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.loadImage();
     this.loadComplaints();
+    this.stompService.subscribe('/topic/New Complaint',() : void =>{
+      this.loadComplaints();
+      Swal.fire({
+        icon: 'warning',
+        title: 'Warning',
+        text: ` ${this.nb} new complaint(s)`,
+
+      })
+    })
     this.subscription = this.messageService.getMessage().subscribe(res=>{
       if (res.message === 'isAuthenticated'){
         this.loadImage();

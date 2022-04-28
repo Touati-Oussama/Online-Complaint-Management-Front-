@@ -18,7 +18,7 @@ export class DetailsComponent implements OnInit {
   id;
   constructor(private projetService:ProjetService,
               private route:ActivatedRoute,
-              private authService:AuthService,
+              public authService:AuthService,
               private router:Router,
               private dialog:MatDialog,
               public dialogRef: MatDialogRef<DetailsComponent>,

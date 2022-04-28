@@ -1,3 +1,4 @@
+import { Role } from './../../model/Role';
 import { MessageService } from './../../services/message.service';
 import { FileService } from './../../services/file.service';
 import { UserService } from 'src/app/services/users.service';
@@ -30,7 +31,6 @@ export class AddComponent implements OnInit {
     this.selectedFiles = event.target.files;
   }
 
-  
   projects = [];
   types = [];
   idProject:any;
@@ -40,7 +40,8 @@ export class AddComponent implements OnInit {
     details: new FormControl('',Validators.required),
     type: new FormControl('',Validators.required),
     projet: new FormControl(''),
-    client: new FormControl('')
+    client: new FormControl(''),
+
   })
   constructor(private projectService: ProjetService,
               private authService:AuthService,
@@ -71,12 +72,13 @@ export class AddComponent implements OnInit {
         })
         })
       }
-        
-
+      
       this.typeService.listeType().toPromise().then((res:any[])=>{
         this.types = res;
         //console.log(this.types);
       })
+
+      
   }
 
 

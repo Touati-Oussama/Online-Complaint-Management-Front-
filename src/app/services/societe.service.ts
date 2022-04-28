@@ -54,6 +54,12 @@ export class SocieteService {
     let httpHeaders = new HttpHeaders({"Authorization": jwt})
     return this.http.get(`${this.apiURL}/${id}`,{headers:httpHeaders});
   }
+  getSocietyByName(name):any{
+    let jwt = this.authService.getToken();
+    jwt = "Bearer " + jwt;
+    let httpHeaders = new HttpHeaders({"Authorization": jwt})
+    return this.http.get(`${this.apiURL}/get/${name}`,{headers:httpHeaders});
+  }
   
  
 }

@@ -1,3 +1,4 @@
+import { DashboardCustomerAdminComponent } from './dashboard-customer-admin/dashboard-customer-admin.component';
 import { DashboardEmployeeComponent } from './dashboard-employee/dashboard-employee.component';
 import { DashboardCustomerComponent } from './dashboard-customer/dashboard-customer.component';
 import { DashboardAdminComponent } from './dashboard-admin/dashboard-admin.component';
@@ -13,6 +14,7 @@ const routes: Routes = [
   {path: 'specialties', loadChildren:()=> import('./specialties/specialties.module').then(m => m.SpecialtiesModule)},
   {path: 'projects', loadChildren:()=> import('./projects/projects.module').then(m => m.ProjectsModule)},
   {path: 'customers', loadChildren:()=> import('./customers/customers.module').then(m => m.CustomersModule)},
+  {path: 'clients', loadChildren:()=> import('./clients/clients.module').then(m => m.ClientsModule)},
   {path: 'societies', loadChildren:()=> import('./societe/societe.module').then(m => m.SocieteModule),canActivate:[AdminGuard]},
   {path: 'teams', loadChildren:()=> import('./teams/teams.module').then(m => m.TeamsModule)},
   {path: 'complaints', loadChildren:()=> import('./complaints/complaints.module').then(m => m.ComplaintsModule)},
@@ -22,6 +24,7 @@ const routes: Routes = [
   {path: 'dashboard-admin',component:DashboardAdminComponent,canActivate:[AdminGuard]},
   {path: 'dashboard-customer',component:DashboardCustomerComponent},
   {path: 'dashboard-employee', component:DashboardEmployeeComponent},
+  {path: 'dashboard-customer-admin', component:DashboardCustomerAdminComponent},
 ];
 
 @NgModule({

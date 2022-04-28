@@ -24,6 +24,15 @@ export class UserService {
     return this.http.get(`${this.apiURL}/customers/all`,{headers:httpHeaders});
   }
 
+  public listCustomersBySociete(societe,role):any{
+    let jwt = this.authService.getToken();
+    jwt = "Bearer " + jwt;
+    let httpHeaders = new HttpHeaders({"Authorization": jwt})
+    return this.http.get(`${this.apiURL}/customers/all/${societe}/${role}`,{headers:httpHeaders});
+  }
+
+
+
   public listStaffs():any{
     let jwt = this.authService.getToken();
     jwt = "Bearer " + jwt;

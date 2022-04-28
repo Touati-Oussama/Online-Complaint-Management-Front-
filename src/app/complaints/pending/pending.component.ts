@@ -1,3 +1,4 @@
+import { Etat } from './../../model/Etat';
 import { TrelloService } from './../../services/trello.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { MatPaginator } from '@angular/material/paginator';
@@ -7,6 +8,7 @@ import { CompalintService } from 'src/app/services/compalint.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { DetailsComponent } from '../details/details.component';
+import { UserService } from 'src/app/services/users.service';
 
 @Component({
   selector: 'app-pending',
@@ -19,9 +21,10 @@ export class PendingComponent implements OnInit {
   public dataSource = new MatTableDataSource();
   constructor(private complaintService:CompalintService,private dialog:MatDialog,private route: ActivatedRoute,
               private trelloService:TrelloService,
+              private userService:UserService, 
               public authService:AuthService,private router:Router) {
                }
-  status = 'EN_COURS';
+  status = Etat.EN_COURS;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   
   
@@ -40,6 +43,13 @@ export class PendingComponent implements OnInit {
     {
       this.complaintService.getByEmployeAndStaus(this.authService.loggedUser,this.status).subscribe((res:any)=>{
         this.dataSource.data = res;
+      })
+    }
+    else if (this.authService.isClientAdmin()){
+      this.userService.getCustomerByUsername(this.authService.loggedUser).subscribe(res =>{
+        this.complaintService.getBySocieteAndStatus(res.societe,this.status).subscribe((res:any)=>{
+          this.dataSource.data = res;
+        })
       })
     }
 
@@ -62,13 +72,21 @@ export class PendingComponent implements OnInit {
     })  
   }
 
-  public doFilter = (value: string) => {
-    this.dataSource.filter = value.trim().toLocaleLowerCase();
+  public doFilter = (keyword: string) => {
+    //this.dataSource.filter = value.trim().toLocaleLowerCase();
+    this.complaintService.findByFilterAndStatus(keyword.trim().toLowerCase(),this.status).subscribe((res:any[])=>{
+      if (res){
+        this.dataSource.data = res;
+      }
+    })
   }
 
 
   all(){
-    this.router.navigate(['complaints/adminList']);
+    if(this.authService.isAdmin())
+      this.router.navigate(['complaints/adminList']);
+    else if (this.authService.isClientAdmin())
+      this.router.navigate(['complaints/clientAdminList']);
   }
 
   zeroAction(){

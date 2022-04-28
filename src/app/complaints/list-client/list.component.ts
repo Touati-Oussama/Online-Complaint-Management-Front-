@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DetailsComponent } from '../details/details.component';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-list',
@@ -45,6 +46,8 @@ export class ListComponent implements OnInit {
   }
 
   public doFilter = (value: string) => {
+    console.log(value);
     this.dataSource.filter = value.trim().toLocaleLowerCase();
+    console.log(this.dataSource.filter);
   }
 }

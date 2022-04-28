@@ -1,3 +1,4 @@
+import { StompService } from './../services/stomp-service.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -25,9 +26,11 @@ import {MatCardModule} from '@angular/material/card';
 import { ForwardComponent } from './forward/forward.component';
 import { MatTableExporterModule } from 'mat-table-exporter';
 import { ListEmployeeComponent } from './list-employee/list-employee.component';
+import { ListClientAdminComponent } from './list-client-admin/list-client-admin.component';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
-  declarations: [ComplaintsComponent, AddComponent, EditComponent, ListComponent, DetailsComponent, ListAdminComponent, PendingComponent, ClosedComponent, ZeroActionComponent, ClientDetailsComponent, ForwardComponent, ListEmployeeComponent],
+  declarations: [ComplaintsComponent, AddComponent, EditComponent, ListComponent, DetailsComponent, ListAdminComponent, PendingComponent, ClosedComponent, ZeroActionComponent, ClientDetailsComponent, ForwardComponent, ListEmployeeComponent, ListClientAdminComponent],
   imports: [
     CommonModule,
     ComplaintsRoutingModule,
@@ -43,7 +46,10 @@ import { ListEmployeeComponent } from './list-employee/list-employee.component';
     MatPaginatorModule,
     MatCardModule,
     MatTableExporterModule,
-    FontAwesomeModule 
-  ]
+    FontAwesomeModule,
+    MatSelectModule
+  ],
+  providers: [StompService],
+
 })
 export class ComplaintsModule { }

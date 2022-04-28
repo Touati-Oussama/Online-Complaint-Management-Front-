@@ -1,3 +1,4 @@
+import { AuthService } from 'src/app/services/auth.service';
 import { ImageService } from 'src/app/services/image.service';
 import { HttpClient, HttpEventType, HttpResponse } from '@angular/common/http';
 import { SocieteService } from './../../services/societe.service';
@@ -7,6 +8,7 @@ import { EmailValidator, FormControl, FormGroup, Validators } from '@angular/for
 import Swal from 'sweetalert2'
 import { MatDialogRef } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
+import { Role } from 'src/app/model/Role';
 
 @Component({
   selector: 'app-add',
@@ -25,10 +27,14 @@ export class AddComponent implements OnInit {
     this.selectedFiles = event.target.files;
   }
   
+  
+  roles = [];
+  role = Role;  
   societies = [];
   data:FormGroup;
   file:File;
   constructor(private userService:UserService,
+    public authService:AuthService,
     public dialogRef: MatDialogRef<AddComponent>,
     private imageService:ImageService,
      private societeService:SocieteService) { }
@@ -39,6 +45,8 @@ export class AddComponent implements OnInit {
       console.log(res);
     })
   
+    this.roles = Object.keys(this.role);
+
     this.data = new FormGroup(
       {
         nom: new FormControl('',[Validators.required]),
@@ -48,13 +56,19 @@ export class AddComponent implements OnInit {
         email: new FormControl('',[Validators.required,
         Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
         password: new FormControl('',[Validators.required,Validators.minLength(8)]),
-        societe: new FormControl('',Validators.required),
+        societe: new FormControl(''),
+        role: new FormControl(Role.ADMIN_CLIENT,Validators.required),
       }
     )
   }
 
 
-    add(){ 
+    add(){
+      /*if(this.authService.isClientAdmin)
+      {
+        this.data.patchValue({'societe': 1});
+        console.log(this.data.value);
+      }*/
     this.currentFile = this.selectedFiles.item(0);
     this.imageService.uploadd(this.currentFile).subscribe(res =>{
       if (res){

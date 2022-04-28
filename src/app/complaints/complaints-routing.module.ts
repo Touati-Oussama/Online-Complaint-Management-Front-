@@ -1,3 +1,4 @@
+import { ListClientAdminComponent } from './list-client-admin/list-client-admin.component';
 import { ForwardComponent } from './forward/forward.component';
 import { ClientDetailsComponent } from './client-details/client-details.component';
 import { ZeroActionComponent } from './zero-action/zero-action.component';
@@ -24,6 +25,7 @@ const routes: Routes = [
   { path: 'employeeList', component:ListEmployeeComponent},
   { path: 'pending',component:PendingComponent},
   { path: 'closed', component:ClosedComponent},
+  { path: 'clientAdminList',component: ListClientAdminComponent},
   { path: 'zeroAction', component:ZeroActionComponent},
   { path: 'client-details', component: ClientDetailsComponent},
   { path: 'forward/:id/:complaintName', component: ForwardComponent}

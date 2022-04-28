@@ -1,3 +1,4 @@
+import { StompService } from './services/stomp-service.service';
 
 import { ForbiddenComponent } from './forbidden/forbidden.component';
 import { BrowserModule } from '@angular/platform-browser';
@@ -20,6 +21,8 @@ import { DashboardCustomerComponent } from './dashboard-customer/dashboard-custo
 import { NavbarEmployeeComponent } from './navbar-employee/navbar-employee.component';
 import { DashboardEmployeeComponent } from './dashboard-employee/dashboard-employee.component';
 import { HeaderComponent } from './header/header.component';
+import { NavbarAdminClientComponent } from './navbar-admin-client/navbar-admin-client.component';
+import { DashboardCustomerAdminComponent } from './dashboard-customer-admin/dashboard-customer-admin.component';
 
 
 
@@ -37,6 +40,8 @@ import { HeaderComponent } from './header/header.component';
     NavbarEmployeeComponent,
     DashboardEmployeeComponent,
     HeaderComponent,
+    NavbarAdminClientComponent,
+    DashboardCustomerAdminComponent,
 
   ],
   imports: [
@@ -52,7 +57,7 @@ import { HeaderComponent } from './header/header.component';
     MatTableExporterModule
     
   ],
-  providers: [],
+  providers: [StompService],
   bootstrap: [AppComponent],
   entryComponents:[LoginComponent]
 })

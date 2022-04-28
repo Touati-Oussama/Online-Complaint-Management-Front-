@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Document</title>
+</head>
+<body>
+    
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title mb-0">update a customer</h5>
+        </div>
+
+        <div class="card-body">
+            <div class="m-sm-4">
+                <form [formGroup]="data" (ngSubmit)="update()">
+                    <div class="mb-3">
+                        <label class="form-label">First Name</label>
+                        <input class="form-control form-control-lg" type="text"  formControlName="nom" name="name" placeholder="Enter the status" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Last Name</label>
+                        <input class="form-control form-control-lg" type="text"  formControlName="prenom" name="name" placeholder="Enter the status" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Username</label>
+                        <input class="form-control form-control-lg" type="text"  formControlName="username" name="name" placeholder="Enter the status" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Phone Number</label>
+                        <input class="form-control form-control-lg" type="tel"  formControlName="telephone" name="name" placeholder="Enter the status" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Email</label>
+                        <input class="form-control form-control-lg" type="email"  formControlName="email" name="name" placeholder="Enter the status" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Password</label>
+                        <input class="form-control form-control-lg" type="password"  formControlName="password" name="name" placeholder="Enter the status" />
+                    </div>
+
+                    <div>
+                          <label class="btn btn-default">
+                            <input type="file" (change)="selectFile($event)" />
+                          </label>
+                          <div class="alert alert-light" role="alert">{{ message }}</div>
+                    </div>
+
+                    <div *ngIf="progress > 0" class="progress" style="margin-bottom: 10px;">
+                        <div
+                          class="progress-bar progress-bar-danger progress-bar-striped"
+                          role="progressbar"
+                          attr.aria-valuenow="{{ progress }}"
+                          aria-valuemin="0"
+                          aria-valuemax="100"
+                          [ngStyle]="{ width: progress + '%' }"
+                        >
+                          {{ progress }}%
+                        </div>
+                    </div>
+                    <div>
+                        <button   [disabled]="!data.valid" style="margin-right:5px;" mat-raised-button color="primary">Update</button>
+                        <button type="reset" mat-raised-button color="warn" (click)="OnClose()">Cancel</button>
+                    </div>
+                   
+                </form>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

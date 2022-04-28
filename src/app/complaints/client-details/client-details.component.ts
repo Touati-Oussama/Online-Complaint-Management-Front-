@@ -1,3 +1,4 @@
+import { AuthService } from 'src/app/services/auth.service';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Component, OnInit, Optional, Inject } from '@angular/core';
 import { CompalintService } from 'src/app/services/compalint.service';
@@ -13,13 +14,14 @@ export class ClientDetailsComponent implements OnInit {
   id;
   data;
   companyName;
-  
+  role;
   retrievedImage: any;
   base64Data: any;
   retrieveResonse: any;
   constructor(
     @Optional() @Inject(MAT_DIALOG_DATA) public complaint: any,
     private imageService:ImageService,
+    private authService:AuthService,
     private complaintService:CompalintService
     )
      { 
@@ -41,6 +43,8 @@ export class ClientDetailsComponent implements OnInit {
         }
       })
     })
+
+    
   }
 
 }

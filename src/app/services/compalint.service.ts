@@ -1,3 +1,4 @@
+import { Complaint } from 'src/app/model/Complaint';
 import { Observable, Subject, tap } from 'rxjs';
 import { HttpClient, HttpEvent, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -56,11 +57,11 @@ export class CompalintService {
     return this.http.get(`${this.apiURL}/employee/${username}`,{headers:httpHeaders});
    }
 
-   getAll():Observable<any>{
+   getAll():Observable<Complaint[]>{
     let jwt = this.authService.getToken();
     jwt = "Bearer " + jwt;
     let httpHeaders = new HttpHeaders({"Authorization": jwt})
-    return this.http.get(`${this.apiURL}/all`,{headers:httpHeaders});
+    return this.http.get<Complaint[]>(`${this.apiURL}/all`,{headers:httpHeaders});
    } 
 
    getClientByRecid(id):any{
@@ -69,6 +70,57 @@ export class CompalintService {
     let httpHeaders = new HttpHeaders({"Authorization": jwt})
     return this.http.get(`${this.apiURL}/client/${id}`,{headers:httpHeaders});
    }
+
+
+   getClientBySociete(name):any{
+    let jwt = this.authService.getToken();
+    jwt = "Bearer " + jwt;
+    let httpHeaders = new HttpHeaders({"Authorization": jwt})
+    return this.http.get(`${this.apiURL}/societe/${name}`,{headers:httpHeaders});
+   }
+
+   findByProjet(id):Observable<any[]>{
+    let jwt = this.authService.getToken();
+    jwt = "Bearer " + jwt;
+    let httpHeaders = new HttpHeaders({"Authorization": jwt})
+    return this.http.get<any[]>(`${this.apiURL}/projet`,{headers:httpHeaders, params:{id}});
+
+   }
+
+   
+   findByType(id):Observable<any[]>{
+    let jwt = this.authService.getToken();
+    jwt = "Bearer " + jwt;
+    let httpHeaders = new HttpHeaders({"Authorization": jwt})
+    return this.http.get<any[]>(`${this.apiURL}/type`,{headers:httpHeaders, params:{id}});
+
+   }
+
+
+   findByFilter(keyword):Observable<any[]>{
+    let jwt = this.authService.getToken();
+    jwt = "Bearer " + jwt;
+    let httpHeaders = new HttpHeaders({"Authorization": jwt})
+    return this.http.get<any[]>(`${this.apiURL}/filter/`,{headers:httpHeaders, params:{keyword}});
+
+   }
+
+   findByFilterAndStatus(keyword,status):Observable<any[]>{
+    let jwt = this.authService.getToken();
+    jwt = "Bearer " + jwt;
+    let httpHeaders = new HttpHeaders({"Authorization": jwt})
+    return this.http.get<any[]>(`${this.apiURL}/filter/status`,{headers:httpHeaders, params:{keyword,status}});
+
+   }
+
+   getBySocieteAndStatus(societe,name):any{
+    let jwt = this.authService.getToken();
+    jwt = "Bearer " + jwt;
+    let httpHeaders = new HttpHeaders({"Authorization": jwt})
+    return this.http.get(`${this.apiURL}/societe/${societe}/status/${name}`,{headers:httpHeaders});
+   }
+
+
    getReclamation(id):any{
     let jwt = this.authService.getToken();
     jwt = "Bearer " + jwt;
