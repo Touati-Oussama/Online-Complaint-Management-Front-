@@ -43,6 +43,14 @@ export class CompalintService {
       );
     } 
 
+    forwardToEmployee(id,idEmployee):Observable<HttpEvent<any>>{
+      let jwt = this.authService.getToken();
+      jwt = "Bearer " + jwt;
+      let httpHeaders = new HttpHeaders({"Authorization": jwt})
+      return this.http.post<HttpEvent<any>>(`${this.apiURL}/update/employee/${id}/${idEmployee}`,{headers:httpHeaders});
+     }
+  
+
    getByClientUsername(username):any{
     let jwt = this.authService.getToken();
     jwt = "Bearer " + jwt;
@@ -155,12 +163,6 @@ export class CompalintService {
     return this.http.post(`${this.apiURL}/update/status/${id}/${statusId}`,{headers:httpHeaders});
    }
 
-   forwardToEmployee(id,idEmployee): any{
-    let jwt = this.authService.getToken();
-    jwt = "Bearer " + jwt;
-    let httpHeaders = new HttpHeaders({"Authorization": jwt})
-    return this.http.post(`${this.apiURL}/update/employee/${id}/${idEmployee}`,{headers:httpHeaders});
-   }
 
    delete(id):any{
     let jwt = this.authService.getToken();

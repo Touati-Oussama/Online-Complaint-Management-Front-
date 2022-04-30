@@ -1,3 +1,5 @@
+import { StompService } from './../../services/stomp-service.service';
+import { MessageService } from './../../services/message.service';
 import { AuthService } from './../../services/auth.service';
 import { Etat } from './../../model/Etat';
 import { ImageService } from './../../services/image.service';
@@ -6,7 +8,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { CompalintService } from 'src/app/services/compalint.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DetailsComponent } from '../details/details.component';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
@@ -18,11 +20,13 @@ import { UserService } from 'src/app/services/users.service';
   styleUrls: ['./zero-action.component.css']
 })
 export class ZeroActionComponent implements OnInit {
-
+  private subscription:Subscription;
   public displayedColumns = ['ID', 'Subject','Type','Project', 'Company Name', 'Date', 'Status', 'details', 'delete'];
   public dataSource = new MatTableDataSource();
   constructor(private complaintService:CompalintService,private dialog:MatDialog,
     private userService:UserService, 
+    private messageService:MessageService,
+    private stompService:StompService,
     private router:Router,public authService:AuthService) { }
   status = Etat.EN_ATTENTE;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -31,6 +35,14 @@ export class ZeroActionComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
   }
   ngOnInit(): void {
+    this.loadComplaints();
+    this.stompService.subscribe('/topic/New Complaint',() : void =>{
+      this.loadComplaints();  
+    })
+     
+  }
+
+  loadComplaints(){
     if(this.authService.isAdmin())
       this.complaintService.getByStatusName(Etat.EN_ATTENTE).subscribe((res:any)=>{
         console.log(res);

@@ -8,6 +8,7 @@ import { CompalintService } from '../services/compalint.service';
 import { ImageService } from '../services/image.service';
 import { MessageService } from '../services/message.service';
 import Swal from 'sweetalert2';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-header',
@@ -23,6 +24,7 @@ export class HeaderComponent implements OnInit {
   nb:number;
   retrieveResonse: any;
   verifToken : boolean = true;
+  path:any;
   private subscription:Subscription;
   private SubscriptionComplaint:Subscription;
   constructor (public authService: AuthService,
@@ -31,30 +33,43 @@ export class HeaderComponent implements OnInit {
     private complaintService:CompalintService,
     private stompService:StompService,
     private router: Router) {
-
+  
     }
-  status = 'EN_ATTENTE ';
   ngOnInit(): void {
     this.loadImage();
     this.loadComplaints();
-    this.stompService.subscribe('/topic/New Complaint',() : void =>{
-      this.loadComplaints();
-      Swal.fire({
-        icon: 'warning',
-        title: 'Warning',
-        text: ` ${this.nb} new complaint(s)`,
-
-      })
-    })
     this.subscription = this.messageService.getMessage().subscribe(res=>{
       if (res.message === 'isAuthenticated'){
         this.loadImage();
         this.loadComplaints();
+        if (this.authService.isAdmin() || this.authService.isEmployee())
+          if (this.nb > 0)
+            Swal.fire({
+              icon: 'warning',
+              title: 'Warning',
+              text: ` ${this.nb} new complaint(s)`,
+      
+            })
       }
       else if  (res.message === 'isAddedComplaint'){
         this.loadComplaints();
       }
-    });    
+    });  
+    if (this.authService.isAdmin())
+    this.path = "New Complaint";
+   if (this.authService.isEmployee())
+     this.path = "Forward Complaint";
+   this.stompService.subscribe('/topic/'+this.path,() : void =>{
+     this.loadComplaints();
+     if (this.authService.isAdmin())
+     this.nb++;
+     Swal.fire({
+       icon: 'warning',
+       title: 'Warning',
+       text: ` ${this.nb} new complaint(s)`,
+
+     })
+   })  
   }
 
   onLogout(){
@@ -76,11 +91,24 @@ export class HeaderComponent implements OnInit {
     })
   }
   loadComplaints(){
-    this.complaintService.getByStatusName(Etat.EN_ATTENTE).subscribe((res:any)=>{
-      this.data = res;
-      if(this.data)
-        this.nb = this.data.length;
-    })
+    if (this.authService.isAdmin())
+      this.complaintService.getByStatusName(Etat.EN_ATTENTE).subscribe((res:any)=>{
+        this.data = res;
+        if(this.data)
+          this.nb = this.data.length;
+      })
+    if (this.authService.isEmployee())
+      this.complaintService.getByEmployeAndStaus(this.authService.loggedUser,Etat.EN_COURS).subscribe((res:any)=>{
+        this.data = res;
+        if(this.data)
+          this.nb = this.data.length;
+      })
+  }
+  go(){
+    if (this.authService.isAdmin())
+    this.router.navigate(["complaints/zeroAction"])
+    if (this.authService.isEmployee())
+    this.router.navigate(["complaints/pending"])
   }
 
 }

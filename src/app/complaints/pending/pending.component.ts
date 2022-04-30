@@ -9,6 +9,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { DetailsComponent } from '../details/details.component';
 import { UserService } from 'src/app/services/users.service';
+import { StompService } from 'src/app/services/stomp-service.service';
 
 @Component({
   selector: 'app-pending',
@@ -22,6 +23,7 @@ export class PendingComponent implements OnInit {
   constructor(private complaintService:CompalintService,private dialog:MatDialog,private route: ActivatedRoute,
               private trelloService:TrelloService,
               private userService:UserService, 
+              private stompService:StompService,
               public authService:AuthService,private router:Router) {
                }
   status = Etat.EN_COURS;
@@ -33,6 +35,21 @@ export class PendingComponent implements OnInit {
   }
   ngOnInit(): void {
     const id = this.route.snapshot.params.id;
+    this.loadComplaints();
+    this.stompService.subscribe('/topic/Forward Complaint',() : void =>{
+      this.loadComplaints();  
+    })
+
+
+    this.trelloService.getAllcardInListDoing().subscribe(res =>{
+      this.test = res;
+      console.log(this.test);
+    })
+ 
+  }
+
+
+  loadComplaints(){
     if (this.authService.isAdmin())
     {
       this.complaintService.getByStatusName(this.status).subscribe((res:any)=>{
@@ -52,14 +69,7 @@ export class PendingComponent implements OnInit {
         })
       })
     }
-
-    this.trelloService.getAllcardInListDoing().subscribe(res =>{
-      this.test = res;
-      console.log(this.test);
-    })
- 
   }
-
   details(id){
     const dialogRef = this.dialog.open(DetailsComponent,{
       width : "50%",

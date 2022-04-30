@@ -100,12 +100,13 @@ export class AddComponent implements OnInit {
         this.data.addControl('file',new FormControl(res.body.id,[]));
         console.log(this.data.value);
         this.complaintService.add(this.data.value).subscribe((res:any)=>{
+          this.messageService.send('isAddedComplaint');
           if (res.type == HttpEventType.UploadProgress){
             this.progress = Math.round(100 * res.loaded / res.total);
           }
           else if (res instanceof HttpResponse){
             if (res.body.id) {
-              
+              this.messageService.send('isAddedComplaint');
               Swal.fire({
                 icon: 'success',
                 title: 'Success...',
@@ -140,11 +141,13 @@ export class AddComponent implements OnInit {
       this.data.addControl('image', new FormControl(null,[]));
       console.log(this.data.value);
       this.complaintService.add(this.data.value).subscribe((res:any)=>{
+        this.messageService.send('isAddedComplaint');
         if (res.type === HttpEventType.UploadProgress) {
           this.progress = Math.round(100 * res.loaded / res.total);
         }
         else if (res instanceof HttpResponse) {
           if (res.body.id) {
+            this.messageService.send('isAddedComplaint');
             this.selectedFiles = undefined;
             Swal.fire({
               icon: 'success',

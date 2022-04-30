@@ -5,7 +5,7 @@
 
     <div class="navbar-collapse collapse">
         <ul class="navbar-nav navbar-align">
-            <li class="nav-item dropdown" *ngIf="this.authService.isAdmin()">
+            <li class="nav-item dropdown" *ngIf="this.authService.isAdmin() || this.authService.isEmployee()">
                 <a class="nav-icon dropdown-toggle" href="#" id="alertsDropdown" data-bs-toggle="dropdown">
                     <div class="position-relative">
                         <i class="align-middle"><mat-icon>notifications_none</mat-icon></i>
@@ -18,7 +18,7 @@
                         {{nb}} New Notifications
                     </div>
                     <div class="list-group">
-                        <a *ngFor="let d of data" routerLink="complaints/zeroAction" class="list-group-item">
+                        <a *ngFor="let d of data" (click)="go()" class="list-group-item">
                             <div class="row g-0 align-items-center">
                                 <div class="col-2">
                                     <i class="text-danger"><mat-icon>error_outline</mat-icon></i>
