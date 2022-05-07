@@ -54,7 +54,7 @@ import { DashboardCustomerAdminComponent } from './dashboard-customer-admin/dash
     MatDialogModule,
     MatTableModule,
     MatIconModule,
-    MatTableExporterModule
+    MatTableExporterModule,
     
   ],
   providers: [StompService],

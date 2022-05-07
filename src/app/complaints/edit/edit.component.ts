@@ -17,7 +17,9 @@ export class EditComponent implements OnInit {
   id;
  status = [];
  etats = Etat;
- data = new FormGroup({
+ s;
+ sujet;
+ /*data = new FormGroup({
     id: new FormControl(''),
     sujet: new FormControl('',Validators.required),
     details: new FormControl(''),
@@ -28,38 +30,31 @@ export class EditComponent implements OnInit {
     societe: new FormControl(''),
     developper: new FormControl(''),
     speciality: new FormControl('')
-})
+})*/
   constructor(
     @Optional() public dialogRef: MatDialogRef<EditComponent>,
     @Optional() @Inject(MAT_DIALOG_DATA) public complaint: any,
     private compalintService:CompalintService,
     private messageService:MessageService,
-    private statusService:StatusService
   ) { 
     this.id =  complaint.complaintId;
   }
 
   ngOnInit(): void {
-    /*this.statusService.listeStatus().subscribe( res =>{
-       this.status = res;
-       console.log(res);
-      });*/
-      //console.log(this.etats);
     this.status = Object.keys(this.etats);
     this.compalintService.getReclamation(this.id).subscribe(res =>{
-      try {
-        this.data.setValue(res);
-      } catch (error) {
-        
-      }
+      this.sujet = res.sujet;
+      this.s = res.status
     })
   }
 
   update(){
-    let status = this.data.value['status'];
-    this.compalintService.updateStatus(this.id,status).subscribe( res =>{
+    
+    this.compalintService.updateStatus(this.id,this.s).subscribe( res =>{
+      console.log(res);
       if(res.id){
-        this.messageService.send('isAddedComplaint');
+            this.messageService.send('isAddedComplaint');
+          
         Swal.fire({
           icon: 'success',
           title: 'Success...',

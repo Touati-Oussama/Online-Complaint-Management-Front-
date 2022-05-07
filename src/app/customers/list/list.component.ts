@@ -1,3 +1,4 @@
+import { CompteComponent } from './../../clients/compte/compte.component';
 import { MatPaginator } from '@angular/material/paginator';
 import { ProjetService } from './../../services/projet.service';
 import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
@@ -16,7 +17,7 @@ import { EditComponent } from '../edit/edit.component';
 export class ListComponent implements OnInit,AfterViewInit {
 
   data = [];
-  public displayedColumns = ['firstName', 'lastName','phone','email','companyName', 'update', 'delete'];
+  public displayedColumns = ['firstName', 'lastName','phone','email','companyName','Role', 'update', 'delete'];
   public dataSource = new MatTableDataSource();
 
   constructor(private userService:UserService,private dialog:MatDialog) { }
@@ -29,7 +30,9 @@ export class ListComponent implements OnInit,AfterViewInit {
   
   ngOnInit(): void {
     this.userService.listCustomers().toPromise().then((res:any[])=>{
+      console.log(res);
       this.dataSource.data = res;
+      this.data = res;
     },
     err =>{
       Swal.fire({
@@ -40,7 +43,7 @@ export class ListComponent implements OnInit,AfterViewInit {
     })
   }
 
-  delete(id: number){
+  /*delete(id: number){
     console.log(id);
     Swal.fire({
       title: 'Are you sure?',
@@ -80,10 +83,31 @@ export class ListComponent implements OnInit,AfterViewInit {
       }
     }
     )
-  }
+  }*/
 
+  ModifierCompte(id:number){
+    const dialogRef = this.dialog.open(CompteComponent,{
+      width : "40%",
+      height: "50%",
+      data: { id: id}
+    });
+    dialogRef.afterClosed().subscribe(res =>{
+      this.ngOnInit();
+    })  
+  }
   public doFilter = (value: string) => {
-    this.dataSource.filter = value.trim().toLocaleLowerCase();
+    this.userService.listCustomersAndFilter(value).toPromise().then((res:any[])=>{
+      console.log(res);
+      this.dataSource.data = res;
+      this.data = res;
+    },
+    err =>{
+      Swal.fire({
+        icon: 'error',
+        title: err.error.message,
+        text: 'Access Denied',
+      })
+    })
   }
 
   add(){

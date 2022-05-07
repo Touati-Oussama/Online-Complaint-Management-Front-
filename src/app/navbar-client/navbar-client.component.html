@@ -1,40 +1,62 @@
 <nav id="sidebar" class="sidebar js-sidebar">
     <div class="sidebar-content js-simplebar">
         <a class="sidebar-brand" href="index.html">
-            <span class="align-middle">GPRO<span style="color: rgb(255, 0, 119);"> CRM</span></span>
+            <span class="align-middle">GPRO CRM</span>
         </a>
 
         <ul class="sidebar-nav">
+            <div *ngIf="authService.isResponsable_Societe()">
+                <li class="sidebar-header">
+                    Espace Responsable Sociéte
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link" routerLink="dashboard-customer-admin">
+                        <i class="align-middle">
+                            <mat-icon class="mat-18">dashboard icon</mat-icon>
+                        </i>
+                         <span class="align-middle">Dashboard Responsable</span>
+                    </a>
+                </li>
+    
+                
+                <li class="sidebar-item">
+                    <a class="sidebar-link" routerLink="clients">
+                        <i class="align-middle"><mat-icon>people_outline</mat-icon></i> <span class="align-middle">Gestion Personnels</span>
+                    </a>
+                </li>
+            </div>
+
+
             <li class="sidebar-header">
-                Espace Client
+                Espace Personnel Sociéte
             </li>
 
             <li class="sidebar-item">
                 <a class="sidebar-link" routerLink="dashboard-customer">
-                    <i class="align-middle"><mat-icon class="mat-18">dashboard icon</mat-icon></i> <span class="align-middle">Dashboard</span>
+                    <i class="align-middle"><mat-icon class="mat-18">dashboard icon</mat-icon></i> <span class="align-middle">Dashboard Personnel</span>
                 </a>
             </li>
 
             <li class="sidebar-item">
                 <a class="sidebar-link" routerLink="complaints/add">
-                    <i class="align-middle"><mat-icon>create</mat-icon></i> <span class="align-middle">Create a complaint</span>
+                    <i class="align-middle"><mat-icon>create</mat-icon></i> <span class="align-middle">Envoyer réclamation</span>
                 </a>
             </li>
 
             <li class="sidebar-item">
                 <a class="sidebar-link" routerLink="complaints">
-                    <i class="align-middle"><mat-icon>menu</mat-icon></i> <span class="align-middle">Complaint Hisotry</span>
+                    <i class="align-middle"><mat-icon>menu</mat-icon></i> <span class="align-middle">Historiques Réclamations</span>
                 </a>
             </li>
             <li class="sidebar-item">
                 <a class="sidebar-link" routerLink="client/projects">
-                    <i class="align-middle"><mat-icon>apps</mat-icon></i> <span class="align-middle">List Projects</span>
+                    <i class="align-middle"><mat-icon>apps</mat-icon></i> <span class="align-middle">Liste Projets</span>
                 </a>
             </li>
             
             <li class="sidebar-item">
                 <a class="sidebar-link" [routerLink]="'customers/edit/'+id">
-                    <i class="align-middle"><mat-icon>person_outline</mat-icon></i> <span class="align-middle"> Edit Profile</span>
+                    <i class="align-middle"><mat-icon>person_outline</mat-icon></i> <span class="align-middle"> Gérer Compte</span>
                 </a>
             </li>
 
@@ -53,7 +75,7 @@
 
             <li class="sidebar-item">
                 <a class="sidebar-link" (click)="onLogout()">
-                    <i class="align-middle"><mat-icon>power_settings_new</mat-icon></i> <span class="align-middle">Log out</span>
+                    <i class="align-middle"><mat-icon>power_settings_new</mat-icon></i> <span class="align-middle">Déconnexion</span>
                 </a>
             </li>
         </ul>

@@ -1,6 +1,6 @@
 import { StompService } from './../../services/stomp-service.service';
 import { SocieteService } from 'src/app/services/societe.service';
-import { Status } from 'src/app/model/Status';
+
 
 import { ProjetService } from './../../services/projet.service';
 import { TypeService } from './../../services/types.service';
@@ -33,7 +33,7 @@ export class ListAdminComponent implements OnInit {
   types = [];
   projects = [];
   societes = [];
-  defaultValue = "All";
+  defaultValue = "tous";
   filterDictionary= new Map<string,string>();
   ok = true;
   filters: Filter[]=[];
@@ -63,10 +63,7 @@ export class ListAdminComponent implements OnInit {
     this.loadProjects();
     this.loadTypes();
     this.loadSociete();
-    this.filters.push({name:'projet',options:this.projects,defaultValue:this.defaultValue});
-    this.filters.push({name:'type',options:this.types,defaultValue:this.defaultValue});
-    this.filters.push({name:'societe',options:this.societes,defaultValue:this.defaultValue});
-    this.filters.push({name:'status',options:this.status,defaultValue:this.defaultValue});
+    this.loadFilters();
   }
 
   loadProjects(){
@@ -76,6 +73,7 @@ export class ListAdminComponent implements OnInit {
       })
     })
   }
+
   loadTypes(){
     this.typeService.listeType().subscribe((res:any[]) =>{
       res.forEach(t =>{
@@ -83,6 +81,7 @@ export class ListAdminComponent implements OnInit {
       })
     })
     }
+    
   loadSociete(){
     this.societeService.listeSocieties().subscribe((res:any[]) =>{
       res.forEach(s =>{
@@ -90,6 +89,7 @@ export class ListAdminComponent implements OnInit {
       })
     })
   }
+
   getAll(){
 
       this.complaintService.getAll().subscribe((res:any[])=>{
@@ -100,12 +100,20 @@ export class ListAdminComponent implements OnInit {
         var map = new Map(JSON.parse(filter));
         let isMatch = false;
         for(let [key,value] of map){
-          isMatch = (value=="All") || (record[key as keyof Complaint] == value); 
+          isMatch = (value=="tous") || (record[key as keyof Complaint] == value); 
           if(!isMatch) return false;
         }
         return isMatch;
       }
     }
+
+  loadFilters(){
+    this.filters.push({name:'projet',options:this.projects,defaultValue:this.defaultValue});
+    this.filters.push({name:'type',options:this.types,defaultValue:this.defaultValue});
+    this.filters.push({name:'societe',options:this.societes,defaultValue:this.defaultValue});
+    this.filters.push({name:'status',options:this.status,defaultValue:this.defaultValue});
+  }
+
   applyEmpFilter(ob:MatSelectChange,filter:Filter) {
 
     this.filterDictionary.set(filter.name,ob.value);
@@ -113,17 +121,16 @@ export class ListAdminComponent implements OnInit {
     this.dataSource.filter = jsonString;
       //console.log(this.filterValues);
     }
-
-
-
+  
   details(id){
     const dialogRef = this.dialog.open(DetailsComponent,{
-      width : "50%",
+      width : "60%",
       height: "70%",
       //disableClose: true,
       data: { complaintId: id}
     });   
     dialogRef.afterClosed().subscribe(res =>{
+      this.filters =[];
       this.ngOnInit();
     })  
   }
@@ -196,7 +203,9 @@ export class ListAdminComponent implements OnInit {
         title: 'Success...',
         text: 'Verified Successfully !',
       })
+      this.filters =[];
       this.ngOnInit();
+
     }
     else{
       Swal.fire({

@@ -6,7 +6,7 @@
       <div style="display: block;"> <b> Domain:</b> {{data.specialite}}</div>
       <div style="display: block;"> <b> date:</b> {{data.dateCreation }}</div>
       <div style="display: block;"> <b> Society:</b> {{data.societe}}</div>
-      <div style="margin-top: 10px;" *ngIf="this.authService.isClient() || this.authService.isClientAdmin()">
+      <div style="margin-top: 10px;" *ngIf="this.authService.isPersonnel_Societe() || this.authService.isResponsable_Societe()">
          <button mat-raised-button color="primary" (click)="add(data.id)"> <mat-icon class="mat-18">create</mat-icon> Add complaint</button>
       </div>
 

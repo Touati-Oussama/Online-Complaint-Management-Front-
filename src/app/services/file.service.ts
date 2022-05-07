@@ -29,6 +29,25 @@ export class FileService {
     return this.http.post(this.apiURL+'/upload',formData,{headers:httpHeaders, observe:'response'})
   }
 
+  uploadd(files: File[], idCompalint:number): Observable<HttpEvent<any>> {
+    let jwt = this.authService.getToken();
+    jwt = "Bearer " + jwt;
+    let httpHeaders = new HttpHeaders({"Authorization": jwt})
+    const formData: FormData = new FormData();
+    for (const file of files) { formData.append('files', file,file.name)};
+    const req = new HttpRequest('POST', `${this.apiURL}/upload/${idCompalint}`, formData, {
+      headers:httpHeaders,
+      reportProgress: true,
+      responseType: 'json'
+    });
+    return this.http.request(req);
+    /*return this.http.post<any>(this.apiURL+'/upload/'+idCompalint,formData,{
+      headers:httpHeaders,
+      reportProgress: true,
+      responseType: 'json',
+    })*/
+  }
+
   getByComplaint(id:number):Observable<any>{
     let jwt = this.authService.getToken();
     jwt = "Bearer " + jwt;

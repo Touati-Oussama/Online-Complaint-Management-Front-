@@ -48,7 +48,7 @@ export class ZeroActionComponent implements OnInit {
         console.log(res);
         this.dataSource.data = res;
       })
-    else if (this.authService.isClientAdmin()){
+    else if (this.authService.isResponsable_Societe()){
       this.userService.getCustomerByUsername(this.authService.loggedUser).subscribe(res =>{
         console.log(res);
         this.complaintService.getBySocieteAndStatus(res.societe,this.status).subscribe((res:any)=>{
@@ -82,7 +82,7 @@ export class ZeroActionComponent implements OnInit {
   all(){
     if(this.authService.isAdmin())
       this.router.navigate(['complaints/adminList']);
-    else if (this.authService.isClientAdmin())
+    else if (this.authService.isResponsable_Societe())
       this.router.navigate(['complaints/clientAdminList']);
   }
 

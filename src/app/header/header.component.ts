@@ -8,7 +8,6 @@ import { CompalintService } from '../services/compalint.service';
 import { ImageService } from '../services/image.service';
 import { MessageService } from '../services/message.service';
 import Swal from 'sweetalert2';
-import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-header',
@@ -43,13 +42,14 @@ export class HeaderComponent implements OnInit {
         this.loadImage();
         this.loadComplaints();
         if (this.authService.isAdmin() || this.authService.isEmployee())
-          if (this.nb > 0)
+          if (this.data.length > 0)
             Swal.fire({
               icon: 'warning',
               title: 'Warning',
-              text: ` ${this.nb} new complaint(s)`,
+              text: `Nouveaux Réclamation(s)`,
       
             })
+            
       }
       else if  (res.message === 'isAddedComplaint'){
         this.loadComplaints();
@@ -61,15 +61,14 @@ export class HeaderComponent implements OnInit {
      this.path = "Forward Complaint";
    this.stompService.subscribe('/topic/'+this.path,() : void =>{
      this.loadComplaints();
-     if (this.authService.isAdmin())
-     this.nb++;
+     if (this.authService.isAdmin() || this.authService.isEmployee() )
      Swal.fire({
        icon: 'warning',
        title: 'Warning',
-       text: ` ${this.nb} new complaint(s)`,
+       text:  'Nouveaux Réclamation(s)',
 
      })
-   })  
+   })
   }
 
   onLogout(){

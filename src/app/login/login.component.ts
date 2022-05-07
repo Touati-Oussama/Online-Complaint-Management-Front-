@@ -38,11 +38,11 @@ export class LoginComponent implements OnInit{
       else if(this.authService.isEmployee()){
         this.router.navigate(['/dashboard-employee']);
       }
-      else if(this.authService.isClient()){
+      else if(this.authService.isPersonnel_Societe()){
         this.router.navigate(['/dashboard-customer']);
       }
       
-      else if(this.authService.isClientAdmin()){
+      else if(this.authService.isResponsable_Societe()){
         this.router.navigate(['/dashboard-customer-admin']);
       }
     },(err) =>{

@@ -1,0 +1,24 @@
+<div class="card">
+    <div class="card-header">
+        <h5 class="card-title mb-0">Configuration de compte</h5>
+    </div>
+    <div class="card-body">
+        <div class="m-sm-4">
+            <form>
+     
+                <div class="mb-3">
+                    <label class="form-label">Activation de compte</label>
+                    <select class="form-select mb-3"  [(ngModel)]="enabled" name="enabled" [value]="enabled">
+                        <option  disabled>Choisir un</option>
+                        <option [value]="etats[s]" *ngFor="let s of status" >{{etats[s]}}</option>
+                    </select>
+                </div>
+                <div class="text-center m-3">
+                    <button mat-raised-button  style="margin-right: 10px; background-color: rgb(47, 48, 48); color: aliceblue;" (click)="update()">Modifier</button> 
+                    <button type="reset" mat-raised-button color="warn" (click)="OnClose()" >Annuler</button>
+                  
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

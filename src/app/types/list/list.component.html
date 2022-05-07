@@ -39,8 +39,9 @@
             </div>
         </div>
     </div>-->
-    <button mat-raised-button color="primary" (click)="add()">
-      <mat-icon class="mat-18">add</mat-icon> <span>Add Type</span></button>
+    <button  (click)="add()" class="btnTest">
+      Ajouter un nouveau type
+    </button>
     <div fxLayout fxLayoutAlign="center space-between">
         <mat-form-field fxFlex="40%">
           <input matInput type="text" (keyup)="doFilter($event.target.value)" placeholder="Filter">

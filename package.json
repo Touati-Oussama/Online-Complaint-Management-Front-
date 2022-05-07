@@ -26,6 +26,7 @@
     "@fortawesome/angular-fontawesome": "^0.7.0",
     "@fortawesome/fontawesome-svg-core": "^6.1.1",
     "@fortawesome/free-solid-svg-icons": "^6.1.1",
+    "chart.js": "^3.7.1",
     "file-saver": "^2.0.5",
     "mat-table-exporter": "^10.2.4",
     "net": "^1.0.2",

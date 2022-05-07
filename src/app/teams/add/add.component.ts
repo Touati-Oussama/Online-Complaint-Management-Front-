@@ -15,6 +15,7 @@ import { HttpResponse, HttpEventType } from '@angular/common/http';
 })
 export class AddComponent implements OnInit {
 
+  
   selectedFiles: FileList;
   currentFile: File;
   progress = 0;
@@ -23,7 +24,9 @@ export class AddComponent implements OnInit {
   selectFile(event): void {
     this.selectedFiles = event.target.files;
   }
-  
+  change(event){
+    console.log(event.target);
+  }
   durationInSeconds = 5;
   data:FormGroup;
   specialitiess = [];

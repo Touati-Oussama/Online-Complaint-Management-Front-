@@ -7,10 +7,10 @@
 </div>    
 
 <div fxLayout fxLayoutAlign="center space-between" style="margin-bottom: 15px;">
-    &nbsp;&nbsp;<button mat-raised-button color="primary" (click)="exporter.exportTable('xlsx',{filename:'Complaints'})">Excel</button>
-    &nbsp;&nbsp;<button mat-raised-button color="primary" (click)="exporter.exportTable('csv',{filename:'Complaints'})">CSV</button>
-    &nbsp;&nbsp;<button mat-raised-button color="primary" (click)="exporter.exportTable('json',{filename:'Complaints'})">Json</button>
-    &nbsp;&nbsp;<button mat-raised-button color="primary" (click)="exporter.exportTable('txt',{filename:'Complaints'})">Txt</button>
+    &nbsp;&nbsp;<button mat-raised-button class="btnTest" (click)="exporter.exportTable('xlsx',{filename:'Complaints'})">Excel</button>
+    &nbsp;&nbsp;<button mat-raised-button class="btnTest" (click)="exporter.exportTable('csv',{filename:'Complaints'})">CSV</button>
+    &nbsp;&nbsp;<button mat-raised-button class="btnTest"(click)="exporter.exportTable('json',{filename:'Complaints'})">Json</button>
+    &nbsp;&nbsp;<button mat-raised-button class="btnTest" (click)="exporter.exportTable('txt',{filename:'Complaints'})">Txt</button>
 </div>
 <table mat-table matTableExporter [dataSource]="dataSource"  #exporter="matTableExporter" class="mat-elevation-z8">
 

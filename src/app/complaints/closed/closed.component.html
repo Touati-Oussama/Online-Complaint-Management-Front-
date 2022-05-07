@@ -1,12 +1,15 @@
-<div *ngIf="authService.isAdmin() || authService.isClientAdmin()">
-    <button mat-button color="primary" (click)="all()">
-        <mat-icon class="mat-18">border_color</mat-icon> <span>All Complaints</span>
+<div *ngIf="authService.isAdmin() || authService.isResponsable_Societe()">
+    <button class="btn btn-link" (click)="all()">
+        <mat-icon class="mat-18" class="align-middle">border_color</mat-icon>
+        <span class="align-middle">Toutes les Réclamations</span>
     </button>
-    <button mat-button color="primary" (click)="zeroAction()">
-        <mat-icon class="mat-18">report</mat-icon> <span>New Complaint(s)</span>
+    <button class="btn btn-link" (click)="zeroAction()">
+        <mat-icon class="mat-18" class="align-middle">report</mat-icon>
+        <span class="align-middle">Nouvelles Réclamation(s)</span>
     </button>
-    <button mat-button color="primary" (click)="pending()">
-        <mat-icon class="mat-18">equalizer</mat-icon> <span>Pending Complaint(s)</span>
+    <button class="btn btn-link" (click)="pending()">
+        <mat-icon class="mat-18" class="align-middle">equalizer</mat-icon>
+        <span class="align-middle">Réclamation(s) en cours</span>
     </button>
     <hr>
 </div>
@@ -20,15 +23,14 @@
 </div>
 
 
-
 <div fxLayout fxLayoutAlign="center space-between" style="margin-bottom: 15px;">
-    &nbsp;&nbsp;<button mat-raised-button color="primary"
+    &nbsp;&nbsp;<button class="btn btn-dark btn-lg"
         (click)="exporter.exportTable('xlsx',{filename:'Complaints'})">Excel</button>
-    &nbsp;&nbsp;<button mat-raised-button color="primary"
+    &nbsp;&nbsp;<button class="btn btn-dark btn-lg"
         (click)="exporter.exportTable('csv',{filename:'Complaints'})">CSV</button>
-    &nbsp;&nbsp;<button mat-raised-button color="primary"
+    &nbsp;&nbsp;<button class="btn btn-dark btn-lg"
         (click)="exporter.exportTable('json',{filename:'Complaints'})">Json</button>
-    &nbsp;&nbsp;<button mat-raised-button color="primary"
+    &nbsp;&nbsp;<button class="btn btn-dark btn-lg"
         (click)="exporter.exportTable('txt',{filename:'Complaints'})">Txt</button>
 </div>
 <table mat-table matTableExporter [dataSource]="dataSource" #exporter="matTableExporter" class="mat-elevation-z8">
@@ -61,13 +63,13 @@
     </ng-container>
 
     <!-- Name Column -->
-    <ng-container matColumnDef="Company Name" *ngIf="!authService.isClientAdmin()">
+    <ng-container matColumnDef="Company Name" *ngIf="!authService.isResponsable_Societe()">
         <th mat-header-cell *matHeaderCellDef > Company Name </th>
         <td mat-cell *matCellDef="let element"> {{element.societe}} </td>
       </ng-container>
   
         <!-- Name Column -->
-        <ng-container matColumnDef="Company Name" *ngIf="authService.isClientAdmin()">
+        <ng-container matColumnDef="Company Name" *ngIf="authService.isResponsable_Societe()">
           <th mat-header-cell *matHeaderCellDef > Sent By </th>
           <td mat-cell *matCellDef="let element"> {{element.client}} </td>
         </ng-container> 

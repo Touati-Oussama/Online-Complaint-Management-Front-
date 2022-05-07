@@ -1,11 +1,14 @@
-<button mat-button color="primary" (click)="all()">
-  <mat-icon class="mat-18">border_color</mat-icon> <span>All Complaints</span>
+<button class="btn btn-link" (click)="all()">
+  <mat-icon class="mat-18" class="align-middle">border_color</mat-icon>
+  <span class="align-middle">Toutes les Réclamations</span>
 </button>
-<button mat-button color="primary" (click)="pending()">
-  <mat-icon class="mat-18">equalizer</mat-icon> <span>Pending Complaint</span>
+<button class="btn btn-link" (click)="pending()">
+  <mat-icon class="mat-18" class="align-middle">equalizer</mat-icon>
+  <span class="align-middle">Reclmations En Cours</span>
 </button>
-<button mat-button color="primary" (click)="closed()">
-  <mat-icon class="mat-18">check_circle_outline</mat-icon> <span>Closed Complaint</span>
+<button class="btn btn-link" (click)="closed()">
+  <mat-icon class="mat-18" class="align-middle">check_circle_outline</mat-icon>
+  <span class="align-middle">Réclamations Cloturés</span>
 </button>
 
 <hr>
@@ -19,13 +22,13 @@
 
 
   <div fxLayout fxLayoutAlign="center space-between" style="margin-bottom: 15px;">
-    &nbsp;&nbsp;<button mat-raised-button color="primary"
+    &nbsp;&nbsp;<button class="btn btn-dark"
       (click)="exporter.exportTable('xlsx',{filename:'Complaints'})">Excel</button>
-    &nbsp;&nbsp;<button mat-raised-button color="primary"
+    &nbsp;&nbsp;<button class="btn btn-dark"
       (click)="exporter.exportTable('csv',{filename:'Complaints'})">CSV</button>
-    &nbsp;&nbsp;<button mat-raised-button color="primary"
+    &nbsp;&nbsp;<button class="btn btn-dark"
       (click)="exporter.exportTable('json',{filename:'Complaints'})">Json</button>
-    &nbsp;&nbsp;<button mat-raised-button color="primary"
+    &nbsp;&nbsp;<button class="btn btn-dark"
       (click)="exporter.exportTable('txt',{filename:'Complaints'})">Txt</button>
   </div>
   <table mat-table matTableExporter [dataSource]="dataSource" #exporter="matTableExporter" class="mat-elevation-z8">
@@ -62,7 +65,7 @@
     </ng-container>
 
       <!-- Name Column -->
-      <ng-container matColumnDef="Company Name" *ngIf="authService.isClientAdmin()">
+      <ng-container matColumnDef="Company Name" *ngIf="authService.isResponsable_Societe()">
         <th mat-header-cell *matHeaderCellDef > Sent By </th>
         <td mat-cell *matCellDef="let element"> {{element.client}} </td>
       </ng-container>  

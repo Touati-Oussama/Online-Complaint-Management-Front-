@@ -22,7 +22,7 @@ import { Observable } from 'rxjs';
 })
 export class AddComponent implements OnInit {
 
-  selectedFiles: FileList;
+  selectedFiles: File [];
   currentFile: File;
   progress = -1;
   message = '';
@@ -84,8 +84,8 @@ export class AddComponent implements OnInit {
 
   submit(){
 
-    
-    //const idProject = this.route.snapshot.params.id;
+    console.log(this.selectedFiles)
+    /*//const idProject = this.route.snapshot.params.id;
     if(!this.data.value['projet'])
     this.data.patchValue({projet: this.idProject});
     this.data.patchValue({ client: this.authService.loggedUser })
@@ -167,9 +167,8 @@ export class AddComponent implements OnInit {
         }
 
       })
-    }
-
-    /*
+    }*/
+    
     //const idProject = this.route.snapshot.params.id;
     if(!this.data.value['projet'])
       //this.data.setValue({projet: idProject})
@@ -177,26 +176,50 @@ export class AddComponent implements OnInit {
         projet: this.idProject
       });
     this.data.patchValue({ client: this.authService.loggedUser })
-    console.log(this.data.value);
     this.progress = 0;
     if(this.selectedFiles){
-      this.currentFile = this.selectedFiles.item(0);
-      console.log(this.currentFile.size);
-      this.complaintService.add(this.data.value).toPromise().then((res:any)=>{
-        if (res.id) {
-          this.fileService.upload(res.id,this.currentFile).subscribe(
-            event => {
-              console.log(event);
-              if (event.type === HttpEventType.UploadProgress) {
-                this.progress = Math.round(100 * event.loaded / event.total);
-              } else if (event instanceof HttpResponse) {
-                this.message = event.body.message;
+      this.complaintService.add(this.data.value).subscribe((res:any)=>{
+        if (res.type === HttpEventType.UploadProgress) {
+          this.progress = Math.round(100 * res.loaded / res.total);
+        }
+        else if (res instanceof HttpResponse) {
+          if (res.body.id) {
+            this.messageService.send('isAddedComplaint');
+            this.fileService.uploadd(this.selectedFiles,res.body.id).subscribe((res:any) => {
+              if (res){
+                this.selectedFiles = undefined;
+                Swal.fire({
+                  icon: 'success',
+                  title: 'Success...',
+                  text: 'Added Successfully !',
+                })  
+                this.data.reset();
+                this.onClose();
+                this.progress = -1;
+              }
+            })
+
+          }else{
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Something went wrong!',
+            })
+          }
+        }
+        /*if (res.body.id) {
+          this.fileService.uploadd(this.selectedFiles,res.body.id).subscribe((res:any) => {
+              
+              if (res.type === HttpEventType.UploadProgress) {
+                console.log("progressss");
+                this.progress = Math.round(100 * res.loaded / res.total);
+              } else if (res instanceof HttpResponse) {
+                this.message = res.body.message;
               }
             },
             err => {
               this.progress = 0;
               this.message = 'Could not upload the file!';
-              this.currentFile = undefined;
             });
           this.selectedFiles = undefined;
           Swal.fire({
@@ -212,45 +235,38 @@ export class AddComponent implements OnInit {
             title: 'Oops...',
             text: 'Something went wrong!',
           })
-        }
-      }).catch((err)=>{
-        Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: 'Something went wrong!, Please try again !',
-        })
+        }*/
       })
     }
     else
     {
-      this.complaintService.add(this.data.value).toPromise().then((res:any)=>{
-        console.log(res);
-      if (res.id) {
-        Swal.fire({
-          icon: 'success',
-          title: 'Success...',
-          text: 'Added Successfully !',
-        })
-        this.data.reset();
-        try {
-          this.dialogRef.close();
-        } catch (error) {
+      this.complaintService.add(this.data.value).subscribe((res:any)=>{
+        this.messageService.send('isAddedComplaint');
+        if (res.type === HttpEventType.UploadProgress) {
+          this.progress = Math.round(100 * res.loaded / res.total);
         }
-      }else{
-        Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: 'Something went wrong!',
-        })
-      }
-    }).catch((err)=>{
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'Something went wrong!, Please try again !',
+        else if (res instanceof HttpResponse) {
+          if (res.body.id) {
+            this.messageService.send('isAddedComplaint');
+            this.selectedFiles = undefined;
+            Swal.fire({
+              icon: 'success',
+              title: 'Success...',
+              text: 'Added Successfully !',
+            })  
+            this.data.reset();
+            this.onClose();
+            this.progress = -1;
+          }else{
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Something went wrong!',
+            })
+          }
+        }
       })
-    })
-    }*/
+    }
     
 
     }

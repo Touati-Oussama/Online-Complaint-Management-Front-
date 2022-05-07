@@ -15,10 +15,11 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatInputModule } from '@angular/material/input';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { CompteComponent } from './compte/compte.component';
 
 
 @NgModule({
-  declarations: [ClientsComponent, AddComponent, EditComponent, ListComponent],
+  declarations: [ClientsComponent, AddComponent, EditComponent, ListComponent, CompteComponent],
   imports: [
     CommonModule,
     ClientsRoutingModule,

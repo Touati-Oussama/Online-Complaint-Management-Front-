@@ -38,7 +38,7 @@
                 <div>
  
                       <label class="btn btn-default">
-                        <input type="file" (change)="selectFile($event)"  accept=".pdf"/>
+                        <input type="file" (change)="selectFile($event)" multiple accept=".pdf"/>
                       </label>
                       <div class="alert alert-light" role="alert">{{ message }}</div>
                 </div>
@@ -57,7 +57,7 @@
                       </div>
                 </div>
                 <div class="text-center m-3">
-                    <button mat-raised-button color="primary" style="margin-right: 10px;" [disabled]="! data.valid">Submit</button> 
+                    <button mat-raised-button  style="margin-right: 10px;background-color: rgb(35, 35, 36); color: aliceblue;" [disabled]="! data.valid">Submit</button> 
                     <button type="reset" mat-raised-button color="warn" (click)="onClose()">Reset</button>
                     <!-- <button type="submit" class="btn btn-lg btn-primary">Sign up</button> -->
                 </div>

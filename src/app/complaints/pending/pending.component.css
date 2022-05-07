@@ -8,3 +8,9 @@ th.mat-header-cell {
     text-align: left;
     max-width: 300px;
 }
+
+.btn-link{
+    color: rgb(71, 69, 69);
+    padding: .25em;
+    display: inline-block;
+}

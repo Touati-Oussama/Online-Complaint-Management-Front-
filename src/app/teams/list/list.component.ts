@@ -2,6 +2,7 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { CompteComponent } from 'src/app/clients/compte/compte.component';
 import { UserService } from 'src/app/services/users.service';
 import Swal from 'sweetalert2'
 import { AddComponent } from '../add/add.component';
@@ -15,7 +16,7 @@ import { EditComponent } from '../edit/edit.component';
 export class ListComponent implements OnInit,AfterViewInit  {
 
   data = [];
-  public displayedColumns = ['firstName', 'lastName','phone','email','specialities', 'update', 'delete'];
+  public displayedColumns = ['firstName', 'lastName','phone','email','specialities','status' ,'update', 'Edit status'];
   public dataSource = new MatTableDataSource();
   constructor(private userService:UserService,private dialog:MatDialog) { }
 
@@ -29,10 +30,11 @@ export class ListComponent implements OnInit,AfterViewInit  {
     this.userService.listStaffs().toPromise().then((res:any[])=>{
       console.log(res);
       this.dataSource.data = res;
+      this.data = res;
     })
   }
 
-  delete(id:number){
+ /* delete(id:number){
     Swal.fire({
       title: 'Are you sure?',
       text: "Do you really want to delete this developper ?",
@@ -71,8 +73,19 @@ export class ListComponent implements OnInit,AfterViewInit  {
       }
     }
     )
-  }
+  }*/
 
+
+  ModifierCompte(id: number){
+    const dialogRef = this.dialog.open(CompteComponent,{
+      width : "40%",
+      height: "50%",
+      data: { id: id}
+    });
+    dialogRef.afterClosed().subscribe(res =>{
+      this.ngOnInit();
+    })  
+  }
   add(){
     const dialogRef = this.dialog.open(AddComponent,{
       width : "40%",

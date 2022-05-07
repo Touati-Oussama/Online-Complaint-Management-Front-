@@ -4,22 +4,22 @@
     </div>
     <div class="card-body">
         <div class="m-sm-4">
-            <form [formGroup]="data" (ngSubmit)="update()">
+            <form >
                 <div class="mb-3">
                     <label class="form-label">Complaint Subject</label>
                     <input class="form-control form-control-lg" type="text" name="name" placeholder="Enter your subject"
-                     formControlName="sujet"   
+                    [(ngModel)]="sujet"
                     />
                 </div>       
                 <div class="mb-3">
                     <label class="form-label">Status</label>
-                    <select class="form-select mb-3"  formControlName="status" value="1">
+                    <select class="form-select mb-3"  [(ngModel)]="s" name="s" [value]="s">
                         <option  disabled>Select One</option>
                         <option [value]="etats[s]" *ngFor="let s of status" >{{etats[s]}}</option>
                     </select>
                 </div>
                 <div class="text-center m-3">
-                    <button mat-raised-button color="primary" style="margin-right: 10px;" [disabled]="! data.valid">update</button> 
+                    <button mat-raised-button color="primary" style="margin-right: 10px; color: aliceblue; background-color: rgb(35,35, 36);" (click)="update()">update</button> 
                     <button type="reset" mat-raised-button color="warn" (click)="OnClose()" >Reset</button>
                   
                 </div>

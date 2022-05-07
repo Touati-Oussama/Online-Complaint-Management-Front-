@@ -1,65 +1,86 @@
-
-<button mat-raised-button color="primary" (click)="add()">
-    <mat-icon class="mat-18">add</mat-icon><span>Add New Customer</span></button>
+<!--
+<button mat-raised-button style="color: rgb(60, 60, 230);" (click)="add()">
+    <mat-icon class="mat-18">add</mat-icon><span>Ajouter Personnel</span></button>
     <div style="background-color: white;margin-top: 20px;" class="mat-elevation-z8">
       <div fxLayout fxLayoutAlign="center space-between">
         <mat-form-field >
-           <input matInput type="text" (keyup)="doFilter($event.target.value)" placeholder="Search">
+           <input matInput type="text" (keyup)="doFilter($event.target.value)" placeholder="Recherche">
         </mat-form-field>
     </div>  
     
     <table mat-table [dataSource]="dataSource"  >
     
-        <!--- Note that these columns can be defined in any order.
-              The actual rendered columns are set as a property on the row definition" -->
-      
-        <!-- Position Column -->
         <ng-container matColumnDef="firstName">
-          <th mat-header-cell *matHeaderCellDef> First Name. </th>
-          <td mat-cell *matCellDef="let element"> {{element.nom}} </td>
+          <th mat-header-cell *matHeaderCellDef> Nom. </th>
+          <td mat-cell *matCellDef="let element">
+            <span *ngIf="authService.loggedUser === element.username"> <b>{{element.nom}}</b></span> 
+            <span *ngIf="authService.loggedUser != element.username">{{element.nom}}</span> 
+           </td>
         </ng-container>
       
-        <!-- Name Column -->
+        
         <ng-container matColumnDef="lastName">
-          <th mat-header-cell *matHeaderCellDef> Last Name </th>
-          <td mat-cell *matCellDef="let element"> {{element.prenom}} </td>
+          <th mat-header-cell *matHeaderCellDef> Prenom </th>
+          <td mat-cell *matCellDef="let element">
+            <span *ngIf="authService.loggedUser === element.username"> <b>{{element.prenom}}</b></span> 
+            <span *ngIf="authService.loggedUser != element.username">{{element.prenom}}</span> 
+          </td>
         </ng-container>
     
-        <!-- Name Column -->
+        
         <ng-container matColumnDef="phone">
-            <th mat-header-cell *matHeaderCellDef> Phone Number </th>
-            <td mat-cell *matCellDef="let element"> {{element.telephone}} </td>
+            <th mat-header-cell *matHeaderCellDef> Télephone </th>
+            <td mat-cell *matCellDef="let element">
+              <span *ngIf="authService.loggedUser === element.username"> <b>{{element.telephone}}</b></span> 
+              <span *ngIf="authService.loggedUser != element.username">{{element.telephone}}</span> 
+            </td>
         </ng-container>
     
-        <!-- Name Column -->
+        
         <ng-container matColumnDef="email">
             <th mat-header-cell *matHeaderCellDef> Email </th>
-            <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+            <td mat-cell *matCellDef="let element">
+              <span *ngIf="authService.loggedUser === element.username"> <b>{{element.email}}</b></span> 
+              <span *ngIf="authService.loggedUser != element.username">{{element.email}}</span> 
+            </td>
         </ng-container>
     
-        <!-- Name Column -->
+        
         <ng-container matColumnDef="companyName">
-            <th mat-header-cell *matHeaderCellDef> Company Name </th>
-            <td mat-cell *matCellDef="let element"> {{element.societe}} </td>
+            <th mat-header-cell *matHeaderCellDef> Nom Sociéte </th>
+            <td mat-cell *matCellDef="let element"> 
+              <span *ngIf="authService.loggedUser === element.username"> <b>{{element.societe}}</b></span> 
+              <span *ngIf="authService.loggedUser != element.username">{{element.societe}}</span> 
+            </td>
+          </ng-container>
+
+        <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef> Compte </th>
+            <td mat-cell *matCellDef="let element"> 
+              <span class="badge bg-danger" *ngIf="element.enabled === false "> Désactiver</span>
+              <span class="badge bg-success" *ngIf="element.enabled === true "> Activé </span>  
+            </td>
           </ng-container>
       
-        <!-- Weight Column -->
         <ng-container matColumnDef="update">
-          <th mat-header-cell *matHeaderCellDef> Update </th>
+          <th mat-header-cell *matHeaderCellDef> Modifier </th>
           <td mat-cell *matCellDef="let element">
-            <button mat-raised-button color="primary" (click)="update(element.id)">
-                Update
-            </button>
+
+            <span (click)="update(element.id)" >
+              <i class="fa fa-pencil-square fa-2xl" style="color: rgb(60, 60, 230);" aria-hidden="true"></i>   
+            </span>
           </td>
         </ng-container>
       
-        <!-- Symbol Column -->
-        <ng-container matColumnDef="delete">
-          <th mat-header-cell *matHeaderCellDef> Delete </th>
+        <ng-container matColumnDef="Edit status">
+          <th mat-header-cell *matHeaderCellDef> Active/Désactiver</th>
           <td mat-cell *matCellDef="let element"> 
-            <button mat-raised-button color="warn" (click)="delete(element.id)">
-                Delete
-            </button>
+
+            <span (click)="ModifierCompte(element.id)" >
+              <i class="fa fa-toggle-on fa-2xl" style="color: rgb(60, 60, 230);" *ngIf="element.enabled === true " aria-hidden="true"></i>
+              <i class="fa fa-toggle-off fa-2xl" style="color: rgb(60, 60, 230);" *ngIf="element.enabled === false "  aria-hidden="true"></i>
+            </span>
+
           </td>
         </ng-container>
       
@@ -70,4 +91,54 @@
     </mat-paginator>
     
     </div>
+-->
+<button  (click)="add()">
+  Ajouter un Responsable/Personnel
+</button>
+<input type="text" (keyup)="doFilter($event.target.value)" placeholder="Rechercher"/>
+<table class="table table-striped"  >
+
+  <tbody>
+    <tr>
+      <th scope="col">Nom</th>
+      <th scope="col">Prenom</th>
+      <th scope="col">Télephone</th>
+      <th scope="col">email</th>
+      <th scope="col">Societe</th>
+      <th scope="col">roles</th>
+      <th scope="col">Compte</th>
+      <th></th>
+      <th></th>
+    </tr>
+    <tr *ngFor="let d of data">
+      <td>{{d.nom}}</td>
+      <td>{{d.prenom}}</td>
+      <td>{{d.telephone}}</td>
+      <td>{{d.email}}</td>
+      <td>{{d.societe}}</td>
+      <td>
+        <select style="background-color: grey;color: aliceblue;border-radius: 5px; padding: 5px; width: 200px;">
+          <option value="" *ngFor="let r of d.roles" >{{r}}</option>
+        </select>
+   
+   
+      </td>
+      <td>
+        <span class="badge bg-danger" *ngIf="d.enabled === false "> Désactiver</span>
+        <span class="badge bg-success" *ngIf="d.enabled === true "> Activé </span>  
+      </td>
+      <td>
+        <span (click)="update(d.id)" >
+          <i class="fa fa-pencil-square fa-2xl" style="color: rgb(60, 60, 230);" aria-hidden="true"></i>   
+        </span>
+      </td>
+      <td>
+        <span (click)="ModifierCompte(d.id)" >
+          <i class="fa fa-toggle-on fa-2xl" style="color: rgb(60, 60, 230);" *ngIf="d.enabled === true " aria-hidden="true"></i>
+          <i class="fa fa-toggle-off fa-2xl" style="color: rgb(60, 60, 230);" *ngIf="d.enabled === false "  aria-hidden="true"></i>
+        </span>
+      </td>
+    </tr>
+  </tbody>
+</table>
   

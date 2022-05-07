@@ -8,3 +8,8 @@ th.mat-header-cell {
     text-align: left;
     max-width: 300px;
 }
+
+.btnTest{
+    background-color: rgb(35, 35,36);
+    color: aliceblue;
+}

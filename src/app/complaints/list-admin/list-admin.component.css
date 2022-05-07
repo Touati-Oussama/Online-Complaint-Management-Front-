@@ -21,4 +21,17 @@ th.mat-header-cell {
     justify-content: space-between;
     
 }
-
+.btn-link{
+    color: rgb(71, 69, 69);
+    padding: .25em;
+    display: inline-block;
+}
+#test{
+    padding: .5em;
+    display: inline-block;
+}
+.testt{
+    display:inline-block;
+    font-size: 1.3em;
+    text-align: right;
+}

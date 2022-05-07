@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand navbar-light navbar-bg" *ngIf="this.authService.loggedUser">
+<nav class="navbar navbar-expand navbar-light navbar-bg" style="background-color:rgb(36,36,35)" *ngIf="this.authService.loggedUser">
     <a class="sidebar-toggle js-sidebar-toggle">
         <i class="hamburger align-self-center"></i>
     </a>
@@ -8,8 +8,8 @@
             <li class="nav-item dropdown" *ngIf="this.authService.isAdmin() || this.authService.isEmployee()">
                 <a class="nav-icon dropdown-toggle" href="#" id="alertsDropdown" data-bs-toggle="dropdown">
                     <div class="position-relative">
-                        <i class="align-middle"><mat-icon>notifications_none</mat-icon></i>
-                        <span class="indicator"  *ngIf="data">{{nb}}</span>
+                        <i class="align-middle" style="color:white"><mat-icon>notifications_none</mat-icon></i>
+                        <span class="indicator" style="background-color: red;" *ngIf="data">{{nb}}</span>
                     </div>
                 </a>
                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end py-0"
@@ -47,7 +47,7 @@
                     data-bs-toggle="dropdown">
                     <img *ngIf=!retrievedImage src="assets/img/avatars/init.jpg "  class="avatar img-fluid rounded me-1"/>
                     <img *ngIf=retrievedImage [src]="retrievedImage" class="avatar img-fluid rounded me-1">
-                     <span class="text-dark">{{this.authService.loggedUser}}</span></a>
+                     <span class="text-light">{{this.authService.loggedUser}} </span></a>
                 <div class="dropdown-menu dropdown-menu-end">
                     <a class="dropdown-item" href="pages-profile.html"><i class="align-middle me-1"
                             data-feather="user"></i> Profile</a>

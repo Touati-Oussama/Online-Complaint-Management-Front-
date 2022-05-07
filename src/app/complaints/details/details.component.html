@@ -16,12 +16,13 @@
             <span  class="badge bg-success" *ngIf="data.status === 'ClOTURE' " > Cloturé </span>
         </div>
         <div style="display: block; margin: 5px;"  *ngIf="file">
-             <b> File Related: </b>  <button (click)="download(file.id)" mat-button color="primary">{{file.name}}</button></div>
+             <b> Files Related: </b>  <button *ngFor="let f of file" (click)="download(f.id,f.name)" mat-button color="primary">{{f.name}}</button>
+        </div>
     <div *ngIf="authService.isAdmin() || authService.isEmployee()" style="margin-top: 10px;">
-        <button *ngIf="!data.developper" mat-raised-button color="primary"  [disabled]="data.developper" (click)="forwardTest()">Forward Complaint</button>
-        <button mat-raised-button color="primary">Reply To Complaint</button>
-        <button mat-raised-button color="primary" (click)="takeAction()">Take Action</button>
-        <button mat-raised-button color="primary" (click)="viewClient()">View client</button>
-        <button  mat-raised-button color="warn" (click)="delete(data.id)">Delete Complaint</button>
+        <button *ngIf="!data.developper" class="btn btn-dark btn-lg"  [disabled]="data.developper" (click)="forwardTest()">Forward Complaint</button>
+        <button class="btn btn-dark btn-lg">Reply To Complaint</button>
+        <button class="btn btn-dark btn-lg" (click)="takeAction()">Take Action</button>
+        <button class="btn btn-dark btn-lg" (click)="viewClient()">View client</button>
+        <button  class="btn btn-danger btn-lg" (click)="delete(data.id)">Delete Complaint</button>
     </div>
 </div>

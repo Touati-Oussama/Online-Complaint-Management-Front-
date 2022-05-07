@@ -9,7 +9,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
-  {path: 'status', loadChildren:()=> import('./status/status.module').then(m => m.StatusModule)},
   {path: 'types', loadChildren:()=> import('./types/types.module').then(m => m.TypesModule)},
   {path: 'specialties', loadChildren:()=> import('./specialties/specialties.module').then(m => m.SpecialtiesModule)},
   {path: 'projects', loadChildren:()=> import('./projects/projects.module').then(m => m.ProjectsModule)},

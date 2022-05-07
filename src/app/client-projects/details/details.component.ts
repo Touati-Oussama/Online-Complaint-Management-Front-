@@ -14,7 +14,6 @@ import { AddComponent } from 'src/app/complaints/add/add.component';
 export class DetailsComponent implements OnInit {
 
   data;
-  isClient:Boolean = false;
   id;
   constructor(private projetService:ProjetService,
               private route:ActivatedRoute,
@@ -29,7 +28,6 @@ export class DetailsComponent implements OnInit {
               }
 
   ngOnInit(): void {
-    this.isClient = this.authService.isClient();
     const id = this.route.snapshot.params.id;
     console.log(this.id)
     this.projetService.getProjet(this.id).toPromise().then((res:any)=>{

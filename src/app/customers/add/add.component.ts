@@ -57,7 +57,7 @@ export class AddComponent implements OnInit {
         Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
         password: new FormControl('',[Validators.required,Validators.minLength(8)]),
         societe: new FormControl(''),
-        role: new FormControl(Role.ADMIN_CLIENT,Validators.required),
+        role: new FormControl(Role.RESPONSABLE_SOCIETE,Validators.required),
       }
     )
   }
@@ -76,6 +76,7 @@ export class AddComponent implements OnInit {
         this.data.addControl('image', new FormControl(res.body.id,[]));
         console.log(this.data.value);
         this.userService.add(this.data.value).subscribe((res:any)=>{
+          console.log(res);
           if (res.type === HttpEventType.UploadProgress) {
             this.progress = Math.round(100 * res.loaded / res.total);
           }

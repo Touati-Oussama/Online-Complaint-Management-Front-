@@ -1,3 +1,5 @@
+import { AuthService } from './../services/auth.service';
+import { CompalintService } from 'src/app/services/compalint.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardEmployeeComponent implements OnInit {
 
-  constructor() { }
+  details;
+  constructor(private complaintService:CompalintService,private authService:AuthService) { }
 
   ngOnInit(): void {
+    this.complaintService.details(this.authService.loggedUser).subscribe(res =>{
+      console.log(res);
+      this.details = res;
+    })
   }
 
 }

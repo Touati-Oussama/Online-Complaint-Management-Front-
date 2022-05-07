@@ -43,6 +43,28 @@ export class CompalintService {
       );
     } 
 
+    
+  addTest(data):any{
+    let jwt = this.authService.getToken();
+    jwt = "Bearer " + jwt;
+    let httpHeaders = new HttpHeaders({"Authorization": jwt})
+    /*return this.http.post(`${this.apiURL}/add`,data,{headers:httpHeaders}).pipe(
+      tap(()=>{
+        this.Refreshrequired.next();
+      })
+    );*/
+      const req = new HttpRequest('POST', `${this.apiURL}/add`, data, {
+        headers:httpHeaders,
+        reportProgress: true,
+        responseType: 'json'
+      });
+      return this.http.request(req).pipe(
+        tap(()=>{
+          this.Refreshrequired.next();
+        })
+      );
+    } 
+
     forwardToEmployee(id,idEmployee):Observable<HttpEvent<any>>{
       let jwt = this.authService.getToken();
       jwt = "Bearer " + jwt;
@@ -169,5 +191,61 @@ export class CompalintService {
     jwt = "Bearer " + jwt;
     let httpHeaders = new HttpHeaders({"Authorization": jwt})
     return this.http.delete(`${this.apiURL}/delete/${id}`,{headers:httpHeaders});
+  }
+
+  details(username):Observable<any>{
+    let jwt = this.authService.getToken();
+    jwt = "Bearer " + jwt;
+    let httpHeaders = new HttpHeaders({"Authorization": jwt})
+    return this.http.get(`${this.apiURL}/details/user`,{headers:httpHeaders,params:{username:username}});
+  }
+
+  detailsParEtat():Observable<any>{
+    let jwt = this.authService.getToken();
+    jwt = "Bearer " + jwt;
+    let httpHeaders = new HttpHeaders({"Authorization": jwt})
+    return this.http.get(`${this.apiURL}/details/status`,{headers:httpHeaders});
+  }
+
+  detailsParProjet():Observable<any>{
+    let jwt = this.authService.getToken();
+    jwt = "Bearer " + jwt;
+    let httpHeaders = new HttpHeaders({"Authorization": jwt})
+    return this.http.get(`${this.apiURL}/details/projet`,{headers:httpHeaders});
+  }
+
+  detailsParProjetAndStatus(status):Observable<any>{
+    let jwt = this.authService.getToken();
+    jwt = "Bearer " + jwt;
+    let httpHeaders = new HttpHeaders({"Authorization": jwt})
+    return this.http.get(`${this.apiURL}/details/projet/status`,{headers:httpHeaders,params:{status:status}});
+  }
+
+  detailsParType():Observable<any>{
+    let jwt = this.authService.getToken();
+    jwt = "Bearer " + jwt;
+    let httpHeaders = new HttpHeaders({"Authorization": jwt})
+    return this.http.get(`${this.apiURL}/details/type`,{headers:httpHeaders});
+  }
+
+  detailsParTypeAndStatus(status):Observable<any>{
+    let jwt = this.authService.getToken();
+    jwt = "Bearer " + jwt;
+    let httpHeaders = new HttpHeaders({"Authorization": jwt})
+    return this.http.get(`${this.apiURL}/details/type/status`,{headers:httpHeaders,params:{status:status}});
+  }
+
+  detailsParPersonnel():Observable<any>{
+    let jwt = this.authService.getToken();
+    jwt = "Bearer " + jwt;
+    let httpHeaders = new HttpHeaders({"Authorization": jwt})
+    return this.http.get(`${this.apiURL}/details/personnel`,{headers:httpHeaders});
+  }
+
+  detailsParPersonnelAndStatus(status):Observable<any>{
+    let jwt = this.authService.getToken();
+    jwt = "Bearer " + jwt;
+    let httpHeaders = new HttpHeaders({"Authorization": jwt})
+    return this.http.get(`${this.apiURL}/details/personnel/status`,{headers:httpHeaders,params:{status:status}});
   }
 }

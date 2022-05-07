@@ -51,7 +51,7 @@ export class EditComponent implements OnInit {
       telephone: new FormControl('',[Validators.required]),
       email: new FormControl('',[Validators.required]),
       password: new FormControl('',[Validators.required]),
-      specialites: this.fb.array([],[Validators.required])
+      specialites: this.fb.array([],[Validators.required]),
     });
       this.specialiteService.listeSpecialties().toPromise().then((res:any[])=>{
       this.specialitiess = res;

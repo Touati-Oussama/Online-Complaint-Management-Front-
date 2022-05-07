@@ -41,7 +41,7 @@ export class ClosedComponent implements OnInit {
         this.dataSource.data = res;
       })
     }
-    else if (this.authService.isClientAdmin()){
+    else if (this.authService.isResponsable_Societe()){
       this.userService.getCustomerByUsername(this.authService.loggedUser).subscribe(res =>{
         this.complaintService.getBySocieteAndStatus(res.societe,this.status).subscribe((res:any)=>{
           this.dataSource.data = res;
@@ -76,7 +76,7 @@ export class ClosedComponent implements OnInit {
   all(){
     if(this.authService.isAdmin())
       this.router.navigate(['complaints/adminList']);
-    else if (this.authService.isClientAdmin())
+    else if (this.authService.isResponsable_Societe())
       this.router.navigate(['complaints/clientAdminList']);
   }
 

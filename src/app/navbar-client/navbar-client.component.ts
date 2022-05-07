@@ -13,7 +13,7 @@ import { EditComponent } from '../customers/edit/edit.component';
 export class NavbarClientComponent implements OnInit {
 
   id:number;
-  constructor(private authService:AuthService,private userService:UserService,private dialog:MatDialog) { }
+  constructor(public authService:AuthService,private userService:UserService,private dialog:MatDialog) { }
 
   ngOnInit(): void {
     this.userService.getUserByUsername(this.authService.loggedUser).subscribe(res =>{

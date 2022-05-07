@@ -1,5 +1,5 @@
 import { AuthService } from './auth.service';
-import { HttpClient, HttpEvent, HttpHeaders, HttpRequest } from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpHeaders, HttpRequest, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -24,12 +24,44 @@ export class UserService {
     return this.http.get(`${this.apiURL}/customers/all`,{headers:httpHeaders});
   }
 
-  public listCustomersBySociete(societe,role):any{
+  /*public listCustomersBySociete(societe,role):any{
     let jwt = this.authService.getToken();
     jwt = "Bearer " + jwt;
     let httpHeaders = new HttpHeaders({"Authorization": jwt})
     return this.http.get(`${this.apiURL}/customers/all/${societe}/${role}`,{headers:httpHeaders});
+  }*/
+
+  public listCustomersBySociete(societe):any{
+    let jwt = this.authService.getToken();
+    jwt = "Bearer " + jwt;
+    let httpHeaders = new HttpHeaders({"Authorization": jwt})
+    return this.http.get(`${this.apiURL}/customers`,
+    {headers:httpHeaders,
+    params: {societe: societe}}
+    );
   }
+
+  public listCustomersBySocieteAndFilter(societe,keyword):any{
+    let jwt = this.authService.getToken();
+    jwt = "Bearer " + jwt;
+    let httpHeaders = new HttpHeaders({"Authorization": jwt})
+    return this.http.get(`${this.apiURL}/customers/filter`,
+    {headers:httpHeaders,
+    params: {societe: societe, keyword:keyword}
+    }
+    );
+  }
+  public listCustomersAndFilter(keyword):any{
+    let jwt = this.authService.getToken();
+    jwt = "Bearer " + jwt;
+    let httpHeaders = new HttpHeaders({"Authorization": jwt})
+    return this.http.get(`${this.apiURL}/customers/all/filter/`,
+    {headers:httpHeaders,
+    params: {keyword:keyword}
+    }
+    );
+  }
+
 
 
 
@@ -94,18 +126,30 @@ export class UserService {
     return this.http.get(`${this.apiURL}/customers/${usernmae}`,{headers:httpHeaders});
   }
 
-  getUserByUsername(usernmae):any{
+  getUserByUsername(username):any{
     let jwt = this.authService.getToken();
     jwt = "Bearer " + jwt;
     let httpHeaders = new HttpHeaders({"Authorization": jwt})
-    return this.http.get(`${this.apiURL}/username/${usernmae}`,{headers:httpHeaders});
+    return this.http.get(`${this.apiURL}`,
+    {
+      headers:httpHeaders,
+      params: {username:username}
+    }
+    );
   }
   
-  getStaff(id):any{
+  getStaff(id):Observable<any>{
     let jwt = this.authService.getToken();
     jwt = "Bearer " + jwt;
     let httpHeaders = new HttpHeaders({"Authorization": jwt})
     return this.http.get(`${this.apiURL}/teams/get/${id}`,{headers:httpHeaders});
+  }
+
+  getUser(id):Observable<any>{
+    let jwt = this.authService.getToken();
+    jwt = "Bearer " + jwt;
+    let httpHeaders = new HttpHeaders({"Authorization": jwt})
+    return this.http.get(`${this.apiURL}/${id}`,{headers:httpHeaders});
   }
 
   updateCustomers(data,id):Observable<HttpEvent<any>>{
@@ -139,5 +183,19 @@ export class UserService {
     jwt = "Bearer " + jwt;
     let httpHeaders = new HttpHeaders({"Authorization": jwt})
     return this.http.get(`${this.apiURL}/all/teams/${speciality}`,{headers:httpHeaders});
+  }
+
+  updateCompteStatus(id,enabled):any{
+    console.log(typeof(enabled));
+    let jwt = this.authService.getToken();
+    jwt = "Bearer " + jwt;
+    let httpHeaders = new HttpHeaders({"Authorization": jwt})
+    let httparams = new HttpParams()
+    .set('id',id)
+    .set('enabled',enabled);
+    return this.http.post(`${this.apiURL}`,null,{
+      headers:httpHeaders,
+      params:httparams
+    });
   }
 }

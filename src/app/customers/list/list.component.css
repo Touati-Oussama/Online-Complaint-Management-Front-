@@ -9,6 +9,18 @@ th.mat-header-cell {
     max-width: 300px;
 }
 button{
+    background-color: grey;
+    color:aliceblue;
+    width: 100%;
+    border: none;
     border-radius: 5px;
+    margin-bottom: 35px;
+    height: 40px;
+}
+
+input{
+    margin-left: 977px;
+    margin-bottom: 5px;
+    border: solid black 1px;
 }
 

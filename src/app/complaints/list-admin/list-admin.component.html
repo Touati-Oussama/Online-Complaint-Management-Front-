@@ -1,32 +1,29 @@
-<button mat-button color="primary" (click)="zeroAction()">
-  <mat-icon class="mat-18">report</mat-icon> <span>New Complaint(s)</span>
+<button class="btn btn-link" (click)="zeroAction()">
+  <mat-icon class="mat-18" class="align-middle">report</mat-icon>
+  <span class="align-middle">Nouvelles Réclamation(s)</span>
 </button>
-<button mat-button color="primary" (click)="pending()">
-  <mat-icon class="mat-18">equalizer</mat-icon> <span>Pending Complaint</span>
+<button class="btn btn-link" (click)="pending()">
+  <mat-icon class="mat-18" class="align-middle">equalizer</mat-icon>
+  <span class="align-middle">Réclamation(s) en cours</span>
 </button>
-<button mat-button color="primary" (click)="closed()">
-  <mat-icon class="mat-18">check_circle_outline</mat-icon> <span>Closed Complaint</span>
+<button class="btn btn-link" (click)="closed()">
+  <mat-icon class="mat-18" class="align-middle">check_circle_outline</mat-icon>
+  <span class="align-middle">Réclamation(s) cloturés</span>
 </button>
 
-<button mat-button color="primary" (click)="verif()">
-  <mat-icon class="mat-18">check_circle_outline</mat-icon> <span>Verif Complaint Status</span>
+<button class="btn btn-link" (click)="verif()">
+  <mat-icon class="mat-18" class="align-middle">check_circle_outline</mat-icon> <span class="align-middle">Verif Complaint Status</span>
 </button>
 <hr>
 
-  <div fxLayout fxLayoutAlign="center space-between">
-    <mat-form-field fxFlex="40%">
-      <input matInput type="text" (keyup)="doFilter($event.target.value)" placeholder="Search">
-    </mat-form-field>
-  </div>
-
   <div fxLayout fxLayoutAlign="center space-between" style="margin-bottom: 15px;">
-    &nbsp;&nbsp;<button mat-raised-button color="primary"
+    &nbsp;&nbsp;<button class="btn btn-dark btn-lg"
       (click)="exporter.exportTable('xlsx',{filename:'Complaints'})">Excel</button>
-    &nbsp;&nbsp;<button mat-raised-button color="primary"
+    &nbsp;&nbsp;<button class="btn btn-dark btn-lg"
       (click)="exporter.exportTable('csv',{filename:'Complaints'})">CSV</button>
-    &nbsp;&nbsp;<button mat-raised-button color="primary"
+    &nbsp;&nbsp;<button class="btn btn-dark btn-lg"
       (click)="exporter.exportTable('json',{filename:'Complaints'})">Json</button>
-    &nbsp;&nbsp;<button mat-raised-button color="primary"
+    &nbsp;&nbsp;<button class="btn btn-dark btn-lg"
       (click)="exporter.exportTable('txt',{filename:'Complaints'})">Txt</button>
   </div>
 
@@ -35,7 +32,7 @@
       <mat-form-field appearance="fill" style="margin: 15px;" *ngFor="let empfilter of filters">
         <mat-label>{{empfilter.name}}</mat-label>
         <mat-select [(value)]="empfilter.defaultValue" (selectionChange)="applyEmpFilter($event,empfilter)">
-          <mat-option value="All">All</mat-option>
+          <mat-option value="tous">Tous</mat-option>
           <mat-option *ngFor="let op of empfilter.options" [value]="op">
             {{op}}
           </mat-option>

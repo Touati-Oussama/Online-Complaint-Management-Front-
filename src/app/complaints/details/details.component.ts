@@ -20,7 +20,7 @@ import Swal from 'sweetalert2';
 export class DetailsComponent implements OnInit {
 
   id;
-  file:any
+  file = [];
   data : any;
   constructor(private route:ActivatedRoute,
               private router:Router,
@@ -56,13 +56,11 @@ export class DetailsComponent implements OnInit {
  
   }
 
-  download(id){
-    this.fileService.getByComplaint(this.id).subscribe(res =>{
-        this.fileService.downloadFile(id)
-        .subscribe(data => {
-          saveAs(new Blob([data], {type: MimeType['application/vnd.openxmlformats-officedocument.wordprocessingml.document']}), res.name);
+  download(id,fileName){
+    this.fileService.downloadFile(id).subscribe(data => {
+          saveAs(new Blob([data], {type: MimeType['application/vnd.openxmlformats-officedocument.wordprocessingml.document']}), fileName);
         })
-    })
+
   }
 
   takeAction(){
