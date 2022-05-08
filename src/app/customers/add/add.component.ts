@@ -40,7 +40,7 @@ export class AddComponent implements OnInit {
      private societeService:SocieteService) { }
 
   ngOnInit(): void {
-    this.societeService.listeSocieties().toPromise().then((res:any[])=>{
+    this.societeService.listeSocietiesAndResponsable().toPromise().then((res:any[])=>{
       this.societies = res;
       console.log(res);
     })

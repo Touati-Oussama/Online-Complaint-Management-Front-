@@ -79,13 +79,6 @@
                         </div>
                        
                     </div>
-                    <div class="mb-3">
-                        <label class="form-label">Role</label>
-                        <select class="form-select mb-3" formControlName="role">
-                            <option value="">Select One</option>
-                            <option [value]="role[r]" *ngFor="let r of roles">{{role[r]}}</option>
-                        </select>
-                    </div>
                     <div>
                           <label class="btn btn-default">
                             <input type="file" (change)="selectFile($event)" />

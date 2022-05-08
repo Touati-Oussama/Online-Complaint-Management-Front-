@@ -27,6 +27,13 @@ export class SocieteService {
     return this.http.get(this.apiURL+'/all',{headers:httpHeaders});
   }
 
+  listeSocietiesAndResponsable():any{
+    let jwt = this.authService.getToken();
+    jwt = "Bearer " + jwt;
+    let httpHeaders = new HttpHeaders({"Authorization": jwt})
+    return this.http.get(this.apiURL+'/all/responsable',{headers:httpHeaders});
+  }
+
   add(data):any{
     let jwt = this.authService.getToken();
     jwt = "Bearer " + jwt;

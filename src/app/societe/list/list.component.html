@@ -33,6 +33,15 @@
           <th mat-header-cell *matHeaderCellDef> Name </th>
           <td mat-cell *matCellDef="let element"> {{element.name}} </td>
         </ng-container>
+
+                <!-- Name Column -->
+        <ng-container matColumnDef="Manager">
+          <th mat-header-cell *matHeaderCellDef> Responsable </th>
+          <td mat-cell *matCellDef="let element"> 
+            <span *ngIf="!element.responsable" class="badge bg-danger">Pas Responsable</span>
+            <span *ngIf="element.responsable">{{element.responsable}}</span>
+          </td>
+        </ng-container>
       
         <ng-container matColumnDef="Team Number">
           <th mat-header-cell *matHeaderCellDef> Team Number </th>
@@ -47,7 +56,7 @@
         <ng-container matColumnDef="update">
           <th mat-header-cell *matHeaderCellDef> Update </th>
           <td mat-cell *matCellDef="let element">
-            <button mat-raised-button color="primary" (click)="update(element.id)">
+            <button class="btn  btn-lg"  style="background-color: gray; color:aliceblue" (click)="update(element.id)">
                 Update
             </button>
           </td>

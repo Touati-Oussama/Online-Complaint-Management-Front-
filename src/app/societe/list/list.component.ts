@@ -15,7 +15,7 @@ import { MatTableDataSource } from '@angular/material/table';
 export class ListComponent implements OnInit {
 
   data = [];
-  public displayedColumns = ['ID', 'Society','Team Number', 'update', 'delete'];
+  public displayedColumns = ['ID', 'Society','Manager','Team Number', 'update', 'delete'];
   public dataSource = new MatTableDataSource();
 
 
