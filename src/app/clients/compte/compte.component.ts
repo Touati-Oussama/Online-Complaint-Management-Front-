@@ -54,7 +54,7 @@ export class CompteComponent implements OnInit {
         Swal.fire({
           icon: 'warning',
           title: 'Updated failed!...',
-          text: 'Failed',
+          text: err.error.message,
         })
       }
     )

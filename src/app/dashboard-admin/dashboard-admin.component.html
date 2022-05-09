@@ -1,4 +1,3 @@
-
 <div class="container">
     <div class="row">
         <div class="col-xl-3 col-xxl-3" style="width: 23%;">
@@ -8,7 +7,7 @@
                         <div class="col mt-0">
                             <h5 class="card-title">Totale Réclamations</h5>
                         </div>
-    
+
                         <div class="col-auto">
                             <div class="stat " style="background-color: rgb(35, 35, 36);color: aliceblue;">
                                 <mat-icon class="mat-18" class="align-middle">reorder</mat-icon>
@@ -23,14 +22,14 @@
                 </div>
             </div>
         </div>
-        <div class="col-xl-3 col-xxl-3" style="width: 23%;">    
+        <div class="col-xl-3 col-xxl-3" style="width: 23%;">
             <div class="card">
                 <div class="card-body">
                     <div class="row">
                         <div class="col mt-0">
                             <h5 class="card-title">Nouvelles Réclamations</h5>
                         </div>
-    
+
                         <div class="col-auto">
                             <div class="stat " style="background-color: rgb(35, 35, 36);color: aliceblue;">
                                 <mat-icon class="mat-18" class="align-middle">equalizer</mat-icon>
@@ -52,7 +51,7 @@
                         <div class="col mt-0">
                             <h5 class="card-title">Réclamations En Cours</h5>
                         </div>
-    
+
                         <div class="col-auto">
                             <div class="stat " style="background-color: rgb(35, 35, 36);color: aliceblue;">
                                 <mat-icon class="mat-18" class="align-middle">reorder</mat-icon>
@@ -74,7 +73,7 @@
                         <div class="col mt-0">
                             <h5 class="card-title">Réclamations Cloturées</h5>
                         </div>
-    
+
                         <div class="col-auto">
                             <div class="stat " style="background-color: rgb(35, 35, 36);color: aliceblue;">
                                 <mat-icon class="mat-18" class="align-middle">check_circle_outline</mat-icon>
@@ -91,18 +90,42 @@
         </div>
     </div>
     <div class="row">
-        <select (change)="onChange($event.target.value)" class="form-control">
-            <option value="Projet">Projet</option>
-            <option value="Type">Type</option>
-            <option value="Developpeur">Developpeur</option>
-        </select>
+        <div class="col-12 col-lg-4">
+            <select (change)="onChange($event.target.value)" class="form-control">
+                <option value="Projet">Projet</option>
+                <option value="Type">Type</option>
+                <option value="Developpeur">Developpeur</option>
+            </select>
+        </div>
+        <div class="col-12 col-lg-8" >
+            <form class="user" [formGroup]="dataFilter" (ngSubmit)="rechercher()">
+                <div id="test">
+                    <div class="col-12 col-lg-4" style="margin-right:5px;">
+                        <input type="datetime-local" class="form-control form-control-user"
+                            formControlName="date1" id="exampleFirstName" placeholder="Date">
+                    </div>
+                    <div div class="col-12 col-lg-4" style="margin-right:5px;">
+                        <input type="datetime-local" class="form-control form-control-user"
+                        formControlName="date2" id="exampleFirstName" placeholder="Date">
+                    </div>
+
+                    <div>
+                        <button type="submit" style="margin-right: 5px;" class="btn btn-dark"
+                            [disabled]="!dataFilter.valid">Filtré</button>
+                        <button class="btn btn-danger" (click)="cancel()">Effacer</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
     </div>
     <div class="row">
         <div class="col-12 col-lg-8">
             <div class="card">
                 <div class="card-header">
                     <h5 class="card-title">Statistiques des réclamations </h5>
-                    <h6 class="card-subtitle text-muted">A bar chart provides a way of showing data values represented as vertical bars.</h6>
+                    <h6 class="card-subtitle text-muted">A bar chart provides a way of showing data values represented
+                        as vertical bars.</h6>
                 </div>
                 <div class="card-body">
                     <div class="chart">
@@ -115,7 +138,8 @@
             <div class="card">
                 <div class="card-header">
                     <h5 class="card-title">Statistiques des réclamations</h5>
-                    <h6 class="card-subtitle text-muted">Cette Statistique définit le nombre des réclamations de chaque {{filter}}</h6>
+                    <h6 class="card-subtitle text-muted">Cette Statistique définit le nombre des réclamations de chaque
+                        {{filter}}</h6>
                 </div>
                 <div class="card-body">
                     <div class="chart chart-sm">
@@ -124,6 +148,5 @@
                 </div>
             </div>
         </div>
-    </div>    
+    </div>
 </div>
-

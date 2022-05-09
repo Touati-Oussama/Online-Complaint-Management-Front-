@@ -200,6 +200,19 @@ export class CompalintService {
     return this.http.get(`${this.apiURL}/details/user`,{headers:httpHeaders,params:{username:username}});
   }
 
+  detailsByDates(username,date1,date2):Observable<any>{
+    let jwt = this.authService.getToken();
+    jwt = "Bearer " + jwt;
+    let httpHeaders = new HttpHeaders({"Authorization": jwt})
+    return this.http.get(`${this.apiURL}/details/user/dates`,{headers:httpHeaders,
+      params:{
+        username:username,
+        date1:date1,
+        date2:date2
+      }
+      });
+  }
+
   detailsParEtat():Observable<any>{
     let jwt = this.authService.getToken();
     jwt = "Bearer " + jwt;
@@ -214,11 +227,34 @@ export class CompalintService {
     return this.http.get(`${this.apiURL}/details/projet`,{headers:httpHeaders});
   }
 
+  detailsParProjetEtDate(date1,date2):Observable<any>{
+    let jwt = this.authService.getToken();
+    jwt = "Bearer " + jwt;
+    let httpHeaders = new HttpHeaders({"Authorization": jwt})
+    return this.http.get(`${this.apiURL}/details/projet/dates`,{headers:httpHeaders,
+      params:{
+        date1:date1,
+        date2:date2
+      }});
+  }
+
   detailsParProjetAndStatus(status):Observable<any>{
     let jwt = this.authService.getToken();
     jwt = "Bearer " + jwt;
     let httpHeaders = new HttpHeaders({"Authorization": jwt})
     return this.http.get(`${this.apiURL}/details/projet/status`,{headers:httpHeaders,params:{status:status}});
+  }
+
+  detailsParProjetAndStatusAndDate(status,date1,date2):Observable<any>{
+    let jwt = this.authService.getToken();
+    jwt = "Bearer " + jwt;
+    let httpHeaders = new HttpHeaders({"Authorization": jwt})
+    return this.http.get(`${this.apiURL}/details/projet/status/dates`,{headers:httpHeaders,
+      params:{
+        status:status,
+        date1:date1,
+        date2:date2
+      }});
   }
 
   detailsParType():Observable<any>{
@@ -228,11 +264,34 @@ export class CompalintService {
     return this.http.get(`${this.apiURL}/details/type`,{headers:httpHeaders});
   }
 
+
+  detailsParTypeEtDate(date1,date2):Observable<any>{
+    let jwt = this.authService.getToken();
+    jwt = "Bearer " + jwt;
+    let httpHeaders = new HttpHeaders({"Authorization": jwt})
+    return this.http.get(`${this.apiURL}/details/type/dates`,{headers:httpHeaders,params:{
+      date1:date1,
+      date2:date2
+    }});
+  }
+
   detailsParTypeAndStatus(status):Observable<any>{
     let jwt = this.authService.getToken();
     jwt = "Bearer " + jwt;
     let httpHeaders = new HttpHeaders({"Authorization": jwt})
     return this.http.get(`${this.apiURL}/details/type/status`,{headers:httpHeaders,params:{status:status}});
+  }
+
+  detailsParTypeAndStatusAndDate(status,date1,date2):Observable<any>{
+    let jwt = this.authService.getToken();
+    jwt = "Bearer " + jwt;
+    let httpHeaders = new HttpHeaders({"Authorization": jwt})
+    return this.http.get(`${this.apiURL}/details/type/status/dates`,{headers:httpHeaders,
+      params:{
+        status:status,
+        date1:date1,
+        date2:date2
+      }});
   }
 
   detailsParPersonnel():Observable<any>{
@@ -241,11 +300,32 @@ export class CompalintService {
     let httpHeaders = new HttpHeaders({"Authorization": jwt})
     return this.http.get(`${this.apiURL}/details/personnel`,{headers:httpHeaders});
   }
+  detailsParPersonnelEtDate(date1,date2):Observable<any>{
+    let jwt = this.authService.getToken();
+    jwt = "Bearer " + jwt;
+    let httpHeaders = new HttpHeaders({"Authorization": jwt})
+    return this.http.get(`${this.apiURL}/details/personnel/dates`,{headers:httpHeaders,params:{
+      date1:date1,
+      date2:date2
+    }});
+  }
 
   detailsParPersonnelAndStatus(status):Observable<any>{
     let jwt = this.authService.getToken();
     jwt = "Bearer " + jwt;
     let httpHeaders = new HttpHeaders({"Authorization": jwt})
     return this.http.get(`${this.apiURL}/details/personnel/status`,{headers:httpHeaders,params:{status:status}});
+  }
+
+  detailsParPersonnelAndStatusAndDate(status,date1,date2):Observable<any>{
+    let jwt = this.authService.getToken();
+    jwt = "Bearer " + jwt;
+    let httpHeaders = new HttpHeaders({"Authorization": jwt})
+    return this.http.get(`${this.apiURL}/details/personnel/status/dates`,{headers:httpHeaders,
+      params:{
+        status:status,
+        date1:date1,
+        date2:date2
+      }});
   }
 }

@@ -1,6 +1,11 @@
+
 <button class="btn btn-link" (click)="all()">
   <mat-icon class="mat-18" class="align-middle">border_color</mat-icon>
-  <span class="align-middle">Toutes les Réclamations</span>
+  <span class="align-middle">Historiques  Réclamation(s)</span>
+</button>
+<button class="btn btn-link"  style="color: red;">
+  <mat-icon class="mat-18" class="align-middle">report</mat-icon>
+  <span class="align-middle">Nouvelles Réclamation(s)</span>
 </button>
 <button class="btn btn-link" (click)="pending()">
   <mat-icon class="mat-18" class="align-middle">equalizer</mat-icon>
@@ -10,7 +15,6 @@
   <mat-icon class="mat-18" class="align-middle">check_circle_outline</mat-icon>
   <span class="align-middle">Réclamations Cloturés</span>
 </button>
-
 <hr>
 <div fxLayout fxLayoutAlign="center space-between">
   <mat-form-field fxFlex="40%">

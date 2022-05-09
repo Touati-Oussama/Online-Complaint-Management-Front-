@@ -20,9 +20,9 @@
         </div>
     <div *ngIf="authService.isAdmin() || authService.isEmployee()" style="margin-top: 10px;">
         <button *ngIf="!data.developper" class="btn btn-dark btn-lg"  [disabled]="data.developper" (click)="forwardTest()">Forward Complaint</button>
-        <button class="btn btn-dark btn-lg">Reply To Complaint</button>
-        <button class="btn btn-dark btn-lg" (click)="takeAction()">Take Action</button>
+        <button class="btn btn-dark btn-lg" *ngIf="authService.isAdmin()">Reply To Complaint</button>
+        <button class="btn btn-dark btn-lg" (click)="takeAction()" *ngIf="authService.isAdmin()">Take Action</button>
         <button class="btn btn-dark btn-lg" (click)="viewClient()">View client</button>
-        <button  class="btn btn-danger btn-lg" (click)="delete(data.id)">Delete Complaint</button>
+        <button  class="btn btn-danger btn-lg" (click)="delete(data.id)" *ngIf="authService.isAdmin()">Delete Complaint</button>
     </div>
 </div>

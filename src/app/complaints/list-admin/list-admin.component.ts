@@ -190,8 +190,6 @@ export class ListAdminComponent implements OnInit {
                   this.messageService.send('isAddedComplaint');
                 },err=>{this.ok = false})
               }
-              this.trelloService.deleteCardInTrello(card.id).subscribe(res=>{
-              },err=>{this.ok = false})
             }
           })
         })

@@ -23,6 +23,7 @@ import { DashboardEmployeeComponent } from './dashboard-employee/dashboard-emplo
 import { HeaderComponent } from './header/header.component';
 import { NavbarAdminClientComponent } from './navbar-admin-client/navbar-admin-client.component';
 import { DashboardCustomerAdminComponent } from './dashboard-customer-admin/dashboard-customer-admin.component';
+import { DatePipe } from '@angular/common';
 
 
 
@@ -57,7 +58,7 @@ import { DashboardCustomerAdminComponent } from './dashboard-customer-admin/dash
     MatTableExporterModule,
     
   ],
-  providers: [StompService],
+  providers: [StompService,DatePipe],
   bootstrap: [AppComponent],
   entryComponents:[LoginComponent]
 })
