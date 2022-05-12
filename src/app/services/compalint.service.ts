@@ -220,6 +220,25 @@ export class CompalintService {
     return this.http.get(`${this.apiURL}/details/status`,{headers:httpHeaders});
   }
 
+  detailsParEtatAndSociete(societe):Observable<any>{
+    let jwt = this.authService.getToken();
+    jwt = "Bearer " + jwt;
+    let httpHeaders = new HttpHeaders({"Authorization": jwt})
+    return this.http.get(`${this.apiURL}/details/status/societe`,{headers:httpHeaders,params:{societe:societe}});
+  }
+
+  detailsParEtatAndSocieteAndDates(societe,date1,date2):Observable<any>{
+    let jwt = this.authService.getToken();
+    jwt = "Bearer " + jwt;
+    let httpHeaders = new HttpHeaders({"Authorization": jwt})
+    return this.http.get(`${this.apiURL}/details/status/societe/dates`,{headers:httpHeaders,
+      params:{
+        societe:societe,
+        date1:date1,
+        date2:date2
+      }});
+  }
+
   detailsParProjet():Observable<any>{
     let jwt = this.authService.getToken();
     jwt = "Bearer " + jwt;

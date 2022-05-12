@@ -42,7 +42,7 @@ import { DatePipe } from '@angular/common';
 })
 export class DashboardAdminComponent implements OnInit {
 
-  data;
+  public data;
   chartPie: Chart;
   chartBar: Chart;
   labesPie = [];

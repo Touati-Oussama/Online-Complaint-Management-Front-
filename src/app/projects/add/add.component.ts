@@ -1,3 +1,5 @@
+import { TrelloDB } from './../../model/Trello';
+import { TrelloService } from './../../services/trello.service';
 import { SocieteService } from './../../services/societe.service';
 import { ProjetService } from './../../services/projet.service';
 import { UserService } from 'src/app/services/users.service';
@@ -13,7 +15,7 @@ import { MatDialogRef } from '@angular/material/dialog';
   styleUrls: ['./add.component.css']
 })
 export class AddComponent implements OnInit {
-
+  trelloDB:TrelloDB = new TrelloDB;
   societies = [];
   specialities = [];
   data = new FormGroup({
@@ -22,8 +24,17 @@ export class AddComponent implements OnInit {
     societe: new FormControl('',Validators.required),
     specialite: new FormControl('',Validators.required)
   })
+
+  TrelloData = new FormGroup({
+    idBoard: new FormControl('',Validators.required),
+    idListToDo: new FormControl('',Validators.required),
+    idListDoing: new FormControl('',Validators.required),
+    idListDone: new FormControl('',Validators.required),
+    projet: new FormControl('',Validators.required)
+  })
   constructor(private societeService:SocieteService,
     public dialogRef: MatDialogRef<AddComponent>,
+    private trelloService:TrelloService,
      private specialiteService: SpecialtyService,
     private projetService:ProjetService) { }
 
@@ -40,16 +51,34 @@ export class AddComponent implements OnInit {
   }
 
   add(){
-    console.log(this.data.value);
-    this.projetService.add(this.data.value).toPromise().then((res:any)=>{
-      if (res.id) {
-        Swal.fire({
-          icon: 'success',
-          title: 'Success...',
-          text: 'Added Successfully !',
+    this.projetService.add(this.data.value).toPromise().then((projet:any)=>{
+      if (projet.id) {
+        this.trelloService.addBoard(projet.designation).subscribe((board:any)=>{
+          this.trelloService.getBoardList(board.id).subscribe((res:any[])=>{
+            res.forEach(r=>{
+              if (r.name == "To Do")
+                this.TrelloData.patchValue({idListToDo: r.id})
+              if (r.name == "Doing")
+                this.TrelloData.patchValue({idListDoing: r.id})
+              if (r.name == "Done")
+                this.TrelloData.patchValue({idListDone: r.id})
+            })
+            this.TrelloData.patchValue({idBoard: board.id})
+            this.TrelloData.patchValue({projet: projet.id})
+            console.log(this.TrelloData.value)
+            this.projetService.addTrello(this.TrelloData.value).toPromise().then((res:any)=>{
+              if (res.id){
+                Swal.fire({
+                  icon: 'success',
+                  title: 'Success...',
+                  text: 'Added Successfully !',
+                })
+                this.data.reset();
+                this.OnClose();
+              }
+            })
+          })
         })
-        this.data.reset();
-        this.OnClose();
       }else{
         Swal.fire({
           icon: 'error',

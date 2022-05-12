@@ -9,14 +9,35 @@ export class TrelloService {
 
   constructor(private http: HttpClient) { }
 
+  addBoard(name){
+    return this.http.post('https://api.trello.com/1/boards/', null,{params:{
+      key: environment.KEY,
+      token: environment.TOKEN,
+      name:name
+    }})
+  }
+
+  getBoardByProjet(designation){
+    return this.http.get('http://localhost:8080/projet/trello/board/',{params:{
+      key: environment.KEY,
+      token: environment.TOKEN,
+      projet: designation
+    }})
+  }
+  getBoardList(id){
+    return this.http.get('https://api.trello.com/1/boards/'+ id +'/lists',{params:{
+      key: environment.KEY,
+      token: environment.TOKEN,
+    }})
+  }
   getTrelloUserId(username){
     return this.http.get('https://api.trello.com/1/members/'+username);
   }
-  addCard(cardName,description,dueDate){
+  addCard(idListToDo,cardName,description,dueDate){
     return this.http.post('https://api.trello.com/1/cards/',null,{params:{
       key: environment.KEY,
       token: environment.TOKEN,
-      idList: environment.idListToDo,
+      idList: idListToDo,
       name: cardName,
       due: dueDate,
       dueReminder: '1',
@@ -51,16 +72,16 @@ export class TrelloService {
     }})
   }
 
-  getAllCardInListDone(){
-    return this.http.get('https://api.trello.com/1/lists/'+ environment.idListDone+'/cards',{params:{
+  getAllCardInListDone(idListDone){
+    return this.http.get('https://api.trello.com/1/lists/'+idListDone+'/cards',{params:{
       key: environment.KEY,
       token: environment.TOKEN,
 
     }})
   }
 
-  getAllcardInListDoing(){
-    return this.http.get('https://api.trello.com/1/lists/'+ environment.idListDoing+'/cards',{params:{
+  getAllcardInListToDo(idListDoing){
+    return this.http.get('https://api.trello.com/1/lists/'+ idListDoing+'/cards',{params:{
       key: environment.KEY,
       token: environment.TOKEN,
 

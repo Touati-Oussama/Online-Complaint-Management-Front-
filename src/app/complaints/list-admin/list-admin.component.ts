@@ -33,6 +33,7 @@ export class ListAdminComponent implements OnInit {
   types = [];
   projects = [];
   societes = [];
+  status: string[]=[Etat.EN_ATTENTE,Etat.EN_COURS,Etat.ClOTURE];
   defaultValue = "tous";
   filterDictionary= new Map<string,string>();
   ok = true;
@@ -54,7 +55,7 @@ export class ListAdminComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
   }
 
-  status: string[]=[Etat.EN_ATTENTE,Etat.EN_COURS,Etat.ClOTURE];
+
   ngOnInit(): void {
     this.getAll();
     this.stompService.subscribe('/topic/New Complaint',() : void =>{
@@ -177,41 +178,47 @@ export class ListAdminComponent implements OnInit {
 
   verif(){
 
-    this.trelloService.getAllCardInListDone().subscribe((cards:any[])=>{
-      //console.log(cards);
-      this.complaintService.getByStatusClosedOrPending().subscribe((complaints:any[])=>{
-        //console.log(complaints);
-        cards.forEach(card=>{
-          complaints.forEach(compalint=>{
-            if (card.name === compalint.sujet){
-              if(compalint.status === Etat.EN_COURS){
-                //console.log(compalint);
-                this.complaintService.updateStatus(compalint.id,Etat.ClOTURE).subscribe(res=>{
-                  this.messageService.send('isAddedComplaint');
-                },err=>{this.ok = false})
-              }
-            }
+    this.projetService.getAll().toPromise().then((res:any [])=>{
+      res.forEach(r=>{
+        this.trelloService.getBoardByProjet(r.designation).subscribe((res:any)=>{
+          this.trelloService.getAllCardInListDone(res.idListDone).subscribe((cards:any[])=>{
+            //console.log(cards);
+            this.complaintService.getByStatusClosedOrPending().subscribe((complaints:any[])=>{
+              //console.log(complaints);
+              cards.forEach(card=>{
+                complaints.forEach(compalint=>{
+                  if (card.name === compalint.sujet){
+                    if(compalint.status === Etat.EN_COURS){
+                      //console.log(compalint);
+                      this.complaintService.updateStatus(compalint.id,Etat.ClOTURE).subscribe(res=>{
+                        this.messageService.send('isAddedComplaint');
+                      },err=>{this.ok = false})
+                    }
+                  }
+                })
+              })
+            })
           })
         })
       })
+      if(this.ok){
+        Swal.fire({
+          icon: 'success',
+          title: 'Success...',
+          text: 'Toutes les réclamations sont verifiées !',
+        })
+        this.filters =[];
+        this.ngOnInit();
+  
+      }
+      else{
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Invalid Date!',
+        })
+      }
     })
-    if(this.ok){
-      Swal.fire({
-        icon: 'success',
-        title: 'Success...',
-        text: 'Verified Successfully !',
-      })
-      this.filters =[];
-      this.ngOnInit();
-
-    }
-    else{
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'Invalid Date!',
-      })
-    }
   }
 
   delete(id:number){

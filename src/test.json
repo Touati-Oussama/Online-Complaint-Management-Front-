@@ -1,0 +1,419 @@
+{
+	"id": "627d198c1c0b27679bea63be",
+	"name": "Projet 4",
+	"desc": "",
+	"descData": null,
+	"closed": false,
+	"dateClosed": null,
+	"idOrganization": "62554089e99fca8508c5bf2a",
+	"idEnterprise": null,
+	"limits": {
+		"attachments": {
+			"perBoard": {
+				"status": "ok",
+				"disableAt": 36000,
+				"warnAt": 28800
+			},
+			"perCard": {
+				"status": "ok",
+				"disableAt": 1000,
+				"warnAt": 800
+			}
+		},
+		"boards": {
+			"totalMembersPerBoard": {
+				"status": "ok",
+				"disableAt": 1600,
+				"warnAt": 1280
+			},
+			"totalAccessRequestsPerBoard": {
+				"status": "ok",
+				"disableAt": 4000,
+				"warnAt": 3200
+			}
+		},
+		"cards": {
+			"openPerBoard": {
+				"status": "ok",
+				"disableAt": 5000,
+				"warnAt": 4000
+			},
+			"openPerList": {
+				"status": "ok",
+				"disableAt": 5000,
+				"warnAt": 4000
+			},
+			"totalPerBoard": {
+				"status": "ok",
+				"disableAt": 2000000,
+				"warnAt": 1600000
+			},
+			"totalPerList": {
+				"status": "ok",
+				"disableAt": 1000000,
+				"warnAt": 800000
+			}
+		},
+		"checklists": {
+			"perBoard": {
+				"status": "ok",
+				"disableAt": 1800000,
+				"warnAt": 1440000
+			},
+			"perCard": {
+				"status": "ok",
+				"disableAt": 500,
+				"warnAt": 400
+			}
+		},
+		"checkItems": {
+			"perChecklist": {
+				"status": "ok",
+				"disableAt": 200,
+				"warnAt": 160
+			}
+		},
+		"customFields": {
+			"perBoard": {
+				"status": "ok",
+				"disableAt": 50,
+				"warnAt": 40
+			}
+		},
+		"customFieldOptions": {
+			"perField": {
+				"status": "ok",
+				"disableAt": 50,
+				"warnAt": 40
+			}
+		},
+		"labels": {
+			"perBoard": {
+				"status": "ok",
+				"disableAt": 1000,
+				"warnAt": 800
+			}
+		},
+		"lists": {
+			"openPerBoard": {
+				"status": "ok",
+				"disableAt": 500,
+				"warnAt": 400
+			},
+			"totalPerBoard": {
+				"status": "ok",
+				"disableAt": 3000,
+				"warnAt": 2400
+			}
+		},
+		"stickers": {
+			"perCard": {
+				"status": "ok",
+				"disableAt": 70,
+				"warnAt": 56
+			}
+		},
+		"reactions": {
+			"perAction": {
+				"status": "ok",
+				"disableAt": 900,
+				"warnAt": 720
+			},
+			"uniquePerAction": {
+				"status": "ok",
+				"disableAt": 17,
+				"warnAt": 14
+			}
+		}
+	},
+	"pinned": false,
+	"starred": false,
+	"url": "https://trello.com/b/UCn71R7s/projet-4",
+	"prefs": {
+		"permissionLevel": "private",
+		"hideVotes": false,
+		"voting": "disabled",
+		"comments": "members",
+		"invitations": "members",
+		"selfJoin": true,
+		"cardCovers": true,
+		"isTemplate": false,
+		"cardAging": "regular",
+		"calendarFeedEnabled": false,
+		"hiddenPluginBoardButtons": [],
+		"background": "blue",
+		"backgroundColor": "#0079BF",
+		"backgroundImage": null,
+		"backgroundImageScaled": null,
+		"backgroundTile": false,
+		"backgroundBrightness": "dark",
+		"backgroundBottomColor": "#0079BF",
+		"backgroundTopColor": "#0079BF",
+		"canBePublic": true,
+		"canBeEnterprise": true,
+		"canBeOrg": true,
+		"canBePrivate": true,
+		"canInvite": true
+	},
+	"shortLink": "UCn71R7s",
+	"subscribed": false,
+	"labelNames": {
+		"green": "",
+		"yellow": "",
+		"orange": "",
+		"red": "",
+		"purple": "",
+		"blue": "",
+		"sky": "",
+		"lime": "",
+		"pink": "",
+		"black": ""
+	},
+	"powerUps": [],
+	"dateLastActivity": null,
+	"dateLastView": "2022-05-12T14:28:58.225Z",
+	"shortUrl": "https://trello.com/b/UCn71R7s",
+	"idTags": [],
+	"datePluginDisable": null,
+	"creationMethod": "automatic",
+	"ixUpdate": "3",
+	"templateGallery": null,
+	"enterpriseOwned": false,
+	"idBoardSource": null,
+	"premiumFeatures": [
+		"additionalBoardBackgrounds",
+		"additionalStickers",
+		"customBoardBackgrounds",
+		"customEmoji",
+		"customStickers",
+		"plugins"
+	],
+	"idMemberCreator": "625540827561d73dded6b95e",
+	"actions": [
+		{
+			"id": "627d198c1c0b27679bea63db",
+			"idMemberCreator": "625540827561d73dded6b95e",
+			"data": {
+				"board": {
+					"id": "627d198c1c0b27679bea63be",
+					"name": "Projet 4",
+					"shortLink": "UCn71R7s"
+				},
+				"organization": {
+					"id": "62554089e99fca8508c5bf2a",
+					"name": "Trello Workspace"
+				}
+			},
+			"appCreator": {
+				"id": "6255e6ee4f2dec4e0ef7cf9d"
+			},
+			"type": "addToOrganizationBoard",
+			"date": "2022-05-12T14:28:28.381Z",
+			"limits": null,
+			"memberCreator": {
+				"id": "625540827561d73dded6b95e",
+				"activityBlocked": false,
+				"avatarHash": "828b4d71331c1d7ee8e1736798f3c29f",
+				"avatarUrl": "https://trello-members.s3.amazonaws.com/625540827561d73dded6b95e/828b4d71331c1d7ee8e1736798f3c29f",
+				"fullName": "Oussama Touati",
+				"idMemberReferrer": null,
+				"initials": "OT",
+				"nonPublic": {
+					"fullName": "Oussama Touati",
+					"initials": "OT",
+					"avatarHash": null
+				},
+				"nonPublicAvailable": true,
+				"username": "oussamatouati"
+			}
+		},
+		{
+			"id": "627d198c1c0b27679bea63d8",
+			"idMemberCreator": "625540827561d73dded6b95e",
+			"data": {
+				"creationMethod": "automatic",
+				"board": {
+					"id": "627d198c1c0b27679bea63be",
+					"name": "Projet 4",
+					"shortLink": "UCn71R7s"
+				}
+			},
+			"appCreator": {
+				"id": "6255e6ee4f2dec4e0ef7cf9d"
+			},
+			"type": "createBoard",
+			"date": "2022-05-12T14:28:28.376Z",
+			"limits": null,
+			"memberCreator": {
+				"id": "625540827561d73dded6b95e",
+				"activityBlocked": false,
+				"avatarHash": "828b4d71331c1d7ee8e1736798f3c29f",
+				"avatarUrl": "https://trello-members.s3.amazonaws.com/625540827561d73dded6b95e/828b4d71331c1d7ee8e1736798f3c29f",
+				"fullName": "Oussama Touati",
+				"idMemberReferrer": null,
+				"initials": "OT",
+				"nonPublic": {
+					"fullName": "Oussama Touati",
+					"initials": "OT",
+					"avatarHash": null
+				},
+				"nonPublicAvailable": true,
+				"username": "oussamatouati"
+			}
+		}
+	],
+	"cards": [],
+	"labels": [
+		{
+			"id": "627d198c463b8c51458b32d5",
+			"idBoard": "627d198c1c0b27679bea63be",
+			"name": "",
+			"color": "green"
+		},
+		{
+			"id": "627d198c463b8c51458b32d6",
+			"idBoard": "627d198c1c0b27679bea63be",
+			"name": "",
+			"color": "orange"
+		},
+		{
+			"id": "627d198c463b8c51458b32d7",
+			"idBoard": "627d198c1c0b27679bea63be",
+			"name": "",
+			"color": "yellow"
+		},
+		{
+			"id": "627d198c463b8c51458b32dc",
+			"idBoard": "627d198c1c0b27679bea63be",
+			"name": "",
+			"color": "purple"
+		},
+		{
+			"id": "627d198c463b8c51458b32dd",
+			"idBoard": "627d198c1c0b27679bea63be",
+			"name": "",
+			"color": "red"
+		},
+		{
+			"id": "627d198c463b8c51458b32df",
+			"idBoard": "627d198c1c0b27679bea63be",
+			"name": "",
+			"color": "blue"
+		}
+	],
+	"lists": [
+		{
+			"id": "627d198c1c0b27679bea63bf",
+			"name": "To Do",
+			"closed": false,
+			"idBoard": "627d198c1c0b27679bea63be",
+			"pos": 16384,
+			"subscribed": false,
+			"softLimit": null,
+			"limits": {
+				"cards": {
+					"openPerList": {
+						"status": "ok",
+						"disableAt": 5000,
+						"warnAt": 4000
+					},
+					"totalPerList": {
+						"status": "ok",
+						"disableAt": 1000000,
+						"warnAt": 800000
+					}
+				}
+			},
+			"creationMethod": "automatic"
+		},
+		{
+			"id": "627d198c1c0b27679bea63c0",
+			"name": "Doing",
+			"closed": false,
+			"idBoard": "627d198c1c0b27679bea63be",
+			"pos": 32768,
+			"subscribed": false,
+			"softLimit": null,
+			"limits": {
+				"cards": {
+					"openPerList": {
+						"status": "ok",
+						"disableAt": 5000,
+						"warnAt": 4000
+					},
+					"totalPerList": {
+						"status": "ok",
+						"disableAt": 1000000,
+						"warnAt": 800000
+					}
+				}
+			},
+			"creationMethod": "automatic"
+		},
+		{
+			"id": "627d198c1c0b27679bea63c1",
+			"name": "Done",
+			"closed": false,
+			"idBoard": "627d198c1c0b27679bea63be",
+			"pos": 49152,
+			"subscribed": false,
+			"softLimit": null,
+			"limits": {
+				"cards": {
+					"openPerList": {
+						"status": "ok",
+						"disableAt": 5000,
+						"warnAt": 4000
+					},
+					"totalPerList": {
+						"status": "ok",
+						"disableAt": 1000000,
+						"warnAt": 800000
+					}
+				}
+			},
+			"creationMethod": "automatic"
+		}
+	],
+	"members": [
+		{
+			"id": "625540827561d73dded6b95e",
+			"aaId": "6255406f4f1d57006a2469c2",
+			"activityBlocked": false,
+			"avatarHash": "828b4d71331c1d7ee8e1736798f3c29f",
+			"avatarUrl": "https://trello-members.s3.amazonaws.com/625540827561d73dded6b95e/828b4d71331c1d7ee8e1736798f3c29f",
+			"bio": "",
+			"bioData": null,
+			"confirmed": true,
+			"fullName": "Oussama Touati",
+			"idEnterprise": null,
+			"idEnterprisesDeactivated": [],
+			"idMemberReferrer": null,
+			"idPremOrgsAdmin": [],
+			"initials": "OT",
+			"memberType": "normal",
+			"nonPublic": {
+				"fullName": "Oussama Touati",
+				"initials": "OT",
+				"avatarHash": null
+			},
+			"nonPublicAvailable": true,
+			"products": [],
+			"url": "https://trello.com/oussamatouati",
+			"username": "oussamatouati",
+			"status": "disconnected"
+		}
+	],
+	"checklists": [],
+	"customFields": [],
+	"memberships": [
+		{
+			"idMember": "625540827561d73dded6b95e",
+			"memberType": "admin",
+			"unconfirmed": false,
+			"deactivated": false,
+			"id": "627d198c1c0b27679bea63c3"
+		}
+	],
+	"pluginData": []
+}

@@ -41,10 +41,10 @@ export class PendingComponent implements OnInit {
     })
 
 
-    this.trelloService.getAllcardInListDoing().subscribe(res =>{
+    /*this.trelloService.getAllcardInListDoing().subscribe(res =>{
       this.test = res;
       console.log(this.test);
-    })
+    })*/
  
   }
 
@@ -109,15 +109,19 @@ export class PendingComponent implements OnInit {
     this.router.navigate(['complaints/pending']);
   }
 
-  goToTrello(complaintName){
-    this.trelloService.getAllcardInListDoing().subscribe((res:any[]) =>{
-      this.test = res;
-      res.forEach(card => {
-        if(card.name == complaintName){
-          //this.router.navigateByUrl(card.url);
-          window.location.href= card.url;
-        }
-      });
+  goToTrello(complaintName,projetName){
+    this.trelloService.getBoardByProjet(projetName).subscribe((res:any)=>{
+      this.trelloService.getAllcardInListToDo(res.idListToDo).subscribe((res:any[]) =>{
+        this.test = res;
+        res.forEach(card => {
+          if(card.name == complaintName){
+            //this.router.navigateByUrl(card.url);
+            window.location.href= card.url;
+          }
+        });
+      })
     })
   }
+    
+
 }

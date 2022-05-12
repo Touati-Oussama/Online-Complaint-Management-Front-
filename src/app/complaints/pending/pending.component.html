@@ -91,7 +91,7 @@
     <ng-container matColumnDef="Trello">
       <th mat-header-cell *matHeaderCellDef> Trello </th>
       <td mat-cell *matCellDef="let element" >
-        <button mat-icon-button color="primary" *ngIf="this.authService.isEmployee()" (click)="goToTrello(element.sujet)">
+        <button mat-icon-button color="primary" *ngIf="this.authService.isEmployee()" (click)="goToTrello(element.sujet,element.projet)">
         <i class="fa-brands fa-trello fa-2xl"></i>
         </button>
       </td>

@@ -120,6 +120,7 @@ export class DashboardEmployeeComponent implements OnInit {
     let date1 = this.datepipe.transform(this.data.value['date1'],'yyyy-MM-dd HH:mm');
     let date2 = this.datepipe.transform(this.data.value['date2'],'yyyy-MM-dd HH:mm');
     this.complaintService.detailsByDates(this.authService.loggedUser,date1,date2).subscribe(res=>{
+      this.details = res;
       this.dataPie= [res.total,res.cloture,res.encours];
       this.chartPie = new Chart("chartjs-pie", {
         type: "bar",

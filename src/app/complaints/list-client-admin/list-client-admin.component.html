@@ -1,5 +1,5 @@
 
-<button mat-button color="primary" (click)="zeroAction()"> 
+<!--<button mat-button color="primary" (click)="zeroAction()"> 
     <mat-icon class="mat-18">report</mat-icon> <span>New Complaint(s)</span>
 </button>
 <button mat-button color="primary" (click)="pending()">
@@ -7,8 +7,8 @@
 </button>
 <button mat-button color="primary" (click)="closed()">
     <mat-icon class="mat-18">check_circle_outline</mat-icon>  <span>Closed Complaint</span>
-</button>
-
+</button>-->
+<h3>Voici les historiques des réclamations</h3>
 
 <hr>
 
@@ -19,10 +19,14 @@
 </div> 
 
 <div fxLayout fxLayoutAlign="center space-between" style="margin-bottom: 15px;">
-    &nbsp;&nbsp;<button mat-raised-button color="primary" (click)="exporter.exportTable('xlsx',{filename:'Complaints'})">Excel</button>
-    &nbsp;&nbsp;<button mat-raised-button color="primary" (click)="exporter.exportTable('csv',{filename:'Complaints'})">CSV</button>
-    &nbsp;&nbsp;<button mat-raised-button color="primary" (click)="exporter.exportTable('json',{filename:'Complaints'})">Json</button>
-    &nbsp;&nbsp;<button mat-raised-button color="primary" (click)="exporter.exportTable('txt',{filename:'Complaints'})">Txt</button>
+  &nbsp;&nbsp;<button class="btn btn-dark btn-lg"
+    (click)="exporter.exportTable('xlsx',{filename:'Complaints'})">Excel</button>
+  &nbsp;&nbsp;<button class="btn btn-dark btn-lg"
+    (click)="exporter.exportTable('csv',{filename:'Complaints'})">CSV</button>
+  &nbsp;&nbsp;<button class="btn btn-dark btn-lg"
+    (click)="exporter.exportTable('json',{filename:'Complaints'})">Json</button>
+  &nbsp;&nbsp;<button class="btn btn-dark btn-lg"
+    (click)="exporter.exportTable('txt',{filename:'Complaints'})">Txt</button>
 </div>
 <table mat-table matTableExporter [dataSource]="dataSource"  #exporter="matTableExporter" class="mat-elevation-z8">
 

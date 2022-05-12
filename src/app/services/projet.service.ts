@@ -22,6 +22,13 @@ export class ProjetService {
     return this.http.post(`${this.apiURL}/add`,data,{headers:httpHeaders});
     } 
 
+    addTrello(data):any{
+      let jwt = this.authService.getToken();
+      jwt = "Bearer " + jwt;
+      let httpHeaders = new HttpHeaders({"Authorization": jwt})
+      return this.http.post(`${this.apiURL}/trello/add`,data,{headers:httpHeaders});
+      } 
+
   getAll():any{
     let jwt = this.authService.getToken();
     jwt = "Bearer " + jwt;
