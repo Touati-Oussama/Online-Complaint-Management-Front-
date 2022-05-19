@@ -20,6 +20,7 @@ export class NavbarEmployeeComponent implements OnInit {
   }
 
   onLogout(){
+    localStorage.removeItem('nickname');
     this.authService.logout();
   }
 }

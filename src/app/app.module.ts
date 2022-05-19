@@ -1,3 +1,14 @@
+import { MatCardModule } from '@angular/material/card';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFireModule } from '@angular/fire';
+
+
+
+
+
+
+
+
 import { StompService } from './services/stomp-service.service';
 
 import { ForbiddenComponent } from './forbidden/forbidden.component';
@@ -24,8 +35,15 @@ import { HeaderComponent } from './header/header.component';
 import { NavbarAdminClientComponent } from './navbar-admin-client/navbar-admin-client.component';
 import { DashboardCustomerAdminComponent } from './dashboard-customer-admin/dashboard-customer-admin.component';
 import { DatePipe } from '@angular/common';
-
-
+import { environment } from 'src/environments/environment';
+import { AddroomComponent } from './addroom/addroom.component';
+import { ChatroomComponent } from './chatroom/chatroom.component';
+import { TestLoginComponent } from './test-login/test-login.component';
+import { RoomlistComponent } from './roomlist/roomlist.component';
+import { MatLabel, MatFormFieldModule } from '@angular/material/form-field';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatInputModule } from '@angular/material/input';
 
 
 @NgModule({
@@ -43,6 +61,10 @@ import { DatePipe } from '@angular/common';
     HeaderComponent,
     NavbarAdminClientComponent,
     DashboardCustomerAdminComponent,
+    AddroomComponent,
+    ChatroomComponent,
+    TestLoginComponent,
+    RoomlistComponent,
 
   ],
   imports: [
@@ -54,8 +76,15 @@ import { DatePipe } from '@angular/common';
     BrowserAnimationsModule, 
     MatDialogModule,
     MatTableModule,
+    MatSnackBarModule,
     MatIconModule,
+    MatCardModule,
+    MatSidenavModule,
+    MatInputModule,
+    MatFormFieldModule,
     MatTableExporterModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireDatabaseModule,
     
   ],
   providers: [StompService,DatePipe],

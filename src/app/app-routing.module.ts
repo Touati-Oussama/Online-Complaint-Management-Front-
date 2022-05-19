@@ -1,3 +1,4 @@
+import { TestLoginComponent } from './test-login/test-login.component';
 import { DashboardCustomerAdminComponent } from './dashboard-customer-admin/dashboard-customer-admin.component';
 import { DashboardEmployeeComponent } from './dashboard-employee/dashboard-employee.component';
 import { DashboardCustomerComponent } from './dashboard-customer/dashboard-customer.component';
@@ -7,6 +8,9 @@ import { ForbiddenComponent } from './forbidden/forbidden.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
+import { RoomlistComponent } from './roomlist/roomlist.component';
+import { AddroomComponent } from './addroom/addroom.component';
+import { ChatroomComponent } from './chatroom/chatroom.component';
 
 const routes: Routes = [
   {path: 'types', loadChildren:()=> import('./types/types.module').then(m => m.TypesModule)},
@@ -24,6 +28,14 @@ const routes: Routes = [
   {path: 'dashboard-customer',component:DashboardCustomerComponent},
   {path: 'dashboard-employee', component:DashboardEmployeeComponent},
   {path: 'dashboard-customer-admin', component:DashboardCustomerAdminComponent},
+  { path: 'loginTest', component: TestLoginComponent },
+  { path: 'roomlist', component: RoomlistComponent },
+  { path: 'addroom', component: AddroomComponent },
+  { path: 'chatroom/:roomname', component: ChatroomComponent },
+  /*{ path: '',
+    redirectTo: '/login',
+    pathMatch: 'full'
+  }*/
 ];
 
 @NgModule({
