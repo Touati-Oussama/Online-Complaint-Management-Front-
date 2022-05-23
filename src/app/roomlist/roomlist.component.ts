@@ -1,3 +1,4 @@
+import { InboxService } from './../services/inbox.service';
 import { UserService } from './../services/users.service';
 import { AuthService } from './../services/auth.service';
 import { Component, OnInit } from '@angular/core';
@@ -5,6 +6,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import * as firebase from 'firebase';
 import { DatePipe } from '@angular/common';
 import { AngularFireDatabase } from '@angular/fire/database';
+import { IInboxConversation } from '../model/InboxConversationModel';
+import { AddroomComponent } from '../addroom/addroom.component';
+import { MatDialog } from '@angular/material/dialog';
 
 
 export const snapshotToArray = (snapshot: any) => {
@@ -38,7 +42,19 @@ export const snapshotToArrayTest = (snapshot: any,societe:any) => {
 })
 export class RoomlistComponent implements OnInit {
 
+  inboxConversations: IInboxConversation[] = [];
   nickname = '';
+  //displayedColumns: string[] = ['roomname'];
+  rooms = [];
+  test = [];
+  isLoadingResults = true;
+  societe
+
+  constructor(private inboxService:InboxService,private router:Router,public authService:AuthService,
+        private dialog:MatDialog,){
+
+  }
+  /*nickname = '';
   displayedColumns: string[] = ['roomname'];
   rooms = [];
   test = [];
@@ -83,10 +99,16 @@ export class RoomlistComponent implements OnInit {
         const userRef = this.db.database.ref('roomusers/' + user.key);
         userRef.update({status: 'online'});
       } else {
-        const newroomuser = { roomname: '', nickname: '', status: '' };
+        const newroomuser = { roomname: '', nickname: '', status: '',title:'' };
         newroomuser.roomname = roomname;
         newroomuser.nickname = this.nickname;
         newroomuser.status = 'online';
+        if (this.authService.isAdmin())
+          newroomuser.title = 'Responsable GPRO';
+        if (this.authService.isEmployee())
+          newroomuser.title = 'Personnel GPRO';
+        if (this.authService.isPersonnel_Societe())
+          newroomuser.title = 'Personnel Societe';
         const newRoomUser = this.db.database.ref('roomusers/').push();
         newRoomUser.set(newroomuser);
       }
@@ -102,6 +124,43 @@ export class RoomlistComponent implements OnInit {
       this.router.navigate(['/dashboard-customer']);
     if (this.authService.isAdmin)
       this.router.navigate(['/dashboard-admin']);
+  }*/
+
+ ngOnInit(): void {
+   this.loadAll();
+ }
+
+
+ loadAll(): void {
+  this.inboxService.findAll().subscribe(inboxConversations => {
+    this.inboxConversations = inboxConversations;
+    //console.log(inboxConversations)
+  });
   }
 
+
+
+  enterChatRoom(room:IInboxConversation) {
+    this.router.navigate(['chatroom/'+room.subject])
+  }
+
+  logout(): void {
+    if (this.authService.isEmployee)
+      this.router.navigate(['/dashboard-employee']);
+    if (this.authService.isPersonnel_Societe)
+      this.router.navigate(['/dashboard-customer']);
+    if (this.authService.isAdmin)
+      this.router.navigate(['/dashboard-admin']);
+  }
+
+  add(){
+    const dialogRef = this.dialog.open(AddroomComponent,{
+      width : "40%",
+      height: "40%",
+      data: {conversations : this.inboxConversations}
+    });
+    dialogRef.afterClosed().subscribe(res =>{
+      this.ngOnInit();
+    })  
+  }
 }

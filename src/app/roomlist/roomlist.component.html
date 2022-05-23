@@ -1,3 +1,9 @@
+
+<!--<div class="row" style="margin: 20px;">
+  <button class="btn btn-dark" (click)="add()">
+    add conversation
+  </button>
+</div>
 <div class="example-container mat-elevation-z8">
   <h3>{{nickname}} <button mat-flat-button (click)="logout()"><mat-icon>logout</mat-icon></button></h3>
   <h2>Room List</h2>
@@ -5,36 +11,34 @@
        *ngIf="isLoadingResults">
     <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
   </div>
-  <div class="button-row" *ngIf="authService.isAdmin()">
-    <button mat-flat-button color="primary" [routerLink]="['/addroom']"><mat-icon>add</mat-icon></button>
-  </div>
-  <div class="mat-elevation-z8" *ngIf="authService.isAdmin() || authService.isEmployee()">
-    <table mat-table [dataSource]="rooms" class="example-table"
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="inboxConversations" class="example-table"
            matSort matSortActive="roomname" matSortDisableClear matSortDirection="asc">
 
-      <!-- Room Name Column -->
+
       <ng-container matColumnDef="roomname">
         <th mat-header-cell *matHeaderCellDef>Room Name</th>
-        <td mat-cell *matCellDef="let row">{{row.roomname}}</td>
+        <td mat-cell *matCellDef="let row">{{row.subject}}</td>
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="enterChatRoom(row.roomname)"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="enterChatRoom(row)"></tr>
     </table>
   </div>
+</div>-->
 
-    <div class="mat-elevation-z8" *ngIf="authService.isPersonnel_Societe()">
-    <table mat-table [dataSource]="test" class="example-table"
-           matSort matSortActive="roomname" matSortDisableClear matSortDirection="asc">
 
-      <!-- Room Name Column -->
-      <ng-container matColumnDef="roomname">
-        <th mat-header-cell *matHeaderCellDef>Room Name</th>
-        <td mat-cell *matCellDef="let row"><span *ngIf="societe == row.roomname">{{row.roomname}}</span></td>
-      </ng-container>
+<table class="table table-striped"  >
 
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="enterChatRoom(row.roomname)"></tr>
-    </table>
-  </div>
-</div>
+  <tbody>
+    <tr>
+      <th scope="col">Conversation</th>
+      <th></th>
+    </tr>
+    <tr *ngFor="let c of inboxConversations">
+      <td>{{c.subject}}</td>
+      <td> <button class="btn btn-dark" (click)="enterChatRoom(c)">Entrer</button></td>
+    </tr>
+  </tbody>
+</table>
+  

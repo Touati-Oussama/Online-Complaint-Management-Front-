@@ -2,6 +2,7 @@ import { AuthService } from './auth.service';
 import { HttpClient, HttpEvent, HttpHeaders, HttpRequest, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { User } from '../model/User';
 
 
 const httpOptions = {
@@ -198,4 +199,6 @@ export class UserService {
       params:httparams
     });
   }
+
+
 }

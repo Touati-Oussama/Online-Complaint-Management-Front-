@@ -44,6 +44,13 @@ import { MatLabel, MatFormFieldModule } from '@angular/material/form-field';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatInputModule } from '@angular/material/input';
+import { InboxListComponent } from './inbox-list/inbox-list.component';
+import { SplitterModule } from '@syncfusion/ej2-angular-layouts';
+import { ToastrModule } from 'ngx-toastr';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateModule } from '@ngx-translate/core';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import { AvatarModule } from 'ngx-avatar';
 
 
 @NgModule({
@@ -65,6 +72,7 @@ import { MatInputModule } from '@angular/material/input';
     ChatroomComponent,
     TestLoginComponent,
     RoomlistComponent,
+    InboxListComponent,
 
   ],
   imports: [
@@ -81,13 +89,18 @@ import { MatInputModule } from '@angular/material/input';
     MatCardModule,
     MatSidenavModule,
     MatInputModule,
+    MatTooltipModule,
+    AvatarModule,
     MatFormFieldModule,
+    TranslateModule,
     MatTableExporterModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireDatabaseModule,
+    SplitterModule,
+    ToastrModule.forRoot(),
     
   ],
-  providers: [StompService,DatePipe],
+  providers: [StompService,DatePipe,NgbActiveModal],
   bootstrap: [AppComponent],
   entryComponents:[LoginComponent]
 })

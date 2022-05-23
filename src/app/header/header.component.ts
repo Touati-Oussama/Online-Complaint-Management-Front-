@@ -1,3 +1,5 @@
+import { IInboxConversation } from './../model/InboxConversationModel';
+import { InboxService } from './../services/inbox.service';
 import { StompService } from './../services/stomp-service.service';
 import { Etat } from './../model/Etat';
 import { Component, OnInit } from '@angular/core';
@@ -8,6 +10,7 @@ import { CompalintService } from '../services/compalint.service';
 import { ImageService } from '../services/image.service';
 import { MessageService } from '../services/message.service';
 import Swal from 'sweetalert2';
+import { IInboxMessage } from '../model/IInboxMessage';
 
 @Component({
   selector: 'app-header',
@@ -24,6 +27,8 @@ export class HeaderComponent implements OnInit {
   retrieveResonse: any;
   verifToken : boolean = true;
   path:any;
+  oldMessages: IInboxMessage[] = [];
+  newMessages: IInboxMessage[] = [];
   private subscription:Subscription;
   private SubscriptionComplaint:Subscription;
   constructor (public authService: AuthService,
@@ -31,6 +36,7 @@ export class HeaderComponent implements OnInit {
     private messageService:MessageService,
     private complaintService:CompalintService,
     private stompService:StompService,
+    private inboxService:InboxService,
     private router: Router) {
   
     }
@@ -56,19 +62,21 @@ export class HeaderComponent implements OnInit {
       }
     });  
     if (this.authService.isAdmin())
-    this.path = "New Complaint";
+      this.path = "New Complaint";
    if (this.authService.isEmployee())
      this.path = "Forward Complaint";
-   this.stompService.subscribe('/topic/'+this.path,() : void =>{
-     this.loadComplaints();
-     if (this.authService.isAdmin() || this.authService.isEmployee() )
-     Swal.fire({
-       icon: 'warning',
-       title: 'Warning',
-       text:  'Nouveaux Réclamation(s)',
+    this.stompService.subscribe('/topic/'+this.path,() : void =>{
+      this.loadComplaints();
+      if (this.authService.isAdmin() || this.authService.isEmployee() )
+      Swal.fire({
+        icon: 'warning',
+        title: 'Warning',
+        text:  'Nouveaux Réclamation(s)',
 
-     })
+      })
    })
+
+
   }
 
   onLogout(){

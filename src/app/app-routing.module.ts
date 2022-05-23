@@ -1,3 +1,4 @@
+import { InboxListComponent } from './inbox-list/inbox-list.component';
 import { TestLoginComponent } from './test-login/test-login.component';
 import { DashboardCustomerAdminComponent } from './dashboard-customer-admin/dashboard-customer-admin.component';
 import { DashboardEmployeeComponent } from './dashboard-employee/dashboard-employee.component';
@@ -31,6 +32,7 @@ const routes: Routes = [
   { path: 'loginTest', component: TestLoginComponent },
   { path: 'roomlist', component: RoomlistComponent },
   { path: 'addroom', component: AddroomComponent },
+  { path: 'inbox', component: InboxListComponent },
   { path: 'chatroom/:roomname', component: ChatroomComponent },
   /*{ path: '',
     redirectTo: '/login',

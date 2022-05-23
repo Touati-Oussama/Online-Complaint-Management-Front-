@@ -1,5 +1,5 @@
 /* Structure */
-.example-container {
+/*.example-container {
     position: relative;
     padding: 5px;
   }
@@ -24,4 +24,10 @@
   
   .mat-flat-button {
     margin: 5px;
+  }*/
+
+  .form-select{
+    font-size: 15px;
   }
+
+ 

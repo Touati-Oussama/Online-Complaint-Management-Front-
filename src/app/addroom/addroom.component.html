@@ -1,4 +1,4 @@
-<div class="container">
+<!--<div class="container">
     <form class="example-form" [formGroup]="roomForm" (ngSubmit)="onFormSubmit(roomForm.value)">
         <h2>Please enter new Room</h2>
         <mat-form-field class="example-full-width">
@@ -12,4 +12,30 @@
             <button type="submit" [disabled]="!roomForm.valid" mat-fab color="primary"><mat-icon>save</mat-icon></button>
         </div>
     </form>
-  </div>
+  </div>-->
+  
+
+  <div class="card">
+    <div class="card-header">
+        <h5 class="card-title mb-0">Add Conversation</h5>
+    </div>
+
+    <div class="card-body">
+        <div class="m-sm-4">
+            <form [formGroup]="data" (ngSubmit)="add()">
+
+                <div class="mb-3">
+                  <label class="form-label">Society</label>
+                  <select class="form-select mb-3" formControlName="societe">
+                      <option value="">Select One</option>
+                      <option [value]="s.name" *ngFor="let s of societies">{{s.name}}</option>
+                  </select>
+              </div>
+                <div>
+                    <button   [disabled]="!data.valid" style="margin-right:5px;color: aliceblue;" class="btn btn-dark">Add</button>
+                    <button type="reset" class="btn btn-danger" (click)="OnClose()">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
