@@ -16,39 +16,9 @@ import { ReplaySubject, Subscription } from 'rxjs';
 import { User } from '../model/User';
 import { StompService } from '../services/stomp-service.service';
 import { ImageService } from '../services/image.service';
+import { MessageService } from '../services/message.service';
 
-export class MyErrorStateMatcher implements ErrorStateMatcher {
-  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
-    const isSubmitted = form && form.submitted;
-    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
-  }
-}
 
-export const snapshotToArray = (snapshot: any) => {
-  const returnArr = [];
-
-  snapshot.forEach((childSnapshot: any) => {
-      const item = childSnapshot.val();
-      item.key = childSnapshot.key;
-      returnArr.push(item);
-  });
-
-  return returnArr;
-};
-
-export const snapshotToArrayByRoom = (snapshot: any,roomname:any) => {
-  const returnArr = [];
-
-  snapshot.forEach((childSnapshot: any) => {
-      if(childSnapshot.val().roomname === roomname){
-        const item = childSnapshot.val();
-        item.key = childSnapshot.key;
-        returnArr.push(item);
-      }
-
-  });
-  return returnArr;
-};
 
 @Component({
   selector: 'app-chatroom',
@@ -98,19 +68,20 @@ export class ChatroomComponent implements OnInit {
   photoSrc =  'api/documents-download/';
   errorFileTooLarge: boolean;
   selectedFiles: FileList;
+  private subscription:Subscription;
   currentFileUpload: File;
   reader = new FileReader();
-  matcher = new MyErrorStateMatcher();
   ref;
   public conversation : IInboxConversation;
   constructor(private router: Router,
               private route: ActivatedRoute,
               private formBuilder: FormBuilder,
               private imageService:ImageService,
-              private authService:AuthService,
+              public authService:AuthService,
               private inboxService:InboxService,
               private userService:UserService,
               private stompService:StompService,
+              private messageService:MessageService,
               private db: AngularFireDatabase,
               public datepipe: DatePipe) {
               }
@@ -178,7 +149,7 @@ export class ChatroomComponent implements OnInit {
     this.roomname = this.route.snapshot.params.roomname;
     this.stompService.subscribe('/topic/new Message',() : void =>{
       this.loadAll(this.roomname);
-        this.getMessagesByConversation(this.inboxConversation);
+        //this.getMessagesByConversation(this.inboxConversation);
     })
     this.userService.getUserByUsername(this.authService.loggedUser).subscribe((res:any)=>{
       let user = new User();
@@ -189,6 +160,12 @@ export class ChatroomComponent implements OnInit {
 
     this.loadAll(this.roomname);
    
+
+    this.stompService.subscribe('/topic/User Connection',() : void =>{
+      this.loadAll(this.roomname);
+    })
+
+
     
   }
 
@@ -213,7 +190,7 @@ export class ChatroomComponent implements OnInit {
           }
         })
       })
-      console.log(this.participants);
+      //console.log(this.participants);
     })
   }
 
@@ -238,7 +215,7 @@ export class ChatroomComponent implements OnInit {
                     message.fromId = user.user_id;
                     message.userPhoto = this.retrievedImage;
                     this.inboxService.sendMessage(message).subscribe(msg => {
-             
+                      this.messageFormControl.reset();
                     });
                   }
 
@@ -262,7 +239,7 @@ export class ChatroomComponent implements OnInit {
     this.inboxMessages = [];
     this.inboxService.getMessages(inboxConversation.id).subscribe(messages => {
       this.inboxMessages = messages;
-      console.log(this.inboxMessages)
+      //console.log(this.inboxMessages)
       this.inboxService.interceptCount();
     });
     this.selectConversation = true;
@@ -272,4 +249,8 @@ export class ChatroomComponent implements OnInit {
     this.router.navigate(['/roomlist']);
   }
 
+
+  updateHeader(){
+    this.messageService.send('updateHeader');
+  }
 }

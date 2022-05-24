@@ -1,3 +1,4 @@
+import { HeaderComponent } from './header/header.component';
 import { InboxListComponent } from './inbox-list/inbox-list.component';
 import { TestLoginComponent } from './test-login/test-login.component';
 import { DashboardCustomerAdminComponent } from './dashboard-customer-admin/dashboard-customer-admin.component';
@@ -29,6 +30,7 @@ const routes: Routes = [
   {path: 'dashboard-customer',component:DashboardCustomerComponent},
   {path: 'dashboard-employee', component:DashboardEmployeeComponent},
   {path: 'dashboard-customer-admin', component:DashboardCustomerAdminComponent},
+  {path:'header:/nb',component:HeaderComponent},
   { path: 'loginTest', component: TestLoginComponent },
   { path: 'roomlist', component: RoomlistComponent },
   { path: 'addroom', component: AddroomComponent },

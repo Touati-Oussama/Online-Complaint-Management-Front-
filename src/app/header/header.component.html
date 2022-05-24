@@ -9,7 +9,7 @@
                 <a class="nav-icon dropdown-toggle" href="#" id="messagesDropdown" data-bs-toggle="dropdown">
                     <div class="position-relative">
                         <i class="align-middle" style="color:white"><mat-icon> chat_bubble_outline</mat-icon></i>
-                        <span class="indicator" style="background-color: red;" *ngIf="data">{{nb}}</span>
+                        <span class="indicator" style="background-color: red;" *ngIf="nbMessages">{{nbMessages}}</span>
                     </div>
                 </a>
                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end py-0" aria-labelledby="messagesDropdown">
@@ -18,16 +18,16 @@
                             4 New Messages
                         </div>
                     </div>
-                    <div class="list-group">
-                        <a href="#" class="list-group-item">
+                    <div class="list-group" >
+                        <a *ngFor="let m of inboxNewMessages" class="list-group-item"  (click)="goToChat()">
                             <div class="row g-0 align-items-center">
                                 <div class="col-2">
-                                    <img src="img/avatars/avatar-5.jpg" class="avatar img-fluid rounded-circle" alt="Vanessa Tucker">
+                                    <img [src]="m.userPhoto" class="avatar img-fluid rounded-circle" alt="Vanessa Tucker">
                                 </div>
                                 <div class="col-10 ps-2">
-                                    <div class="text-dark">Vanessa Tucker</div>
-                                    <div class="text-muted small mt-1">Nam pretium turpis et arcu. Duis arcu tortor.</div>
-                                    <div class="text-muted small mt-1">15m ago</div>
+                                    <div class="text-dark">{{m.fromName}}</div>
+                                    <div class="text-muted small mt-1">{{m.message}}</div>
+                                    <div class="text-muted small mt-1">{{m.sendDate  | date:'short'}}</div>
                                 </div>
                             </div>
                         </a>

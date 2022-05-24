@@ -58,7 +58,7 @@
 
 
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
-  <button type="button" mat-button matSuffix mat-icon-button aria-label="Exit" (click)="exitChat()">
+  <button type="button" mat-button matSuffix mat-icon-button aria-label="Exit" (click)="exitChat()" *ngIf="authService.isAdmin()|| authService.isEmployee()">
     <mat-icon>logout</mat-icon>
   </button>
 
@@ -78,17 +78,18 @@
                         <img [src]="p.photo" alt="avatar">
                         <div class="about">
                             <div class="name">{{p.nom}} {{p.prenom}}</div>
-                            <div class="status"> <i class="fa fa-circle offline"></i> left 7 mins ago </div>                                            
+                            <div class="status" *ngIf="!p.connected"> <i class="fa fa-circle offline"></i> offline</div>  
+                            <div class="status" *ngIf="p.connected"> <i class="fa fa-circle online"></i> online </div>                                          
                         </div>
                     </li>
                   
                 </ul>
             </div>
             <div class="chat">
-                <div class="chat-header clearfix">
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="chat-about" style="text-align: center;">
+                <div class="chat-header clearfix" >
+                    <div class="row" >
+                        <div class="col-lg-6" >
+                            <div class="chat-about">
                                 <h3 class="m-b-0"><b>Conversation de {{conversation.subject}}</b></h3>
                             </div>
                         </div>
@@ -98,7 +99,7 @@
                     <ul class="m-b-0">
                         <li class="clearfix" *ngFor="let message of inboxMessages">
                             <div *ngIf="message.fromId == currentUser.id">
-                                <div class="message-data text-right" style="margin-left: 65%;">
+                                <div class="message-data text-right" style="margin-left: 63%;">
                                   <img  [src]="message.userPhoto" alt="avatar">
                                   <span class="message-data-time">{{message.sendDate | date:'short'}}</span>
                                 </div>
@@ -121,7 +122,7 @@
                 <hr>
                 <div class="chat-message clearfix">
                     <div class="input-group mb-0">
-                        <input type="text" class="form-control"  [formControl]="messageFormControl" matInput placeholder="Enter text here...">
+                        <input type="text" class="form-control"  (click)="updateHeader()"       [formControl]="messageFormControl" matInput placeholder="Enter text here...">
                         <button (click)="sendMessage()" class="btn" style="
                           background-color: #040404;
                           color: white;

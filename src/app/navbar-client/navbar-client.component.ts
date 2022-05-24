@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { AuthService } from './../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
@@ -13,12 +14,15 @@ import { EditComponent } from '../customers/edit/edit.component';
 export class NavbarClientComponent implements OnInit {
 
   id:number;
-  constructor(public authService:AuthService,private userService:UserService,private dialog:MatDialog) { }
+  constructor(public authService:AuthService,private userService:UserService,private dialog:MatDialog,private router:Router) { }
 
   ngOnInit(): void {
     this.userService.getUserByUsername(this.authService.loggedUser).subscribe(res =>{
-      this.id = res.user_id
+      this.id = res.user_id;
+      
     })
+
+
   }
 
 
@@ -27,5 +31,11 @@ export class NavbarClientComponent implements OnInit {
     this.authService.logout();
   }
 
+  goToChat(){
+    this.userService.getCustomerByUsername(this.authService.loggedUser).subscribe((res:any)=>{
+      console.log(res);
+      this.router.navigate(['chatroom/'+res.societe]);
+    })
+  }
 
 }

@@ -25,10 +25,17 @@ export class InboxService {
     return this.http.get<IInboxConversation[]>(this.apiUrl + '/all');
   }
 
+  findBySociete(societe){
+    return this.http.get<IInboxConversation>(this.apiUrl,{params:{subject:societe}});
+  }
   public add(societe:any) {
     return this.http.post<IInboxConversation>(this.apiUrl+ '/add',null,{
       params:{ societe: societe}
     });
+  }
+
+  update(societe){
+    return this.http.post<IInboxConversation>(this.apiUrl+'/update',null,{params:{societe:societe}});
   }
 
   public getMessages(inboxConversationId: string) {

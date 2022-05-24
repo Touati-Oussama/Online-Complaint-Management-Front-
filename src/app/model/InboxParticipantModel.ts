@@ -7,6 +7,7 @@ export interface IInboxParticipant {
     photo?: string;
     role?: string
     username?: string;
+    connected?: boolean;
 }
 
 export class InboxParticipantModel implements IInboxParticipant{
@@ -18,7 +19,8 @@ export class InboxParticipantModel implements IInboxParticipant{
         public email?: string,
         public photo?: string,
         public role?: string,
-        public username?: string
+        public username?: string,
+        public connected?: boolean
     ){
 
     }

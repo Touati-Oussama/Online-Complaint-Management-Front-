@@ -166,6 +166,24 @@ export class UserService {
 
     //return this.http.put(`${this.apiURL}/customers/update/${id}`,data,{headers:httpHeaders});
   }
+
+  updateUserStatus(username,connected):Observable<HttpEvent<any>>{
+    let jwt = this.authService.getToken();
+    jwt = "Bearer " + jwt;
+    let httpHeaders = new HttpHeaders({"Authorization": jwt});
+    let httparams = new HttpParams()
+    .set('username',username)
+    .set('connected',connected);
+    const req = new HttpRequest('POST', `${this.apiURL}/user`, null, {
+      params:httparams,
+      headers:httpHeaders,
+      reportProgress: true,
+      responseType: 'json'
+    });
+    return this.http.request(req);
+
+    //return this.http.put(`${this.apiURL}/customers/update/${id}`,data,{headers:httpHeaders});
+  }
   updateTeams(data,id):Observable<HttpEvent<any>>{
     let jwt = this.authService.getToken();
     jwt = "Bearer " + jwt;

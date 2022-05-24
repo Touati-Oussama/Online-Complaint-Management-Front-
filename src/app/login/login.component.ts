@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit{
       let jwToken = data.headers.get('Authorization');
       this.authService.saveToken(jwToken);
       this.messageService.send('isAuthenticated');
-      
+      this.userService.updateUserStatus(this.authService.loggedUser,true).subscribe((res)=>{ });
       this.userService.getUserByUsername(this.authService.loggedUser).subscribe((res:any)=>{
         let title = '';
         if (this.authService.isAdmin())
