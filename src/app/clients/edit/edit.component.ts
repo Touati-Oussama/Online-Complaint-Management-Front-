@@ -88,7 +88,7 @@ export class EditComponent implements OnInit {
                   Swal.fire({
                     icon: 'success',
                     title: 'Success...',
-                    text: 'Updated Successfully !',
+                    text: 'Mis à jour avec succés !',
                   })
                   this.OnClose();
                   this.progress = 0;
@@ -96,14 +96,14 @@ export class EditComponent implements OnInit {
                   Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
-                    text: 'Something went wrong!',
+                    text: "Quelque chose s'est mal passé!",
                   })
                 }
               }
             },err => {
                 Swal.fire({
                   icon: 'warning',
-                  title: 'Updated failed!...',
+                  title: "Échec de la mise à jour!...",
                   text: err.error.message,
                 })
                 }
@@ -132,7 +132,7 @@ export class EditComponent implements OnInit {
             Swal.fire({
               icon: 'success',
               title: 'Success...',
-              text: 'Updated Successfully !',
+              text: 'Mis à jour avec succés !',
             })
             this.OnClose();
             this.progress = 0;
@@ -140,14 +140,14 @@ export class EditComponent implements OnInit {
             Swal.fire({
               icon: 'error',
               title: 'Oops...',
-              text: 'Something went wrong!',
+              text: "Quelque chose s'est mal passé!",
             })
           }
         }
       },err => {
           Swal.fire({
             icon: 'warning',
-            title: 'Updated failed!...',
+            title: "Échec de la mise à jour!...",
             text: err.error.message,
           })
           }

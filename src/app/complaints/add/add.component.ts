@@ -191,7 +191,7 @@ export class AddComponent implements OnInit {
                 Swal.fire({
                   icon: 'success',
                   title: 'Success...',
-                  text: 'Added Successfully !',
+                  text: 'Ajouté avec succès!',
                 })  
                 this.data.reset();
                 this.onClose();
@@ -203,7 +203,7 @@ export class AddComponent implements OnInit {
             Swal.fire({
               icon: 'error',
               title: 'Oops...',
-              text: 'Something went wrong!',
+              text: "Quelque chose s'est mal passé!",
             })
           }
         }
@@ -252,7 +252,7 @@ export class AddComponent implements OnInit {
             Swal.fire({
               icon: 'success',
               title: 'Success...',
-              text: 'Added Successfully !',
+              text: 'Ajouté avec succès!',
             })  
             this.data.reset();
             this.onClose();
@@ -261,7 +261,7 @@ export class AddComponent implements OnInit {
             Swal.fire({
               icon: 'error',
               title: 'Oops...',
-              text: 'Something went wrong!',
+              text: "Quelque chose s'est mal passé!",
             })
           }
         }

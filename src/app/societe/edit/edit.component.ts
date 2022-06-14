@@ -43,15 +43,15 @@ export class EditComponent implements OnInit {
       if (res.id) {
         Swal.fire({
           icon: 'success',
-          title: 'Success...',
-          text: 'Updated Successfully !',
+          title: 'Succès...',
+          text: 'Mis à jour avec succés !',
         })
         this.OnClose();
       }else{
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
-          text: 'Something went wrong!',
+          text: "Quelque chose s'est mal passé!",
         })
       }
     }).catch((err)=>{

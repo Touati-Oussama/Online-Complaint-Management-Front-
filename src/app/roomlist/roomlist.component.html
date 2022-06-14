@@ -27,17 +27,23 @@
   </div>
 </div>-->
 
-
+<button id="btnTest" (click)="add()">
+  Ajouter une conversation
+</button>
 <table class="table table-striped"  >
 
   <tbody>
     <tr>
-      <th scope="col">Conversation</th>
+      <th>Conversation</th>
+      <th>Date de création</th>
+      <th>Participants</th>
       <th></th>
     </tr>
     <tr *ngFor="let c of inboxConversations">
       <td>{{c.subject}}</td>
-      <td> <button class="btn btn-dark" (click)="enterChatRoom(c)">Entrer</button></td>
+      <td>{{c.startDate | date:'short'}}</td>
+      <td>{{c.nbParticipants}}</td>
+      <td> <button class="btn btn-dark" (click)="enterChatRoom(c)">Accéder au conversation</button></td>
     </tr>
   </tbody>
 </table>

@@ -1,26 +1,26 @@
 <div class="card">
     <div class="card-header">
-        <h5 class="card-title mb-0">Update Complaint Status</h5>
+        <h5 class="card-title mb-0">Mise à jour de statut</h5>
     </div>
     <div class="card-body">
         <div class="m-sm-4">
             <form >
                 <div class="mb-3">
-                    <label class="form-label">Complaint Subject</label>
+                    <label class="form-label">Désignation de réclamation</label>
                     <input class="form-control form-control-lg" type="text" name="name" placeholder="Enter your subject"
                     [(ngModel)]="sujet"
                     />
                 </div>       
                 <div class="mb-3">
-                    <label class="form-label">Status</label>
+                    <label class="form-label">Statut</label>
                     <select class="form-select mb-3"  [(ngModel)]="s" name="s" [value]="s">
-                        <option  disabled>Select One</option>
+                        <option  disabled>Choisir un</option>
                         <option [value]="etats[s]" *ngFor="let s of status" >{{etats[s]}}</option>
                     </select>
                 </div>
                 <div class="text-center m-3">
-                    <button mat-raised-button color="primary" style="margin-right: 10px; color: aliceblue; background-color: rgb(35,35, 36);" (click)="update()">update</button> 
-                    <button type="reset" mat-raised-button color="warn" (click)="OnClose()" >Reset</button>
+                    <button mat-raised-button color="primary" style="margin-right: 10px; color: aliceblue; background-color: rgb(35,35, 36);" (click)="update()">Modifier</button> 
+                    <button type="reset" mat-raised-button color="warn" (click)="OnClose()" >Annuler</button>
                   
                 </div>
             </form>

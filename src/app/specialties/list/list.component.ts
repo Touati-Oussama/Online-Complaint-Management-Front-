@@ -36,13 +36,13 @@ export class ListComponent implements OnInit,AfterViewInit{
   delete(/*specialite:String,*/id:number){
     console.log(id);
     Swal.fire({
-      title: 'Are you sure?',
-      text: "Do you really want to delete this speciality ?",
+      title: 'Êtes-vous sûr?',
+      text: "Voulez-vous vraiment supprimer cette spécialité ?",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!'
+      confirmButtonText: 'Oui, supprimez-le!'
     }).then((result) => {
       if (result.isConfirmed) {
         this.specialityService.delete(id).toPromise().then((res:any)=>{
@@ -50,7 +50,7 @@ export class ListComponent implements OnInit,AfterViewInit{
             Swal.fire({
               icon: 'success',
               title: 'Success...',
-              text: 'Deleted Successfully !',
+              text: 'Supprimé avec succès !',
             })
             this.ngOnInit();
           }
@@ -58,14 +58,14 @@ export class ListComponent implements OnInit,AfterViewInit{
             Swal.fire({
               icon: 'error',
               title: 'Oops...',
-              text: 'Something went wrong!',
+              text: "Quelque chose s'est mal passé!",
             })
           }
         },
         err =>{
           Swal.fire({
             icon: 'warning',
-            title: 'Deleted failed!...',
+            title: 'La suppression a échoué!...',
             text: err.error.message,
           })
         }

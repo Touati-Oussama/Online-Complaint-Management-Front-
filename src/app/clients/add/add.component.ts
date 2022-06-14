@@ -89,7 +89,7 @@ export class AddComponent implements OnInit {
                     Swal.fire({
                       icon: 'success',
                       title: 'Success...',
-                      text: 'Your registration is successful!',
+                      text: "l'inscription est réussie !",
                     })
                     this.data.reset();
                     this.currentFile = undefined;
@@ -101,7 +101,7 @@ export class AddComponent implements OnInit {
                     Swal.fire({
                       icon: 'error',
                       title: 'Oops...',
-                      text: 'Something went wrong!',
+                      text: "Quelque chose s'est mal passé!",
                     })
                   }
                 }
@@ -109,7 +109,7 @@ export class AddComponent implements OnInit {
               err => {
                 Swal.fire({
                   icon: 'warning',
-                  title: 'Signup failed!...',
+                  title: "Échec de l'inscription!...",
                   text: err.error.message,
                 })
                 this.currentFile = undefined;

@@ -1,7 +1,7 @@
 import { ListClientAdminComponent } from './list-client-admin/list-client-admin.component';
 import { ForwardComponent } from './forward/forward.component';
 import { ClientDetailsComponent } from './client-details/client-details.component';
-import { ZeroActionComponent } from './zero-action/zero-action.component';
+
 import { ListAdminComponent } from './list-admin/list-admin.component';
 
 import { NgModule } from '@angular/core';
@@ -13,6 +13,7 @@ import { ListComponent } from './list-client/list.component';
 import { PendingComponent } from './pending/pending.component';
 import { ClosedComponent } from './closed/closed.component';
 import { ListEmployeeComponent } from './list-employee/list-employee.component';
+import { ZeroActionComponent } from './zero-action/zero-action.component';
 
 const routes: Routes = [
   { path: '', component: ListComponent },

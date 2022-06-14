@@ -190,7 +190,7 @@ export class ChatroomComponent implements OnInit {
           }
         })
       })
-      //console.log(this.participants);
+      console.log(this.participants);
     })
   }
 

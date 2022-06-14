@@ -85,8 +85,8 @@ export class AddComponent implements OnInit {
               this.progress = 0;
               Swal.fire({
                 icon: 'success',
-                title: 'Success...',
-                text: 'Your registration is successful!',
+                title: 'Succès...',
+                text: "L'inscription est réussie!",
               })
               this.data.reset();
               this.currentFile = undefined;
@@ -98,7 +98,7 @@ export class AddComponent implements OnInit {
               Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
-                text: 'Something went wrong!',
+                text: "il y'a un probléme !",
               })
             }
           }

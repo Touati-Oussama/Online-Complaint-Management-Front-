@@ -71,7 +71,7 @@ export class AddComponent implements OnInit {
                 Swal.fire({
                   icon: 'success',
                   title: 'Success...',
-                  text: 'Added Successfully !',
+                  text: 'Ajouté avec succès !',
                 })
                 this.data.reset();
                 this.OnClose();
@@ -83,7 +83,7 @@ export class AddComponent implements OnInit {
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
-          text: 'Something went wrong!',
+          text: "Quelque chose s'est mal passé!",
         })
       }
     }).catch((err)=>{

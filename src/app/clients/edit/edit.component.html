@@ -11,18 +11,18 @@
     
     <div class="card">
         <div class="card-header">
-            <h5 class="card-title mb-0">update a customer</h5>
+            <h5 class="card-title mb-0">Modifier un personnel</h5>
         </div>
 
         <div class="card-body">
             <div class="m-sm-4">
                 <form [formGroup]="data" (ngSubmit)="update()">
                     <div class="mb-3">
-                        <label class="form-label">First Name</label>
+                        <label class="form-label">Nom</label>
                         <input class="form-control form-control-lg" type="text"  formControlName="nom" name="name" placeholder="Enter the status" />
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Last Name</label>
+                        <label class="form-label">Prénom</label>
                         <input class="form-control form-control-lg" type="text"  formControlName="prenom" name="name" placeholder="Enter the status" />
                     </div>
                     <div class="mb-3">
@@ -30,7 +30,7 @@
                         <input class="form-control form-control-lg" type="text"  formControlName="username" name="name" placeholder="Enter the status" />
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Phone Number</label>
+                        <label class="form-label">telephone</label>
                         <input class="form-control form-control-lg" type="tel"  formControlName="telephone" name="name" placeholder="Enter the status" />
                     </div>
                     <div class="mb-3">
@@ -38,7 +38,7 @@
                         <input class="form-control form-control-lg" type="email"  formControlName="email" name="name" placeholder="Enter the status" />
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Password</label>
+                        <label class="form-label">Mot de passe</label>
                         <input class="form-control form-control-lg" type="password"  formControlName="password" name="name" placeholder="Enter the status" />
                     </div>
 
@@ -62,8 +62,8 @@
                         </div>
                     </div>
                     <div>
-                        <button   [disabled]="!data.valid" style="margin-right:5px;" mat-raised-button color="primary">Update</button>
-                        <button type="reset" mat-raised-button color="warn" (click)="OnClose()">Cancel</button>
+                        <button   [disabled]="!data.valid" style="margin-right:5px;" mat-raised-button color="primary">Modifier</button>
+                        <button type="reset" mat-raised-button color="warn" (click)="OnClose()">Annuler</button>
                     </div>
                    
                 </form>

@@ -134,6 +134,10 @@ export class RoomlistComponent implements OnInit {
  loadAll(): void {
   this.inboxService.findAll().subscribe(inboxConversations => {
     this.inboxConversations = inboxConversations;
+    inboxConversations.forEach(i=>{
+      i.nbParticipants = i.participants.length;
+    })
+    console.log(inboxConversations);
     //console.log(inboxConversations)
   });
   }

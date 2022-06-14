@@ -1,36 +1,36 @@
 <div class="card">
     <div class="card-header">
-        <h5 class="card-title mb-0">Add a complaint</h5>
+        <h5 class="card-title mb-0">Envoyer une réclamation</h5>
     </div>
     <div class="card-body">
         <div class="m-sm-4">
             <form [formGroup]="data" (ngSubmit)="submit()">
                 <div class="mb-3">
-                    <label class="form-label">Complaint Subject</label>
+                    <label class="form-label">Désignation </label>
                     <input class="form-control form-control-lg" type="text" name="name" placeholder="Enter your subject"
                      formControlName="sujet"   
                     />
                 </div>
                 <div class="mb-3" *ngIf="projects.length != 0">
-                    <label class="form-label">Complaint Related Project</label>
+                    <label class="form-label">Projet lié au réclamation</label>
                     <select class="form-select mb-3" formControlName="projet">
                         <option value="">Select One</option>
                         <option [value]="p.id" *ngFor="let p of projects">{{p.designation}}</option>
                     </select>
                 </div>
                 <div class="mb-3" *ngIf="project">
-                    <label class="form-label">Complaint Related Project</label>
+                    <label class="form-label">Projet lié au réclamation</label>
                     <input class="form-control form-control-lg" type="text" name="name" [value]="project.designation" readonly/>
                 </div>
                 <div class="mb-3">
-                    <label class="form-label">Complaint Type</label>
+                    <label class="form-label">Type de réclamation</label>
                     <select class="form-select mb-3" formControlName="type">
                         <option value="">Select One</option>
                         <option [value]="t.type_id" *ngFor="let t of types">{{t.type}}</option>
                     </select>
                 </div>
                 <div class="mb-3">
-                    <label class="form-label">Complaint Détails</label>
+                    <label class="form-label">Détails de réclamation</label>
                     <textarea class="form-control" id="form6Example7" 
                     formControlName="details"
                     rows="3"></textarea>
@@ -57,8 +57,8 @@
                       </div>
                 </div>
                 <div class="text-center m-3">
-                    <button mat-raised-button  style="margin-right: 10px;background-color: rgb(35, 35, 36); color: aliceblue;" [disabled]="! data.valid">Submit</button> 
-                    <button type="reset" mat-raised-button color="warn" (click)="onClose()">Reset</button>
+                    <button mat-raised-button  style="margin-right: 10px;background-color: rgb(35, 35, 36); color: aliceblue;" [disabled]="! data.valid">Envoyer</button> 
+                    <button type="reset" mat-raised-button color="warn" (click)="onClose()">Annuler</button>
                     <!-- <button type="submit" class="btn btn-lg btn-primary">Sign up</button> -->
                 </div>
             </form>

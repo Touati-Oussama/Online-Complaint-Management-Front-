@@ -18,22 +18,22 @@
             <div class="m-sm-4">
                 <form [formGroup]="data" (ngSubmit)="add()">
                     <div class="mb-3">
-                        <label class="form-label">First Name</label>
+                        <label class="form-label">Nom</label>
                         <input class="form-control form-control-lg" 
                         [class.is-invalid] = "data.get('nom').invalid && data.get('nom').touched"
-                        type="text"  formControlName="nom" name="name" placeholder="Enter the First Name" />
+                        type="text"  formControlName="nom" name="name" placeholder="Donnez le nom" />
                         <div *ngIf="(f.nom.invalid && f.nom.touched) ||f. nom.dirty">
-                            <small *ngIf="f.nom.errors?.required" class="text-danger">First Name is required</small>
+                            <small *ngIf="f.nom.errors?.required" class="text-danger">Le nom est obligatoire</small>
                         </div>
                        
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Last Name</label>
+                        <label class="form-label">Prénom</label>
                         <input class="form-control form-control-lg" 
                         [class.is-invalid] = "data.get('prenom').invalid && data.get('prenom').touched"
-                        type="text"  formControlName="prenom" name="name" placeholder="Enter the Last Name" />
+                        type="text"  formControlName="prenom" name="name" placeholder="Donnez le prénom" />
                         <div *ngIf="(f.prenom.invalid && f.prenom.touched) ||f.prenom.dirty">
-                            <small *ngIf="f.prenom.errors?.required" class="text-danger">Last Name is required</small>
+                            <small *ngIf="f.prenom.errors?.required" class="text-danger">Le prénom est obligatoire</small>
                         </div>
                         
                     </div>
@@ -47,13 +47,13 @@
                         </div>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Phone Number</label>
+                        <label class="form-label">telephone</label>
                         <input class="form-control form-control-lg" 
                         [class.is-invalid] = "data.get('telephone').invalid && data.get('telephone').touched"
-                        type="tel"  formControlName="telephone" name="name" placeholder="Enter the phone number" />
+                        type="tel"  formControlName="telephone" name="name" placeholder="Donnez le telephone" />
                         <div *ngIf="(f.telephone.invalid && f.telephone.touched) || f.telephone.dirty">
-                            <small *ngIf="f.telephone.errors?.required" class="text-danger">Phone is required</small>
-                            <small *ngIf="f.telephone.errors?.minlength" class="text-danger">Phone must be grater than 8 digit</small>
+                            <small *ngIf="f.telephone.errors?.required" class="text-danger">Telephone est obligatoire</small>
+                            <small *ngIf="f.telephone.errors?.minlength" class="text-danger">Le numéro de téléphone doit comporter plus de 8 chiffres</small>
                         </div>
                     
                     </div>
@@ -62,20 +62,20 @@
                         <label class="form-label">Email</label>
                         <input class="form-control form-control-lg"
                         [class.is-invalid] = "data.get('email').invalid && data.get('email').touched"
-                         type="email"  formControlName="email" name="name" placeholder="Enter the email" />
+                         type="email"  formControlName="email" name="name" placeholder="Donnez l'email" />
                          <div *ngIf="(f.email.invalid && f.email.touched) || f.email.dirty">
-                            <small *ngIf="f.email.errors?.required" class="text-danger">Email is required</small>
-                            <small *ngIf="f.email.errors?.pattern" class="text-danger">Please provide a valid email address</small>
+                            <small *ngIf="f.email.errors?.required" class="text-danger">Email est obligatoire</small>
+                            <small *ngIf="f.email.errors?.pattern" class="text-danger">Veuillez fournir une adresse email valide</small>
                           </div>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Password</label>
+                        <label class="form-label">Mot de passe</label>
                         <input class="form-control form-control-lg" 
                         [class.is-invalid] = "data.get('password').invalid && data.get('password').touched"
-                        type="password"  formControlName="password" name="name" placeholder="Enter the password" />
+                        type="password"  formControlName="password" name="name" placeholder="Donnez le mot de passe" />
                         <div *ngIf="(f.password.invalid && f.password.touched) || f.password.dirty">
-                            <small *ngIf="f.password.errors?.required" class="text-danger">Password is required</small>
-                            <small *ngIf="f.password.errors?.minlength" class="text-danger">Password must be grater than 8 digit</small>
+                            <small *ngIf="f.password.errors?.required" class="text-danger">Mot de passe est obligatoire</small>
+                            <small *ngIf="f.password.errors?.minlength" class="text-danger">Le mot de passe doit être supérieur à 8 chiffres</small>
                         </div>
                        
                     </div>
@@ -99,8 +99,8 @@
                         </div>
                       </div>
                     <div>
-                        <button   [disabled]="!data.valid" style="margin-right:5px;background-color: rgb(35,35,36);color: aliceblue;" mat-raised-button color="primary">Add</button>
-                        <button type="reset" mat-raised-button color="warn" (click)="OnClose()">Cancel</button>
+                        <button   [disabled]="!data.valid" style="margin-right:5px;background-color: rgb(35,35,36);color: aliceblue;" mat-raised-button color="primary">Ajouter</button>
+                        <button type="reset" mat-raised-button color="warn" (click)="OnClose()">Annuler</button>
                     </div>
                 </form>
             </div>

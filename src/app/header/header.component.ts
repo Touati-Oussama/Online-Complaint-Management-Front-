@@ -168,7 +168,7 @@ export class HeaderComponent implements OnInit {
   }
   onLogout(){
     this.userService.updateUserStatus(this.authService.loggedUser,false).subscribe((res)=>{ });
-    this.messageService.send('isAuthenticated');
+    //this.messageService.send('isAuthenticated');
     this.authService.logout();
   }
 

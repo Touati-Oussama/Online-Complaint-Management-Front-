@@ -3,26 +3,26 @@
     <div class="card-body">
         <h5 class="card-title">{{data.sujet}}</h5>
         <p class="card-text">{{data.details}}</p>
-        <div style="display: block;"> <b> Company Name: </b> {{data.societe}}</div>
-        <div style="display: block;"> <b> Project: </b> {{data.projet}}</div>
+        <div style="display: block;"> <b> Société clientéle </b> {{data.societe}}</div>
+        <div style="display: block;"> <b> Projet: </b> {{data.projet}}</div>
         <div style="display: block;"> <b> Domain: </b> {{data.speciality}}</div>
-        <div style="display: block;"> <b> Sent By: </b> {{data.client}}</div>
+        <div style="display: block;"> <b> Envoyée par: </b> {{data.client}}</div>
         <div style="display: block;"> <b> Type: </b> {{data.type}}</div>
-        <div style="display: block;"> <b> Complaint Date: </b> {{data.dateCreation}}</div>
-        <div style="display: block;" *ngIf="data.developper"> <b> Forward To: </b> {{data.developper}}</div>
-        <div style="display: block;"> <b> Status: </b> 
+        <div style="display: block;"> <b> Date de Réclamation: </b> {{data.dateCreation}}</div>
+        <div style="display: block;" *ngIf="data.developper"> <b> Transférer à: </b> {{data.developper}}</div>
+        <div style="display: block;"> <b> Statut: </b> 
             <span  class="badge bg-warning" *ngIf="data.status === 'EN_COURS' " > En cours </span>
             <span  class="badge bg-danger" *ngIf="data.status === 'EN_ATTENTE' " > En attente</span>
             <span  class="badge bg-success" *ngIf="data.status === 'ClOTURE' " > Cloturé </span>
         </div>
         <div style="display: block; margin: 5px;"  *ngIf="file">
-             <b> Files Related: </b>  <button *ngFor="let f of file" (click)="download(f.id,f.name)" mat-button color="primary">{{f.name}}</button>
+             <b> Fichiers liés: </b>  <button *ngFor="let f of file" (click)="download(f.id,f.name)" mat-button color="primary">{{f.name}}</button>
         </div>
     <div *ngIf="authService.isAdmin() || authService.isEmployee()" style="margin-top: 10px;">
-        <button *ngIf="!data.developper" class="btn btn-dark btn-lg"  [disabled]="data.developper" (click)="forwardTest()">Forward Complaint</button>
-        <button class="btn btn-dark btn-lg" *ngIf="authService.isAdmin()">Reply To Complaint</button>
-        <button class="btn btn-dark btn-lg" (click)="takeAction()" *ngIf="authService.isAdmin()">Take Action</button>
-        <button class="btn btn-dark btn-lg" (click)="viewClient()">View client</button>
-        <button  class="btn btn-danger btn-lg" (click)="delete(data.id)" *ngIf="authService.isAdmin()">Delete Complaint</button>
+        <button *ngIf="!data.developper" class="btn btn-dark btn-lg"  [disabled]="data.developper" (click)="forwardTest()">Transférer</button>
+        <button class="btn btn-dark btn-lg" *ngIf="authService.isAdmin()">Répondre au Réclamation</button>
+        <button class="btn btn-dark btn-lg" (click)="takeAction()" *ngIf="authService.isAdmin()">Mise à jour</button>
+        <button class="btn btn-dark btn-lg" (click)="viewClient()">Afficher client</button>
+        <button  class="btn btn-danger btn-lg" (click)="delete(data.id)" *ngIf="authService.isAdmin()">Supprimer réclamation</button>
     </div>
 </div>

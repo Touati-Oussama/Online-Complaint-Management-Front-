@@ -10,6 +10,7 @@ export interface IInboxConversation{
     lastInBoxMessage?: IInboxMessage;
     lastModifiedDate?: Date;
     seen?: boolean;
+    nbParticipants?: number;
 }
 
 export class InboxConversationModel implements IInboxConversation{ 
@@ -21,6 +22,7 @@ export class InboxConversationModel implements IInboxConversation{
         public lastInBoxMessage?: IInboxMessage,
         public lastModifiedDate?: Date,
         public seen?: boolean,
+        public nbParticipants?: number
     ){
 
     }

@@ -12,7 +12,6 @@ import { DetailsComponent } from './details/details.component';
 import { ListAdminComponent } from './list-admin/list-admin.component';
 import { PendingComponent } from './pending/pending.component';
 import { ClosedComponent } from './closed/closed.component';
-import { ZeroActionComponent } from './zero-action/zero-action.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -28,6 +27,7 @@ import { MatTableExporterModule } from 'mat-table-exporter';
 import { ListEmployeeComponent } from './list-employee/list-employee.component';
 import { ListClientAdminComponent } from './list-client-admin/list-client-admin.component';
 import { MatSelectModule } from '@angular/material/select';
+import { ZeroActionComponent } from './zero-action/zero-action.component';
 
 @NgModule({
   declarations: [ComplaintsComponent, AddComponent, EditComponent, ListComponent, DetailsComponent, ListAdminComponent, PendingComponent, ClosedComponent, ZeroActionComponent, ClientDetailsComponent, ForwardComponent, ListEmployeeComponent, ListClientAdminComponent],

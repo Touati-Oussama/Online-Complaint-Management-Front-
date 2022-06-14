@@ -1,8 +1,8 @@
-import { StompService } from './../../services/stomp-service.service';
-import { MessageService } from './../../services/message.service';
-import { AuthService } from './../../services/auth.service';
-import { Etat } from './../../model/Etat';
-import { ImageService } from './../../services/image.service';
+import { StompService } from '../../services/stomp-service.service';
+import { MessageService } from '../../services/message.service';
+import { AuthService } from '../../services/auth.service';
+import { Etat } from '../../model/Etat';
+import { ImageService } from '../../services/image.service';
 import { Router } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { CompalintService } from 'src/app/services/compalint.service';

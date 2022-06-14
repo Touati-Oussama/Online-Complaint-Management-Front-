@@ -357,7 +357,8 @@
 }
 
 .chat .chat-message {
-    padding: 20px
+    padding: 20px;
+    width: 100%;
 }
 
 .online,

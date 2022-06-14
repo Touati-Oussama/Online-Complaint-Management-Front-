@@ -60,7 +60,7 @@ export class ForwardComponent implements OnInit {
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
-        text: 'Invalid Date!',
+        text: "Délais invalid!",
       })
       return;
     }
@@ -94,7 +94,7 @@ export class ForwardComponent implements OnInit {
                           Swal.fire({
                             icon: 'success',
                             title: 'Success...',
-                            text: 'Forward Successfully !',
+                            text: 'Transférer avec succès!',
                           })
                           this.messageService.send('isAddedComplaint');
                           this.data.reset();
@@ -107,7 +107,7 @@ export class ForwardComponent implements OnInit {
                           Swal.fire({
                             icon: 'error',
                             title: 'Oops...',
-                            text: 'Something went wrong!',
+                            text: "Quelque chose s'est mal passé!",
                           })
                         }
                       })
@@ -124,7 +124,7 @@ export class ForwardComponent implements OnInit {
                         Swal.fire({
                           icon: 'success',
                           title: 'Success...',
-                          text: 'Forward Successfully !',
+                          text: 'Transférer avec succès!',
                         })
                         this.messageService.send('isAddedComplaint');
                         this.data.reset();

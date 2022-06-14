@@ -38,22 +38,22 @@ export class CompteComponent implements OnInit {
       if(res.user_id){
         Swal.fire({
           icon: 'success',
-          title: 'Success...',
-          text: 'Updated Successfully !',
+          title: 'Succès...',
+          text: 'Mise à jour réussie!',
         })
         this.OnClose();
       }else{
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
-          text: 'Something went wrong!',
+          text: "il y'a un probléme !",
         })
       }
     },err =>
      {
         Swal.fire({
           icon: 'warning',
-          title: 'Updated failed!...',
+          title: 'Echec de modification!...',
           text: err.error.message,
         })
       }

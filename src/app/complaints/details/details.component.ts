@@ -96,13 +96,13 @@ export class DetailsComponent implements OnInit {
 
   delete(id:number){
     Swal.fire({
-      title: 'Are you sure?',
-      text: "Do you really want to delete this project ?",
+      title: 'Êtes-vous sûr?',
+      text: "Voulez-vous vraiment supprimer ce réclamation ?",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!'
+      confirmButtonText: 'Oui, supprimez-le !'
     }).then((result) => {
       if (result.isConfirmed) {
         this.complaintService.delete(id).toPromise().then((res:any) =>{

@@ -223,13 +223,13 @@ export class ListAdminComponent implements OnInit {
 
   delete(id:number){
     Swal.fire({
-      title: 'Are you sure?',
-      text: "Do you really want to delete this project ?",
+      title: 'Êtes-vous sûr?',
+      text: "Voulez-vous vraiment supprimer ce réclamation ?",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!'
+      confirmButtonText: 'Oui, supprimez-le !'
     }).then((result) => {
       if (result.isConfirmed) {
         this.complaintService.delete(id).toPromise().then((res:any) =>{
@@ -237,7 +237,7 @@ export class ListAdminComponent implements OnInit {
             Swal.fire({
               icon: 'success',
               title: 'Success...',
-              text: 'Deleted Successfully !',
+              text: 'Supprimé avec succès !',
             })
             this.ngOnInit();
           }
@@ -245,14 +245,14 @@ export class ListAdminComponent implements OnInit {
             Swal.fire({
               icon: 'error',
               title: 'Oops...',
-              text: 'Something went wrong!',
+              text: "Quelque chose s'est mal passé!",
             })
           }
         },
         err =>{
           Swal.fire({
             icon: 'warning',
-            title: 'Deleted failed!...',
+            title: 'Échec de la suppression!...',
             text: err.error.message,
           })
         }
