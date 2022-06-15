@@ -1,0 +1,36 @@
+<div class="card">
+    <div class="card-header">
+        <h5 class="card-title mb-0">Repondre à cette réclamation</h5>
+    </div>
+    <div class="card-body">
+        <div class="m-sm-4">
+            <form [formGroup]="data" (ngSubmit)="reply()">
+                <div class="mb-3">
+                    <label class="form-label">Repondre Ici</label>
+                    <textarea class="form-control" id="form6Example7" 
+                    formControlName="reply"
+                    rows="3"></textarea>
+                </div>
+                <div class="mb-3">
+                    <div *ngIf="progress >= 0" class="progress">
+                        <div
+                          class="progress-bar progress-bar-danger progress-bar-striped"
+                          role="progressbar"
+                          attr.aria-valuenow="{{ progress }}"
+                          aria-valuemin="0"
+                          aria-valuemax="100"
+                          [ngStyle]="{ width: progress + '%' }"
+                        >
+                          {{ progress }}%
+                        </div>
+                      </div>
+                </div>
+                <div class="text-center m-3">
+                    <button  class="btn btn-dark btn-lg" style="margin-right: 10px;" [disabled]="! data.valid">Repondre</button> 
+                    <button type="reset" class="btn btn-danger btn-lg">Annuler</button>
+                    <!-- <button type="submit" class="btn btn-lg btn-primary">Sign up</button> -->
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

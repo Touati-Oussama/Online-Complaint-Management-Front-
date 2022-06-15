@@ -28,9 +28,10 @@ import { ListEmployeeComponent } from './list-employee/list-employee.component';
 import { ListClientAdminComponent } from './list-client-admin/list-client-admin.component';
 import { MatSelectModule } from '@angular/material/select';
 import { ZeroActionComponent } from './zero-action/zero-action.component';
+import { ReplyComponent } from './reply/reply.component';
 
 @NgModule({
-  declarations: [ComplaintsComponent, AddComponent, EditComponent, ListComponent, DetailsComponent, ListAdminComponent, PendingComponent, ClosedComponent, ZeroActionComponent, ClientDetailsComponent, ForwardComponent, ListEmployeeComponent, ListClientAdminComponent],
+  declarations: [ComplaintsComponent, AddComponent, EditComponent, ListComponent, DetailsComponent, ListAdminComponent, PendingComponent, ClosedComponent, ZeroActionComponent, ClientDetailsComponent, ForwardComponent, ListEmployeeComponent, ListClientAdminComponent, ReplyComponent],
   imports: [
     CommonModule,
     ComplaintsRoutingModule,

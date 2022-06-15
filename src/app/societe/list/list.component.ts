@@ -36,21 +36,21 @@ export class ListComponent implements OnInit {
   delete(id:number){
     //console.log(id);
     Swal.fire({
-      title: 'Are you sure?',
-      text: "Do you really want to delete this society ?",
+      title: 'Êtes-vous sûr?',
+      text: "Voulez-vous vraiment supprimer cette société ?",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!'
+      confirmButtonText: 'Oui, supprimez-la!'
     }).then((result) => {
       if (result.isConfirmed) {
         this.societeService.delete(id).toPromise().then((res:any)=>{
           if (res){
             Swal.fire({
               icon: 'success',
-              title: 'Success...',
-              text: 'Deleted Successfully !',
+              title: 'Succès...',
+              text: 'Supprimé avec succès !',
             })
             this.ngOnInit();
           }
@@ -58,14 +58,14 @@ export class ListComponent implements OnInit {
             Swal.fire({
               icon: 'error',
               title: 'Oops...',
-              text: 'Something went wrong!',
+              text: "Quelque chose s'est mal passé!",
             })
           }
         },
         err =>{
           Swal.fire({
             icon: 'warning',
-            title: 'Deleted failed!...',
+            title: 'Échec de la suppression!...',
             text: err.error.message,
           })
         }

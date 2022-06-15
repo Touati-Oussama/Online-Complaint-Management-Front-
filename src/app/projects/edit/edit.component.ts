@@ -15,7 +15,10 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrls: ['./edit.component.css']
 })
 export class EditComponent implements OnInit {
-
+  societe;
+  soc: any;
+  specialite;
+  spec:any;
   societies = [];
   specialities = [];
   id;
@@ -36,19 +39,43 @@ export class EditComponent implements OnInit {
       }
 
   ngOnInit(): void {
-    this.societeService.listeSocieties().toPromise().then((res:any[])=>{
-      this.societies = res;
-      console.log(res);
-    })
-    this.specialiteService.listeSpecialties().toPromise().then((res:any) =>{
-      this.specialities = res;
-    })
 
 
-    this.projetService.getProjet(this.id).toPromise().then((res:any)=>{
-      console.log(res);
-      this.data.setValue(res);
+    this.societeService.listeSocieties().toPromise().then((resu:any[])=>{
+      /*this.societies = res;
+      console.log(res);*/
+      this.projetService.getProjet(this.id).toPromise().then((res:any)=>{
+        console.log(res);
+        this.societe = res.societe
+        this.specialite = res.specialite
+        console.log(this.societe);
+        resu.forEach(r => {
+          if(r.name !== this.societe)
+            this.societies.push(r);
+          else
+            this.soc = r;
+        });
+        this.societies.push(this.soc);
+        
+        this.specialiteService.listeSpecialties().toPromise().then((res:any[]) =>{
+          //this.specialities = res;
+          res.forEach(s =>{
+            if (s.specialite !== this.specialite)
+              this.specialities.push(s);
+            else
+              this.spec = s;
+          })
+          this.specialities.push(this.spec)
+        })  
+        this.data.patchValue({specialite: this.specialite})
+        this.data.patchValue({societe: this.societe})
+        this.data.setValue(res);
+
+
+ 
+      })
     })
+
   }
 
 

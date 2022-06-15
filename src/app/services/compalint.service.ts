@@ -72,7 +72,17 @@ export class CompalintService {
       return this.http.post<HttpEvent<any>>(`${this.apiURL}/update/employee/${id}/${idEmployee}`,{headers:httpHeaders});
      }
   
-
+    reply(data):Observable<HttpEvent<any>>{
+      let jwt = this.authService.getToken();
+      jwt = "Bearer " + jwt;
+      let httpHeaders = new HttpHeaders({"Authorization": jwt})
+      const req = new HttpRequest('POST', `${this.apiURL}/reply`, data, {
+          headers:httpHeaders,
+          reportProgress: true,
+          responseType: 'json'
+        });
+        return this.http.request(req);
+    }
    getByClientUsername(username):any{
     let jwt = this.authService.getToken();
     jwt = "Bearer " + jwt;

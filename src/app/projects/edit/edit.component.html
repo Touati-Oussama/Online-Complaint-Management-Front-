@@ -12,16 +12,16 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Sociéte clientéle</label>
-                        <select class="form-select mb-3" formControlName="societe">
-                            <option value="">Selectioner Une</option>
-                            <option [value]="c.id" *ngFor="let c of societies">{{c.name}}</option>
+                        <select class="form-select mb-3" formControlName="societe"  >
+                            <option [value]="c.id" *ngFor="let c of societies"  [selected]="this.societe">{{c.name}}</option>
                         </select>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Specialité</label>
                         <select class="form-select mb-3" formControlName="specialite">
                             <option value="">Selectioner Une</option>
-                            <option [value]="c.id" *ngFor="let c of specialities">{{c.specialite}}</option>
+                            <option [value]="c.id" *ngFor="let c of specialities" [selected]="this.specialite">{{c.specialite}}</option>
+                            
                         </select>
                     </div>
                     <div class="mb-3">
@@ -29,7 +29,7 @@
                         <textarea class="form-control" id="form6Example7" formControlName="description" rows="3"></textarea>
                     </div>
                     <div>
-                        <button   [disabled]="!data.valid" style="margin-right:5px;" mat-raised-button color="primary">Modifier</button>
+                        <button    style="margin-right:5px;" mat-raised-button color="primary">Modifier</button>
                         <button type="reset" mat-raised-button color="warn" (click)="OnClose()">Annuler</button>
                     </div>
                 </form>

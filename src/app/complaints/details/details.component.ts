@@ -11,6 +11,7 @@ import { Component, Inject, OnInit, Optional } from '@angular/core';
 import { MatDialog, MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { EditComponent } from '../edit/edit.component';
 import Swal from 'sweetalert2';
+import { ReplyComponent } from '../reply/reply.component';
 
 @Component({
   selector: 'app-details',
@@ -93,6 +94,22 @@ export class DetailsComponent implements OnInit {
       this.ngOnInit();
     })  
   }
+
+  reply(){
+    let dialogRef;
+    this.complaintService.getReclamation(this.id).toPromise().then((res:any)=>{
+      this.data = res;
+    })
+    dialogRef = this.dialog.open(ReplyComponent,{
+    width : "50%",
+    height: "50%",
+    data: { complaint: this.data}
+  })
+
+  dialogRef.afterClosed().subscribe(res =>{
+    this.ngOnInit();
+  })  
+}
 
   delete(id:number){
     Swal.fire({

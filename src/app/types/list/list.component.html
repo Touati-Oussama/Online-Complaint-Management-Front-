@@ -60,26 +60,26 @@
       
         <!-- Name Column -->
         <ng-container matColumnDef="Type">
-          <th mat-header-cell *matHeaderCellDef> Name </th>
+          <th mat-header-cell *matHeaderCellDef> Designation </th>
           <td mat-cell *matCellDef="let element"> {{element.type}} </td>
         </ng-container>
       
         <!-- Weight Column -->
         <ng-container matColumnDef="update">
-          <th mat-header-cell *matHeaderCellDef> Update </th>
+          <th mat-header-cell *matHeaderCellDef> Modification </th>
           <td mat-cell *matCellDef="let element">
             <button mat-raised-button color="primary" (click)="update(element.type_id)">
-                update
+                Modification
             </button>
           </td>
         </ng-container>
       
         <!-- Symbol Column -->
         <ng-container matColumnDef="delete">
-          <th mat-header-cell *matHeaderCellDef> Delete </th>
+          <th mat-header-cell *matHeaderCellDef> Suppression </th>
           <td mat-cell *matCellDef="let element"> 
             <button mat-raised-button color="warn" (click)="delete(element.type_id)">
-                delete
+                Suppression
             </button>
           </td>
         </ng-container>
