@@ -63,7 +63,6 @@ export class ReplyComponent implements OnInit {
 
   
   onClose(){
-      
     this.dialogRef.close();
   }
 }

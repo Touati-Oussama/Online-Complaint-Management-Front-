@@ -230,6 +230,13 @@ export class CompalintService {
     return this.http.get(`${this.apiURL}/details/status`,{headers:httpHeaders});
   }
 
+  detailsParClient(username):Observable<any>{
+    let jwt = this.authService.getToken();
+    jwt = "Bearer " + jwt;
+    let httpHeaders = new HttpHeaders({"Authorization": jwt})
+    return this.http.get(`${this.apiURL}/details/client`,{headers:httpHeaders, params:{username:username}});
+  }
+
   detailsParEtatAndSociete(societe):Observable<any>{
     let jwt = this.authService.getToken();
     jwt = "Bearer " + jwt;

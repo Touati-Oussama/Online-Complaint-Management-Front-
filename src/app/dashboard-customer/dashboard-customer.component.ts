@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../services/auth.service';
+import { CompalintService } from '../services/compalint.service';
 
 @Component({
   selector: 'app-dashboard-customer',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardCustomerComponent implements OnInit {
 
-  constructor() { }
-
+  constructor(private complaintService:CompalintService,private authService:AuthService,) { }
+  data;
   ngOnInit(): void {
+    this.complaintService.detailsParClient(this.authService.loggedUser).subscribe(res=>{
+      this.data = res;
+    })
   }
 
 }

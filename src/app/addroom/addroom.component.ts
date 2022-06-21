@@ -57,6 +57,7 @@ export class AddroomComponent implements OnInit {
     this.roomForm = this.formBuilder.group({
       'roomname' : [null, Validators.required]
     });
+
   }
 
   onFormSubmit(form: any) {
@@ -82,8 +83,8 @@ export class AddroomComponent implements OnInit {
       if(res){
         Swal.fire({
           icon: 'success',
-          title: 'Success...',
-          text: 'Chatroom added successfuly!',
+          title: 'Succès...',
+          text: "Conversation ajoutée avec succès",
         })
         this.OnClose();
       }

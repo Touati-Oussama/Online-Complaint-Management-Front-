@@ -17,7 +17,7 @@
 
   <div class="card">
     <div class="card-header">
-        <h5 class="card-title mb-0">Add Conversation</h5>
+        <h5 class="card-title mb-0">Ajouter une Conversation</h5>
     </div>
 
     <div class="card-body">
@@ -25,15 +25,15 @@
             <form [formGroup]="data" (ngSubmit)="add()">
 
                 <div class="mb-3">
-                  <label class="form-label">Society</label>
+                  <label class="form-label">Societé</label>
                   <select class="form-select mb-3" formControlName="societe">
-                      <option value="">Select One</option>
+                      <option value="">Choisir une</option>
                       <option [value]="s.name" *ngFor="let s of societies">{{s.name}}</option>
                   </select>
               </div>
                 <div>
-                    <button   [disabled]="!data.valid" style="margin-right:5px;color: aliceblue;" class="btn btn-dark">Add</button>
-                    <button type="reset" class="btn btn-danger" (click)="OnClose()">Cancel</button>
+                    <button   [disabled]="!data.valid" style="margin-right:5px;color: aliceblue;" class="btn btn-dark">Ajouter</button>
+                    <button type="reset" class="btn btn-danger" (click)="OnClose()">Annuler</button>
                 </div>
             </form>
         </div>
